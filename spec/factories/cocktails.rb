@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :cocktail do
-    name { "MyString" }
-    thumbnail { "MyString" }
+    name { Faker::Beer.name }
+    thumbnail { Faker::Internet.url }
   end
 end

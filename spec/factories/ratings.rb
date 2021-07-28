@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :rating do
-    user { nil }
-    cocktail { nil }
-    stars { 1 }
+    user
+    cocktail
+    stars { rand(1..5) }
   end
 end
