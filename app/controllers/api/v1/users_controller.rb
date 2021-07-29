@@ -16,16 +16,8 @@ class Api::V1::UsersController < ApplicationController
     if user.save
       render json: UserSerializer.new(user), status: :created
     else
-      render json: UserSerializer.new(user), status: :no_content
+      #render json: UserSerializer.new(user), status: :no_content
     end
-
-    #cookies.encrypted[:current_user_id] = {value: user.id, expires: Time.now + 4.days }
-  end
-
-  def destroy
-    session[:user_id] = nil
-
-    redirect_to root_path
   end
 
   private
