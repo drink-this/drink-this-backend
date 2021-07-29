@@ -14,12 +14,11 @@ class RecommendationService
   end
 
   def self.weighted_avg(new_dataframe, unrated_cocktails)
-    # recommended_cocktails = Pandas.DataFrame.new()
     new_dataframe['weightedAvgRecScore'] = unrated_cocktails['Max']/unrated_cocktails['weightedRating']
   end
 
   def self.remove_rated_cocktails(pivoted_ratings, combined_ratings)
-    max_pivot = pivoted_ratings[pivoted_ratings.name == 'Max'] # won't be 'Max', will be user_id (current_user.id?)
+    max_pivot = pivoted_ratings[pivoted_ratings.name == 'Max']
     reset_sw = combined_ratings.reset_index()
     unrated_cocktails = reset_sw.merge(max_pivot).set_index('variable')
     unrated_cocktails = unrated_cocktails[unrated_cocktails.value == 0]
@@ -42,6 +41,7 @@ class RecommendationService
 
   def self.create_df
     csv_data = Pandas.read_csv("./db/data/cocktail_ratings.csv") #replace with our ratings data
+    binding.pry
     df = csv_data.set_index('name').fillna(0) #will be user_id instead of name
   end
 

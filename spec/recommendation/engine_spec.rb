@@ -1,8 +1,9 @@
 require 'rails_helper'
+require 'pycall'
 
 RSpec.describe 'Testing' do
-  describe 'say_hello' do
-    xit 'can run python' do
+  describe 'create_df' do
+    it 'can convert ruby data into dataframe' do
       cocktail_1 = create(:cocktail, name: 'margarita')
       cocktail_2 = create(:cocktail, name: 'old fashion')
       cocktail_3 = create(:cocktail, name: 'whisky sour')
@@ -23,7 +24,7 @@ RSpec.describe 'Testing' do
         create(:rating, cocktail: cocktail_1, stars: 5)
       end
 
-      expect(RecommendationService.say_hello).to eq("hello world")
+      expect(RecommendationService.create_df).to be_a? DataFrame
     end
   end
 
