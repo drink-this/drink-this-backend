@@ -33,6 +33,5 @@ class RecommendationService
     empty.sort_values(by='weightedAvgRecScore', ascending=false)
     # empty.loc[empty['weightedAvgRecScore'].idxmax()]
     recommendation = empty[empty.weightedAvgRecScore == empty.weightedAvgRecScore.max()]
-    binding.pry
   end
 end
