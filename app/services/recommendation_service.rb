@@ -29,38 +29,36 @@ class RecommendationService
     baseline_ratings['weightedRating'] = (1 / baseline_ratings['Max'] + 1) * baseline_ratings['value']
   end
 
-  # def self.cocktail_ratings(df)
-  #   pivoted_ratings = Pandas.melt(df.reset_index(),id_vars='name',value_vars=df.keys)
-  #   scraped_ratings = pivoted_ratings[pivoted_ratings.value != 0]
-  # end
-
   def self.user_distances(user_distance_matrix, df)
     max = user_distance_matrix.loc['Max'].sort_values(0,ascending=true)[1..5]
     df_max = Pandas.DataFrame.new(data=max, index=df.index)
   end
 
+  def self.euclidean_distance(df)
+    sklearn = PyCall.import_module("sklearn")
+    euclidean = Numpy.round(sklearn.metrics.pairwise.euclidean_distances(df,df),2)
+    user_distance_matrix = Pandas.DataFrame.new(data=euclidean, index=df.index,columns=df.index)
+  end
+
   # Should take a user_id or user as a parameter (who's making the request)
   def self.recommendation
-    sklearn = PyCall.import_module("sklearn")
+    # sklearn = PyCall.import_module("sklearn")
 
     # Make the data into a DataFrame, set the name as an index, and make nil values into 0s
     csv_data = Pandas.read_csv("./db/data/cocktail_ratings.csv") #replace with our ratings data
     df = csv_data.set_index('name').fillna(0) #will be user_id instead of name
 
     # Get the euclidean distances between the vector and itself, pairwise
-    euclidean = Numpy.round(sklearn.metrics.pairwise.euclidean_distances(df,df),2)
-    # alternate option for measuring similarity
-    # euclidean = Numpy.round(sklearn.metrics.pairwise.cosine_similarity(df,df),2)
+    # euclidean = Numpy.round(sklearn.metrics.pairwise.euclidean_distances(df,df),2)
 
-    # making the array of euclidean distances into a new DataFrame (pairwise, so the columns and rows are both users)
-    user_distance_matrix = Pandas.DataFrame.new(data=euclidean, index=df.index,columns=df.index)
+    # user_distance_matrix = Pandas.DataFrame.new(data=euclidean, index=df.index,columns=df.index)
 
+    user_distance_matrix = euclidean_distance(df)
+    
     distances_from_user = user_distances(user_distance_matrix, df)
 
     cocktail_ratings = Pandas.melt(df.reset_index(),id_vars='name',value_vars=df.keys)
     scraped_ratings = cocktail_ratings[cocktail_ratings.value != 0]
-
-    # cocktail_ratings = cocktail_ratings(df)
 
     baseline_ratings = distances_from_user.reset_index().merge(scraped_ratings).dropna()
 
