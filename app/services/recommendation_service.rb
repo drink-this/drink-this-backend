@@ -40,21 +40,16 @@ class RecommendationService
     user_distance_matrix = Pandas.DataFrame.new(data=euclidean, index=df.index,columns=df.index)
   end
 
-  # Should take a user_id or user as a parameter (who's making the request)
-  def self.recommendation
-    # sklearn = PyCall.import_module("sklearn")
-
-    # Make the data into a DataFrame, set the name as an index, and make nil values into 0s
+  def self.create_df
     csv_data = Pandas.read_csv("./db/data/cocktail_ratings.csv") #replace with our ratings data
     df = csv_data.set_index('name').fillna(0) #will be user_id instead of name
+  end
 
-    # Get the euclidean distances between the vector and itself, pairwise
-    # euclidean = Numpy.round(sklearn.metrics.pairwise.euclidean_distances(df,df),2)
-
-    # user_distance_matrix = Pandas.DataFrame.new(data=euclidean, index=df.index,columns=df.index)
+  def self.recommendation
+    df = create_df
 
     user_distance_matrix = euclidean_distance(df)
-    
+
     distances_from_user = user_distances(user_distance_matrix, df)
 
     cocktail_ratings = Pandas.melt(df.reset_index(),id_vars='name',value_vars=df.keys)
