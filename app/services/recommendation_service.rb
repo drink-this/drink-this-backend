@@ -25,6 +25,10 @@ class RecommendationService
     unrated_cocktails = unrated_cocktails[unrated_cocktails.value == 0]
   end
 
+  def self.weighted_ratings(baseline_ratings)
+    baseline_ratings['weightedRating'] = (1 / baseline_ratings['Max'] + 1) * baseline_ratings['value']
+  end
+
   # Should take a user_id or user as a parameter (who's making the request)
   def self.recommendation
     sklearn = PyCall.import_module("sklearn")
@@ -52,12 +56,13 @@ class RecommendationService
 
     # scraping out 0 (nil) ratings and merging similarity data with cocktail data
     scraped_pivot = pivoted_ratings[pivoted_ratings.value != 0]
-    total = df_max.reset_index().merge(scraped_pivot).dropna()
+    baseline_ratings = df_max.reset_index().merge(scraped_pivot).dropna()
 
     # creating a comparison metric (weighted rating) based on euclidean distance (ed_adjusted * rating)
-    total['weightedRating']=(1 / total['Max']+1)*total['value']
+    # baseline_ratings['weightedRating'] = (1 / baseline_ratings['Max'] + 1) * baseline_ratings['value']
+    weighted_ratings(baseline_ratings)
 
-    combined_ratings = total.groupby('variable').sum()[['Max','weightedRating']]
+    combined_ratings = baseline_ratings.groupby('variable').sum()[['Max','weightedRating']]
 
     unrated_cocktails = remove_rated_cocktails(pivoted_ratings, combined_ratings)
 
