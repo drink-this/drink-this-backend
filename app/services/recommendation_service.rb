@@ -18,7 +18,11 @@ class RecommendationService
     new_dataframe['weightedAvgRecScore'] = unrated_cocktails['Max']/unrated_cocktails['weightedRating']
   end
 
-  def self.remove_rated_cocktails()
+  def self.remove_rated_cocktails(pivoted_ratings, combined_ratings)
+    max_pivot = pivoted_ratings[pivoted_ratings.name == 'Max'] # won't be 'Max', will be user_id (current_user.id?)
+    reset_sw = combined_ratings.reset_index()
+    unrated_cocktails = reset_sw.merge(max_pivot).set_index('variable')
+    unrated_cocktails = unrated_cocktails[unrated_cocktails.value == 0]
   end
 
   # Should take a user_id or user as a parameter (who's making the request)
@@ -44,24 +48,18 @@ class RecommendationService
     df_max = Pandas.DataFrame.new(data=max, index=df.index)
 
     # prepping the cocktail data to merge with the user similarity data
-    pivoted = Pandas.melt(df.reset_index(),id_vars='name',value_vars=df.keys)
+    pivoted_ratings = Pandas.melt(df.reset_index(),id_vars='name',value_vars=df.keys)
 
     # scraping out 0 (nil) ratings and merging similarity data with cocktail data
-    scraped_pivot = pivoted[pivoted.value != 0]
+    scraped_pivot = pivoted_ratings[pivoted_ratings.value != 0]
     total = df_max.reset_index().merge(scraped_pivot).dropna()
 
     # creating a comparison metric (weighted rating) based on euclidean distance (ed_adjusted * rating)
     total['weightedRating']=(1 / total['Max']+1)*total['value']
-    # total['weightedRating']=total['Max']*total['value'] # Use this one for cosine similarity
 
-    # Adding up the similarities by drink and aggregating the data
-    similarity_weighted = total.groupby('variable').sum()[['Max','weightedRating']]
+    combined_ratings = total.groupby('variable').sum()[['Max','weightedRating']]
 
-    # Removing cocktails user has already rated
-    max_pivot = pivoted[pivoted.name == 'Max'] # won't be 'Max', will be user_id (current_user.id?)
-    reset_sw = similarity_weighted.reset_index()
-    unrated_cocktails = reset_sw.merge(max_pivot).set_index('variable')
-    unrated_cocktails = unrated_cocktails[unrated_cocktails.value == 0]
+    unrated_cocktails = remove_rated_cocktails(pivoted_ratings, combined_ratings)
 
     new_dataframe = Pandas.DataFrame.new()
 
