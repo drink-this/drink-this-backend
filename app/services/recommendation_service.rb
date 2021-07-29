@@ -29,6 +29,16 @@ class RecommendationService
     baseline_ratings['weightedRating'] = (1 / baseline_ratings['Max'] + 1) * baseline_ratings['value']
   end
 
+  # def self.cocktail_ratings(df)
+  #   pivoted_ratings = Pandas.melt(df.reset_index(),id_vars='name',value_vars=df.keys)
+  #   scraped_ratings = pivoted_ratings[pivoted_ratings.value != 0]
+  # end
+
+  def self.user_distances(user_distance_matrix, df)
+    max = user_distance_matrix.loc['Max'].sort_values(0,ascending=true)[1..5]
+    df_max = Pandas.DataFrame.new(data=max, index=df.index)
+  end
+
   # Should take a user_id or user as a parameter (who's making the request)
   def self.recommendation
     sklearn = PyCall.import_module("sklearn")
@@ -43,28 +53,22 @@ class RecommendationService
     # euclidean = Numpy.round(sklearn.metrics.pairwise.cosine_similarity(df,df),2)
 
     # making the array of euclidean distances into a new DataFrame (pairwise, so the columns and rows are both users)
-    similar = Pandas.DataFrame.new(data=euclidean, index=df.index,columns=df.index)
+    user_distance_matrix = Pandas.DataFrame.new(data=euclidean, index=df.index,columns=df.index)
 
-    # get the similarities for the user requesting the recommendation (and make it into a DataFrame)
-    # sort true with Euclidean Distance, false with cosine similarity
-    max = similar.loc['Max'].sort_values(0,ascending=true)[1..5] #here, Max is replacing our USER_ID for the user requesting the rec
-    # max = similar.loc['Max'].sort_values(0,ascending=false)[1..5] #here, Max is replacing our USER_ID for the user requesting the rec
-    df_max = Pandas.DataFrame.new(data=max, index=df.index)
+    distances_from_user = user_distances(user_distance_matrix, df)
 
-    # prepping the cocktail data to merge with the user similarity data
-    pivoted_ratings = Pandas.melt(df.reset_index(),id_vars='name',value_vars=df.keys)
+    cocktail_ratings = Pandas.melt(df.reset_index(),id_vars='name',value_vars=df.keys)
+    scraped_ratings = cocktail_ratings[cocktail_ratings.value != 0]
 
-    # scraping out 0 (nil) ratings and merging similarity data with cocktail data
-    scraped_pivot = pivoted_ratings[pivoted_ratings.value != 0]
-    baseline_ratings = df_max.reset_index().merge(scraped_pivot).dropna()
+    # cocktail_ratings = cocktail_ratings(df)
 
-    # creating a comparison metric (weighted rating) based on euclidean distance (ed_adjusted * rating)
-    # baseline_ratings['weightedRating'] = (1 / baseline_ratings['Max'] + 1) * baseline_ratings['value']
+    baseline_ratings = distances_from_user.reset_index().merge(scraped_ratings).dropna()
+
     weighted_ratings(baseline_ratings)
 
     combined_ratings = baseline_ratings.groupby('variable').sum()[['Max','weightedRating']]
 
-    unrated_cocktails = remove_rated_cocktails(pivoted_ratings, combined_ratings)
+    unrated_cocktails = remove_rated_cocktails(cocktail_ratings, combined_ratings)
 
     new_dataframe = Pandas.DataFrame.new()
 
