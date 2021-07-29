@@ -8,6 +8,19 @@ pyfrom 'sklearn.metrics', import: :pairwise
 pyfrom 'sklearn.metrics.pairwise', import: :euclidean_distances
 
 class RecommendationService
+
+  def self.return_recommendation(recommended_cocktails)
+    recommended_cocktails[recommended_cocktails.weightedAvgRecScore == recommended_cocktails.weightedAvgRecScore.max()]
+  end
+
+  def self.weighted_avg(new_dataframe, unrated_cocktails)
+    # recommended_cocktails = Pandas.DataFrame.new()
+    new_dataframe['weightedAvgRecScore'] = unrated_cocktails['Max']/unrated_cocktails['weightedRating']
+  end
+
+  def self.remove_rated_cocktails()
+  end
+
   # Should take a user_id or user as a parameter (who's making the request)
   def self.recommendation
     sklearn = PyCall.import_module("sklearn")
@@ -23,7 +36,7 @@ class RecommendationService
 
     # making the array of euclidean distances into a new DataFrame (pairwise, so the columns and rows are both users)
     similar = Pandas.DataFrame.new(data=euclidean, index=df.index,columns=df.index)
-    
+
     # get the similarities for the user requesting the recommendation (and make it into a DataFrame)
     # sort true with Euclidean Distance, false with cosine similarity
     max = similar.loc['Max'].sort_values(0,ascending=true)[1..5] #here, Max is replacing our USER_ID for the user requesting the rec
@@ -43,22 +56,17 @@ class RecommendationService
 
     # Adding up the similarities by drink and aggregating the data
     similarity_weighted = total.groupby('variable').sum()[['Max','weightedRating']]
-    
-    # Removing drinks user has already rated
+
+    # Removing cocktails user has already rated
     max_pivot = pivoted[pivoted.name == 'Max'] # won't be 'Max', will be user_id (current_user.id?)
     reset_sw = similarity_weighted.reset_index()
-    unknown_to_user = reset_sw.merge(max_pivot).set_index('variable')
-    unknown_to_user = unknown_to_user[unknown_to_user.value == 0]
+    unrated_cocktails = reset_sw.merge(max_pivot).set_index('variable')
+    unrated_cocktails = unrated_cocktails[unrated_cocktails.value == 0]
 
-    # Finishing created the weighted avg adjusted euclid distance
-    empty = Pandas.DataFrame.new()
-    empty['weightedAvgRecScore'] = unknown_to_user['Max']/unknown_to_user['weightedRating']
+    new_dataframe = Pandas.DataFrame.new()
 
-    # Make the final (best) recommendation
-    recommendation = empty[empty.weightedAvgRecScore == empty.weightedAvgRecScore.max()]
-    # empty.loc[empty['weightedAvgRecScore'].idxmax()]
+    weighted_avg(new_dataframe, unrated_cocktails)
 
-    # need to format for incoming data with user_ids, etc. 
-    require 'pry'; binding.pry
+    best_drink = return_recommendation(new_dataframe)
   end
 end
