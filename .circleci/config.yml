@@ -2,6 +2,7 @@ version: 2.1
 orbs:
   ruby: circleci/ruby@0.1.2
   python: circleci/python@1.4.0
+  homebrew: izumin5210/homebrew@0.1.3
 
 jobs:
   build:
@@ -12,6 +13,11 @@ jobs:
     steps:
       - checkout
       - run: brew install pyenv
+      - run: 
+          name: install python 3.9.6
+          command:
+              pyenv install 3.9.6
+              pyenv global 3.9.6
       - run: 
           command:  
             sudo pip install pipenv
