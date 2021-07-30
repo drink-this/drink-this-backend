@@ -59,6 +59,5 @@ class RecommendationService
     # empty.loc[empty['weightedAvgRecScore'].idxmax()]
 
     # need to format for incoming data with user_ids, etc. 
-    require 'pry'; binding.pry
   end
 end
