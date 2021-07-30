@@ -13,13 +13,13 @@ jobs:
       - checkout
       - ruby/bundle-install
       - run: sudo apt-get install python3-dev
-      - run: sudo apt-get install numpy
-      - run: sudo apt-get install pandas
-      - run: sudo apt-get install sklearn
       - run:
           name: Which bundler?
           command: bundle -v
       - run: bundle install
+      - run: sudo apt-get install numpy
+      - run: sudo apt-get install pandas
+      - run: sudo apt-get install sklearn 
       - run: bundle exec rspec spec
 # workflows:
 #   heroku_deploy:
