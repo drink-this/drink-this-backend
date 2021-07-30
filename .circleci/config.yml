@@ -16,10 +16,10 @@ jobs:
       - run:
           name: Which bundler?
           command: bundle -v
-      - run: bundle install
       - run: sudo apt-get install python-numpy
       - run: sudo apt-get install python-pandas
       - run: sudo apt-get install python-sklearn 
+      - run: bundle install
       - run: bundle exec rspec spec
 # workflows:
 #   heroku_deploy:
