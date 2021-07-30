@@ -19,6 +19,7 @@ jobs:
       - run:
           name: Which bundler?
           command: bundle -v
+      - run: bundle install
       - run: bundle exec rspec spec
 workflows:
   heroku_deploy:
