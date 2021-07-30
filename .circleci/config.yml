@@ -11,6 +11,7 @@ jobs:
     executor: ruby/default
     steps:
       - checkout
+      - run: brew install pyenv
       - run: 
           command:  
             sudo pip install pipenv
