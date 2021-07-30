@@ -10,18 +10,14 @@ jobs:
     executor: ruby/default
     steps:
       - checkout
+      - ruby/bundle-install
+      - run: sudo apt-get install python3
+      - run: sudo apt-get install python-numpy
+      - run: sudo apt-get install python-pandas
+      - run: sudo apt-get install python-sklearn
       - run:
           name: Which bundler?
           command: bundle -v
-      - ruby/bundle-install
-      # - run: python -m ensurepip --upgrade
-      - run: sudo apt-get install python3
-      - run: sudo apt-get install python-numpy
-      - run: apt-get install python-pandas
-      - run: apt-get install python-sklearn
-      # - run: python3 -m pip install numpy
-      # - run: python3 -m pip install pandas
-      # - run: python3 -m pip install sklearn
       # - run:
       #      name: Deploy main to Heroku
       #      command: 
