@@ -18,7 +18,7 @@ jobs:
           command: bundle -v
       - run: bundle install
       - run: sudo apt-get install python-numpy
-      - run: sudo apt-get install pandas
+      - run: sudo apt-get install python-pandas
       - run: sudo apt-get install python-sklearn 
       - run: bundle exec rspec spec
 # workflows:
