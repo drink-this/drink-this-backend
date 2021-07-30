@@ -12,8 +12,7 @@ jobs:
     steps:
       - checkout
       - ruby/bundle-install
-      - run: sudo apt-get install pyenv
-      - run: env PYTHON_CONFIGURE_OPTS="--enable-shared" pyenv install 3.9.6
+      - run: sudo apt-get install python3-dev
       - run: sudo apt-get install python-numpy
       - run: sudo apt-get install python-pandas
       - run: sudo apt-get install python-sklearn
