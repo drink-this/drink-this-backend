@@ -2,7 +2,6 @@ version: 2.1
 orbs:
   ruby: circleci/ruby@0.1.2
   python: circleci/python@1.4.0
-  homebrew: izumin5210/homebrew@0.1.3
 
 jobs:
   build:
