@@ -3,6 +3,16 @@ orbs:
   ruby: circleci/ruby@0.1.2
   python: circleci/python@1.4.0
   heroku: circleci/heroku@0.0.10
+workflows:
+  heroku_deploy:
+    jobs:
+      - build
+      - heroku/deploy-via-git: # Use the pre-configured job, deploy-via-git
+          requires:
+            - build
+          filters:
+            branches:
+              only: sequential-branch-filter
 jobs:
   build:
     docker:
