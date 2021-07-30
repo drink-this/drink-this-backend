@@ -20,18 +20,13 @@ jobs:
           name: Which bundler?
           command: bundle -v
       - run: bundle exec rspec spec
-  migrate: 
-    steps:
-      - run: heroku run rails db:migrate
 workflows:
   heroku_deploy:
     jobs:
       - build
-      - migrate
       - heroku/deploy-via-git: # Use the pre-configured job, deploy-via-git
           requires:
             - build
-            - migrate
           filters:
             branches:
               only: python_config
