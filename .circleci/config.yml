@@ -11,7 +11,7 @@ jobs:
     executor: ruby/default
     steps:
       - checkout
-      -run: 
+      - run: 
         command: |
           sudo pip install pipenv
           pipenv install
