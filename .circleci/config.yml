@@ -11,6 +11,10 @@ jobs:
     executor: ruby/default
     steps:
       - checkout
+      -run: 
+        command: |
+          sudo pip install pipenv
+          pipenv install
       - run: python3 -m pip install numpy
       - run: python3 -m pip install pandas
       - run: python3 -m pip install sklearn
