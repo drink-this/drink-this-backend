@@ -1,11 +1,8 @@
 version: 2.1
 orbs:
   ruby: circleci/ruby@0.1.2
-  python: circleci/python@1.4.0
-# dependencies:
-#   pre:
-#     - brew upgrade
-#     - brew update
+  # python: circleci/python@1.4.0
+  heroku: circleci/heroku@0.0.10.
 jobs:
   build:
     docker:
@@ -13,12 +10,11 @@ jobs:
     executor: ruby/default
     steps:
       - checkout
-      # - run: brew install pyenv
       - run: 
           name: install python 3.9.6
           command:
-              pip install 3.9.6
-              # pyenv global 3.9.6
+              pyenv install 3.9.6
+              pyenv global 3.9.6
       - run: python3 -m pip install numpy
       - run: python3 -m pip install pandas
       - run: python3 -m pip install sklearn
@@ -26,3 +22,7 @@ jobs:
           name: Which bundler?
           command: bundle -v
       - ruby/bundle-install
+      # - run:
+      #      name: Deploy main to Heroku
+      #      command: 
+      #        git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git main
