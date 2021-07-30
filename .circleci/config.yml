@@ -7,10 +7,11 @@ jobs:
   build:
     docker:
       - image: circleci/ruby:2.7.2
+      - image: cimg/python:3.9.6
     executor: ruby/default
     steps:
       - checkout
-      - run: apt install python3
+      # - run: apt install python3
       - run: python3 -m pip install numpy
       - run: python3 -m pip install pandas
       - run: python3 -m pip install sklearn
