@@ -1,13 +1,13 @@
 version: 2.1
 orbs:
   ruby: circleci/ruby@0.1.2
-  # python: circleci/python@1.4.0
+  python: circleci/python@1.4.0
 
 jobs:
   build:
     docker:
       - image: circleci/ruby:2.7.2
-      - image: circleci/python:3.9.6
+      # - image: circleci/python:3.9.6
     executor: ruby/default
     steps:
       - checkout
