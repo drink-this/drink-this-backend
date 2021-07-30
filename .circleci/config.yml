@@ -16,9 +16,13 @@ jobs:
       - run:
           name: Which bundler?
           command: bundle -v
-      - run: sudo apt-get install python-numpy
-      - run: sudo apt-get install python-pandas
-      - run: sudo apt-get install python-sklearn 
+      - run: sudo apt-get install pip
+      - run: python3 -m pip install numpy
+      - run: python3 -m pip install pandas
+      - run: python3 -m pip install sklearn
+      # - run: sudo apt-get install python3-numpy
+      # - run: sudo apt-get install python3-pandas
+      # - run: sudo apt-get install python3-sklearn 
       - run: bundle install
       - run: bundle exec rspec spec
 # workflows:
