@@ -31,4 +31,23 @@ class CocktailDetails
     end
     measurements
   end
+
+  def zip_measurements_with_ingredients
+    merge = []
+    @measurements.zip(@ingredients).map do |combined|
+      merge << combined.join
+    end
+    count = 0
+    if @measurements.size < @ingredients.size
+      difference = @measurements.size - @ingredients.size
+      @ingredients.each do |ingredient|
+        setting = difference + count
+        count += 1
+        binding.pry
+        merge << @ingredients[setting] until setting == 0
+      end
+    end
+    # binding.pry
+    merge
+  end
 end
