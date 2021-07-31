@@ -6,8 +6,18 @@ orbs:
 
 jobs:
   build:
+    working_directory: ~/drink-this-backend
     docker:
       - image: circleci/ruby:2.7.2
+        # environment:
+        #     PGHOST: localhost
+        #     PGUSER: your-app-name
+        #     RAILS_ENV: test
+        - image: postgres:9.5
+          environment:
+            POSTGRES_USER: drink-this-backend
+            POSTGRES_DB: drink-this-backend_test
+            # POSTGRES_PASSWORD: 
     executor: ruby/default
     steps:
       - checkout
@@ -20,19 +30,34 @@ jobs:
       - run: python3 -m pip install numpy
       - run: python3 -m pip install pandas
       - run: python3 -m pip install sklearn
-      # - run: sudo apt-get install python3-numpy
-      # - run: sudo apt-get install python3-pandas
-      # - run: sudo apt-get install python3-sklearn 
+      # #  Restore Cached Dependencies
+      # - type: cache-restore
+      #   name: Restore bundle cache
+      #   key: your-app-name-{{ checksum "Gemfile.lock" }}
+
+      # # Bundle install dependencies
+      # - run: bundle install --path vendor/bundle
+
+      # # Cache Dependencies
+      # - type: cache-save
+      #   name: Store bundle cache
+      #   key: your-app-name-{{ checksum "Gemfile.lock" }}
+      #   paths:
+      #     - vendor/bundle
+
+      # # Wait for DB
+      # - run: dockerize -wait tcp://localhost:5432 -timeout 1m
       - run: bundle install
+      - run: bundle exec rake db:setup
       - run: bundle exec rspec spec
-# workflows:
-#   heroku_deploy:
-#     jobs:
-#       - build
-#       - heroku/deploy-via-git: # Use the pre-configured job, deploy-via-git
-#           requires:
-#             - build
-#           filters:
-#             branches:
-#               only: python_config
+workflows:
+  heroku_deploy:
+    jobs:
+      - build
+      - heroku/deploy-via-git: # Use the pre-configured job, deploy-via-git
+          requires:
+            - build
+          filters:
+            branches:
+              only: python_config
            
