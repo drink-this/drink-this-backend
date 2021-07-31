@@ -13,10 +13,10 @@ jobs:
         #     PGHOST: localhost
         #     PGUSER: your-app-name
         #     RAILS_ENV: test
-        - image: postgres:9.5
-          environment:
-            POSTGRES_USER: drink-this-backend
-            POSTGRES_DB: drink-this-backend_test
+      - image: postgres:9.5
+        environment:
+          POSTGRES_USER: drink-this-backend
+          POSTGRES_DB: drink-this-backend_test
             # POSTGRES_PASSWORD: 
     executor: ruby/default
     steps:
