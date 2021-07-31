@@ -18,8 +18,12 @@ jobs:
     steps:
       - checkout
       - ruby/bundle-install
-      - run: bundle exec rake db:setup
       - run: sudo apt-get install python3-dev
+      - run: sudo apt-get install python3-pip
+      - run: python3 -m pip install numpy
+      - run: python3 -m pip install pandas
+      - run: python3 -m pip install sklearn
+      - run: bundle exec rake db:setup
       - run:
           name: Which bundler?
           command: bundle -v
@@ -27,11 +31,7 @@ jobs:
     executor: ruby/default
     steps:
       - checkout
-      - run: sudo apt-get install python3-pip
-      - run: python3 -m pip install numpy
-      - run: python3 -m pip install pandas
-      - run: python3 -m pip install sklearn
-      - run: bundle install --path vendor/bundle
+      - run: bundle install # --path vendor/bundle
       - run: bundle exec rspec spec
 
 workflows:
