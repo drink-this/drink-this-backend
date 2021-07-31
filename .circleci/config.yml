@@ -22,6 +22,7 @@ jobs:
     steps:
       - checkout
       - ruby/bundle-install
+      - run: bundle exec rake db:setup
       - run: sudo apt-get install python3-dev
       - run:
           name: Which bundler?
@@ -45,7 +46,6 @@ jobs:
       #     key: your-app-name-{{ checksum "Gemfile.lock" }}
       #     paths:
       #       - vendor/bundle
-      - run: bundle exec rake db:setup
       - run: bundle exec rspec spec
 
 workflows:
