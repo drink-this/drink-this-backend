@@ -55,5 +55,20 @@ RSpec.describe 'Rating API' do
       expect(response_body[:error]).to eq("Failed to create resource")
       expect(response_body[:messages].first).to eq("Stars is not a number")
     end
+
+    it 'returns error if user and/or cocktail not found' do
+      post "/api/v1/cocktails/#{@cocktail_1.id}/rating", params: {
+        user_id: 7,
+        cocktail_id: 19,
+        stars: 3
+      }
+
+      expect(response.status).to eq(400)
+      response_body = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response_body[:error]).to eq("Failed to create resource")
+      expect(response_body[:messages].first).to eq("User must exist")
+      expect(response_body[:messages].second).to eq("Cocktail must exist")
+    end
   end
 end
