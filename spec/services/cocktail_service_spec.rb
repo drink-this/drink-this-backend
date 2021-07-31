@@ -9,12 +9,12 @@ RSpec.describe CocktailService, :vcr do
           manhattan = CocktailService.get_cocktail_details(11008)
 
           expect(manhattan).to be_a Hash
-          expect(manhattan['drinks']).to be_an Array
-          expect(manhattan['drinks'].first['idDrink']).to be_a String
-          expect(manhattan['drinks'].first['strDrink']).to be_a String
-          expect(manhattan['drinks'].first['strInstructions']).to be_a String
-          expect(manhattan['drinks'].first['strIngredient1']).to be_a String
-          expect(manhattan['drinks'].first['strMeasure1']).to be_a String
+          expect(manhattan['idDrink']).to be_a String
+          expect(manhattan['strDrink']).to be_a String
+          expect(manhattan['strInstructions']).to be_a String
+          expect(manhattan['strDrinkThumb']).to be_a String
+          expect(manhattan['strIngredient1']).to be_a String
+          expect(manhattan['strMeasure1']).to be_a String
         end
       end
     end
