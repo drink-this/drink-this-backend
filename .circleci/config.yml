@@ -18,8 +18,8 @@ jobs:
     steps:
       - checkout
       - ruby/bundle-install
-      - run: bundle exec rake db:{create,migrate}
       - run: sudo apt-get install python3-dev
+      - run: bundle exec rake db:{create,migrate}
       - run: sudo apt-get install python3-pip
       - run: python3 -m pip install numpy
       - run: python3 -m pip install pandas
