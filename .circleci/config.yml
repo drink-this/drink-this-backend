@@ -5,6 +5,13 @@ orbs:
   heroku: circleci/heroku@0.0.10
 
 jobs:
+  build-database:
+    docker: 
+      - image: postgres:9.5
+        environment:
+          POSTGRES_USER: drink-this-backend
+          POSTGRES_DB: drink-this-backend_test
+          POSTGRES_PASSWORD: drink-this
   build:
     working_directory: ~/drink-this-backend
     docker:
@@ -13,11 +20,6 @@ jobs:
         #     PGHOST: localhost
         #     PGUSER: your-app-name
         #     RAILS_ENV: test
-      - image: postgres:9.5
-        environment:
-          POSTGRES_USER: drink-this-backend
-          POSTGRES_DB: drink-this-backend_test
-          POSTGRES_PASSWORD: drink-this
     executor: ruby/default
     steps:
       - checkout
@@ -34,7 +36,7 @@ jobs:
       #     name: cache-restore
       #     command: your-app-name-{{ checksum "Gemfile.lock" }}
 
-      - run: dockerize -wait tcp://localhost:5432 -timeout 1m
+      # - run: dockerize -wait tcp://localhost:5432 -timeout 1m
 
       - run: bundle install --path vendor/bundle
       
@@ -47,7 +49,10 @@ jobs:
 workflows:
   heroku_deploy:
     jobs:
-      - build
+      - build-database
+      - build:
+        requires:
+            - build-database
       - heroku/deploy-via-git: # Use the pre-configured job, deploy-via-git
           requires:
             - build
