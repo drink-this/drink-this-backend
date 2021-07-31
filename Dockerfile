@@ -18,7 +18,9 @@ RUN wget https://cache.ruby-lang.org/pub/ruby/2.7/ruby-2.7.2.tar.gz &&\
     cd .. &&\
     rm -rf ruby-2.7.2.tar.gz ruby-2.7.2
 
-RUN export TZ="America/Mountain"; apt-get install -y tzdata
+RUN export DEBIAN_FRONTEND=noninteractive &&\
+    ln -fs /usr/share/zoneinfo/America/Mountain /etc/localtime &&\
+    apt-get install -y tzdata
 WORKDIR /home/files
 RUN gem install bundler && bundle install
 # COPY . . 
