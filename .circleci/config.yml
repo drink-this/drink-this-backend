@@ -30,25 +30,19 @@ jobs:
       - run: python3 -m pip install numpy
       - run: python3 -m pip install pandas
       - run: python3 -m pip install sklearn
-      # - type: cache-restore
-      #   name: Restore bundle cache
-      #   key: your-app-name-{{ checksum "Gemfile.lock" }}
+      - type: cache-restore
+          name: Restore bundle cache
+          key: your-app-name-{{ checksum "Gemfile.lock" }}
 
-      # # Wait for DB 
-      # - run: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run: dockerize -wait tcp://localhost:5432 -timeout 1m
 
-      # - run: bundle install --path vendor/bundle
-
-      - run: bundle install
+      - run: bundle install --path vendor/bundle
       
-      # - type: cache-save
-      #   name: Store bundle cache
-      #   key: your-app-name-{{ checksum "Gemfile.lock" }}
-      #   paths:
-      #     - vendor/bundle
-
-      
-      
+      - type: cache-save
+          name: Store bundle cache
+          key: your-app-name-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
       - run: bundle exec rake db:setup
       - run: bundle exec rspec spec
 workflows:
