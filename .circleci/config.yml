@@ -12,6 +12,8 @@ jobs:
           POSTGRES_USER: drink-this-backend
           POSTGRES_DB: drink-this-backend_test
           POSTGRES_PASSWORD: drink-this
+    steps:
+        - checkout    
   build:
     working_directory: ~/drink-this-backend
     docker:
@@ -51,7 +53,7 @@ workflows:
     jobs:
       - build-database
       - build:
-        requires:
+          requires:
             - build-database
       - heroku/deploy-via-git: # Use the pre-configured job, deploy-via-git
           requires:
