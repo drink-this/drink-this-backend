@@ -17,6 +17,10 @@ RSpec.describe 'Rating API' do
       expect(response).to be_successful
       expect(response.status).to eq(201)
 
+      created_rating = JSON.parse(response.body, symbolize_names: true)
+
+      expect(created_rating).to have_key(:data)
+      expect(created_rating[:data]).to be_a Hash
     end
   end
 end
