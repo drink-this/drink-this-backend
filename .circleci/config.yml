@@ -21,9 +21,9 @@ jobs:
       - run: sudo apt-get install python3-dev
       - run: sudo apt-get install python3-pip
       - run: python3 -m pip install numpy
-      - run: bundle exec rake db:{create,migrate}
       - run: python3 -m pip install pandas
       - run: python3 -m pip install sklearn
+      - run: bundle exec rake db:{create,migrate}
       - run:
           name: Which bundler?
           command: bundle -v
