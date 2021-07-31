@@ -8,5 +8,6 @@ RSpec.describe Rating, type: :model do
 
   describe 'validations' do
     it {should validate_presence_of :stars}
+    it {should validate_numericality_of(:stars).only_integer}
   end
 end
