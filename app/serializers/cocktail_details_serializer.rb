@@ -1,4 +1,4 @@
-class CocktailSerializer < ActiveModel::Serializer
+class CocktailDetailsSerializer < ActiveModel::Serializer
   attributes :name, :thumbnail, :glass, :recipe, :instructions, :rating
 
   def self.details(id, cocktail)
