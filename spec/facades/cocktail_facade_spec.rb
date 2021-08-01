@@ -28,7 +28,14 @@ RSpec.describe CocktailFacade, :vcr do
         expect(vodka_fizz[:rating]).to eq(0)
       end
 
-      it 'returns rating if present'
+      it 'returns rating if present' do
+        create(:cocktail, id: 16967)
+        user = create(:user)
+        create(:rating, cocktail_id: 16967, user_id: user.id, stars: 4)
+        vodka_fizz = CocktailFacade.retrieve_cocktail('16967')
+
+        expect(vodka_fizz[:rating]).to eq(4)
+      end
     end
   end
 end
