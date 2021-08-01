@@ -12,7 +12,7 @@ class CocktailFacade
     end.compact
 
     rating = if Rating.find_by(cocktail_id: cocktail_id).present?
-      Rating.find_by(cocktail_id: cocktail_id).pluck(:stars)
+      Rating.find_by(cocktail_id: cocktail_id).stars
     else
       0
     end
