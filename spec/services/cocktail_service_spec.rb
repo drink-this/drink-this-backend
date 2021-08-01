@@ -6,9 +6,13 @@ RSpec.describe CocktailService, :vcr do
 
       describe '::get_cocktail_details' do
         it 'returns cocktail data' do
-          manhattan = CocktailService.get_cocktail_details(11008)
+          response = CocktailService.get_cocktail_details(11008)
 
-          expect(manhattan).to be_a Hash
+          expect(response).to be_a Hash
+          expect(response[:drinks]).to be_an Array
+
+          manhattan = response[:drinks].first
+
           expect(manhattan[:idDrink]).to be_a String
           expect(manhattan[:idDrink]).to eq('11008')
 
