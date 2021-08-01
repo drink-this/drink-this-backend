@@ -9,11 +9,11 @@ jobs:
     working_directory: ~/drink-this-backend
     docker:
       - image: circleci/ruby:2.7.2
-      - image: postgres:9.5
-        environment:
-          POSTGRES_USER: drink-this-backend
-          POSTGRES_DB: drink-this-backend_production
-          POSTGRES_PASSWORD: <%= ENV['DRINK-THIS-BACKEND_DATABASE_PASSWORD'] %>
+      # - image: postgres:9.5
+      #   environment:
+      #     POSTGRES_USER: drink-this-backend
+      #     POSTGRES_DB: drink-this-backend_production
+      #     POSTGRES_PASSWORD: <%= ENV['DRINK-THIS-BACKEND_DATABASE_PASSWORD'] %>
     executor: ruby/default
     steps:
       - checkout
@@ -23,7 +23,7 @@ jobs:
       - run: python3 -m pip install numpy
       - run: python3 -m pip install pandas
       - run: python3 -m pip install sklearn
-      - run: bundle exec rake db:{create,migrate}
+      # - run: bundle exec rake db:{create,migrate}
       - run:
           name: Which bundler?
           command: bundle -v
