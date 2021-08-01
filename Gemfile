@@ -35,9 +35,10 @@ gem 'pandas'
 # gem 'rack-cors'
 gem 'rubocop', require: false
 
+gem 'active_model_serializers'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'active_model_serializers'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'factory_bot_rails'
   gem 'faker'
