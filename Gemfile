@@ -30,6 +30,10 @@ gem 'faraday'
 gem 'pycall'
 # gem 'pandas'
 
+gem 'jwt'
+gem 'bcrypt'
+gem 'rack-cors'
+
 gem 'omniauth-google-oauth2'
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible

@@ -17,6 +17,8 @@ class SessionsController < ApplicationController
 
     user.save
 
+
+    redirect_to 'localhost:3000'
     #cookies.encrypted[:current_user_id] = {value: user.id, expires: Time.now + 4.days }
   end
 
