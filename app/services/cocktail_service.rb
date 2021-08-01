@@ -5,7 +5,7 @@ class CocktailService
       req.params['api_key'] = ENV['cocktail_key']
     end
 
-    parse_json(response)[:drinks].first
+    parse_json(response)
   end
 
   private
