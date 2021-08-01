@@ -12,8 +12,8 @@ jobs:
       - image: postgres:9.5
         environment:
           POSTGRES_USER: drink-this-backend
-          POSTGRES_DB: drink-this-backend
-          POSTGRES_PASSWORD: drink-this
+          POSTGRES_DB: drink-this-backend_production
+          POSTGRES_PASSWORD: <%= ENV['DRINK-THIS-BACKEND_DATABASE_PASSWORD'] %>
     executor: ruby/default
     steps:
       - checkout
