@@ -23,6 +23,7 @@ jobs:
       - run: python3 -m pip install numpy
       - run: python3 -m pip install pandas
       - run: python3 -m pip install sklearn
+      # - run: pg_ctl -D /var/lib/postgresql/data -l logfile start
       - run: bundle exec rake db:{create,migrate}
       - run:
           name: Which bundler?
