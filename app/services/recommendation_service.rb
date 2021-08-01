@@ -43,14 +43,7 @@ class RecommendationService
     # binding.pry
   end
 
-  # def self.create_df
-  #   csv_data = Pandas.read_csv("./db/data/cocktail_ratings.csv") #replace with our ratings data
-  #   binding.pry
-  #   df = csv_data.set_index('name').fillna(0) #will be user_id instead of name
-  # end
-
   def self.recommendation(user_id)
-    # df = create_df
     df = Dataframeable.create_df
 
     user_distance_matrix = euclidean_distance(df)
@@ -71,7 +64,7 @@ class RecommendationService
     new_dataframe = Pandas.DataFrame.new()
 
     weighted_avg(new_dataframe, unrated_cocktails, user_id)
-binding.pry
+
     best_drink = return_recommendation(new_dataframe)
   end
 end

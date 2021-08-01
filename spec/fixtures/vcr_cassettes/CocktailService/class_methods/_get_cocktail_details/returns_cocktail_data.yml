@@ -1,0 +1,63 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.thecocktaildb.com/api/json/v1/1/lookup.php?api_key=<api_key>&i=11008
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.5.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 30 Jul 2021 23:37:08 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - ASP.NET
+      - PHP/7.0.9
+      Access-Control-Allow-Origin:
+      - "*"
+      Cf-Cache-Status:
+      - DYNAMIC
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=Tvs%2FWzKum33ZGWzvMZsEQ0Sw4MSrkeWf%2FYBPVGAwa7mtI%2FSSstFHHZFX8NGh4gQqd6lVg8%2BLh2I12xEjCyIs9C0YDtvyKEK%2BFAt6Zg9xtmcg%2BoGIA8fyIW991OEJSEBqIvDpWOouypE%3D"}],"group":"cf-nel","max_age":604800}'
+      Nel:
+      - '{"report_to":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 677269c0ed270e5a-DFW
+      Alt-Svc:
+      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
+        ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: '{"drinks":[{"idDrink":"11008","strDrink":"Manhattan","strDrinkAlternate":null,"strTags":"IBA,Classic,Alcoholic","strVideo":"https:\/\/www.youtube.com\/watch?v=TFWPtkNoF4Y","strCategory":"Cocktail","strIBA":"Unforgettables","strAlcoholic":"Alcoholic","strGlass":"Cocktail
+        glass","strInstructions":"Stirred over ice, strained into a chilled glass,
+        garnished, and served up.","strInstructionsES":null,"strInstructionsDE":"\u00dcber
+        Eis ger\u00fchrt, in ein gek\u00fchltes Glas geseiht, garniert und serviert.","strInstructionsFR":null,"strInstructionsIT":"Mescolate
+        su ghiaccio, filtrate in un bicchiere freddo, guarnite e servite.","strInstructionsZH-HANS":null,"strInstructionsZH-HANT":null,"strDrinkThumb":"https:\/\/www.thecocktaildb.com\/images\/media\/drink\/yk70e31606771240.jpg","strIngredient1":"Sweet
+        Vermouth","strIngredient2":"Bourbon","strIngredient3":"Angostura bitters","strIngredient4":"Ice","strIngredient5":"Maraschino
+        cherry","strIngredient6":"Orange peel","strIngredient7":null,"strIngredient8":null,"strIngredient9":null,"strIngredient10":null,"strIngredient11":null,"strIngredient12":null,"strIngredient13":null,"strIngredient14":null,"strIngredient15":null,"strMeasure1":"3\/4
+        oz ","strMeasure2":"2 1\/2 oz Blended ","strMeasure3":"dash ","strMeasure4":"2
+        or 3 ","strMeasure5":"1 ","strMeasure6":"1 twist of ","strMeasure7":null,"strMeasure8":null,"strMeasure9":null,"strMeasure10":null,"strMeasure11":null,"strMeasure12":null,"strMeasure13":null,"strMeasure14":null,"strMeasure15":null,"strImageSource":"https:\/\/commons.wikimedia.org\/wiki\/File:Oak_Fired_Manhattan_-_Stierch_1.jpg","strImageAttribution":"Sarah
+        Stierch (CC BY 4.0)","strCreativeCommonsConfirmed":"Yes","dateModified":"2017-09-02
+        12:07:09"}]}'
+  recorded_at: Fri, 30 Jul 2021 23:37:08 GMT
+recorded_with: VCR 6.0.0
