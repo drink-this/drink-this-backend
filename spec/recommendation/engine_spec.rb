@@ -30,9 +30,8 @@ RSpec.describe 'Testing' do
       create(:rating, user: user_4, cocktail: cocktail_1, stars: 5)
       create(:rating, user: user_4, cocktail: cocktail_3, stars: 2)
       create(:rating, user: user_4, cocktail: cocktail_4, stars: 1)
-      # create(:rating, user: user_4, cocktail: cocktail_5, stars: 1)
 
-      expect(RecommendationService.recommendation(User.last.id)).to be_a? DataFrame
+      expect(RecommendationService.recommendation(User.last.id)).to eq "Screw Driver"
     end
   end
 
