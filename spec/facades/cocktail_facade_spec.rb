@@ -67,6 +67,7 @@ RSpec.describe CocktailFacade, :vcr do
         result_1 = dry.first
 
         expect(result_1).to be_a Hash
+        expect(result_1[:id]).to eq('11324')
         expect(result_1[:name]).to eq('Dry Rob Roy')
         expect(result_1[:thumbnail]).to eq('https://www.thecocktaildb.com/images/media/drink/typuyq1439456976.jpg')
         expect(result_1[:rating]).to eq(4)
@@ -74,6 +75,7 @@ RSpec.describe CocktailFacade, :vcr do
         result_2 = dry.second
 
         expect(result_2).to be_a Hash
+        expect(result_2[:id]).to eq('11005')
         expect(result_2[:name]).to eq('Dry Martini')
         expect(result_2[:thumbnail]).to eq('https://www.thecocktaildb.com/images/media/drink/6ck9yi1589574317.jpg')
         expect(result_2[:rating]).to eq(0)
