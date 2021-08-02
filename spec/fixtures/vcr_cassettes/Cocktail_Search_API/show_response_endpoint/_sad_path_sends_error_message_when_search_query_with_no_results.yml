@@ -1,0 +1,55 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.thecocktaildb.com/api/json/v1/1/search.php?api_key=<api_key>&s=sdkljfs
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.5.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 02 Aug 2021 22:03:28 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '15'
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - ASP.NET
+      - PHP/7.0.9
+      Access-Control-Allow-Origin:
+      - "*"
+      Cf-Cache-Status:
+      - DYNAMIC
+      Last-Modified:
+      - Mon, 02 Aug 2021 22:03:28 GMT
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=gZ1LbRWle5hopupPyZsuMpgup2HdJGCGlG2Q9gARsXKpf80P6somvJ4qn7Ust39W70vUuykvaxy9Uf56c6p0YFavYhOeULtXX21gW8RKlemrMx2AmcT6IOkuwmNZYuJR0uw3s8Pot2g%3D"}],"group":"cf-nel","max_age":604800}'
+      Nel:
+      - '{"report_to":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 678a98ab0c6dd25e-DFW
+      Alt-Svc:
+      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
+        ma=86400
+    body:
+      encoding: UTF-8
+      string: '{"drinks":null}'
+  recorded_at: Mon, 02 Aug 2021 22:03:27 GMT
+recorded_with: VCR 6.0.0
