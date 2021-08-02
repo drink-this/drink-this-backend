@@ -3,7 +3,7 @@ require 'pycall'
 
 RSpec.describe 'Testing' do
   describe 'create_df' do
-    it 'can convert ruby data into dataframe' do
+    xit 'can convert ruby data into dataframe' do
       cocktail_1 = create(:cocktail, name: 'margarita')
       cocktail_2 = create(:cocktail, name: 'old fashion')
       cocktail_3 = create(:cocktail, name: 'whisky sour')
