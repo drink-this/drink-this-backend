@@ -17,7 +17,7 @@ class CocktailFacade
       0
     end
 
-    cocktail = {
+    {
       # id: details[:idDrink],
       name: details[:strDrink],
       thumbnail: details[:strDrinkThumb],
@@ -31,26 +31,34 @@ class CocktailFacade
   end
 
   def self.get_ingredients(cocktail_data)
-    ingredients = []
-    cocktail_data.each do |key, value|
-      stringify_key = key.to_s
-      if stringify_key.include?("Ingredient")
-        value = "" if value.nil?
-        ingredients << value
+    cocktail_data.map do |key, value|
+      if key.to_s.include?("Ingredient")
+        value ||= ""
       end
-    end
-    ingredients
+    end.compact
   end
 
   def self.get_measurements(cocktail_data)
-    measurements = []
-    cocktail_data.each do |key, value|
-      stringify_key = key.to_s
-      if stringify_key.include?("Measure")
-        value = "" if value.nil?
-        measurements << value
+    cocktail_data.map do |key, value|
+      if key.to_s.include?("Measure")
+        value ||= ""
       end
+    end.compact
+  end
+
+  def self.retrieve_search_results(query, user_id)
+    response = CocktailService.search_cocktails(query)
+
+    response[:drinks].map do |drink|
+      {
+        name: drink[:strDrink],
+        thumbnail: drink[:strDrinkThumb],
+        rating: if Rating.find_by(cocktail_id: drink[:idDrink], user_id: user_id).present?
+                  Rating.find_by(cocktail_id: drink[:idDrink], user_id: user_id).stars
+                else
+                  0
+                end
+      }
     end
-    measurements
   end
 end
