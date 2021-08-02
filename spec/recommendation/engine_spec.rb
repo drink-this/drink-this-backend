@@ -30,15 +30,8 @@ RSpec.describe 'Testing' do
       create(:rating, user: user_4, cocktail: cocktail_1, stars: 5)
       create(:rating, user: user_4, cocktail: cocktail_3, stars: 2)
       create(:rating, user: user_4, cocktail: cocktail_4, stars: 1)
-      # create(:rating, user: user_4, cocktail: cocktail_5, stars: 1)
 
-      expect(RecommendationService.recommendation(User.last.id)).to be_a? DataFrame
-    end
-  end
-
-  describe 'testing euclidean distance' do
-    xit 'can run python' do
-      expect(RecommendationService.recommendation).to eq("Screw Driver") # Should take a user_id or user as a parameter (who's making the request)
+      expect(RecommendationService.recommendation(User.last.id)).to eq "Screw Driver"
     end
   end
 end

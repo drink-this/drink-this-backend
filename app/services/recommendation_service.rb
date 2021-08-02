@@ -31,7 +31,6 @@ class RecommendationService
 
   def self.user_distances(user_distance_matrix, df, user_id)
     other_users = user_distance_matrix.loc[user_id].sort_values(0,ascending=true)
-    # binding.pry
     user_removed = other_users[other_users>0][0..4]
     Pandas.DataFrame.new(data=user_removed, index=df.index)
   end
@@ -40,7 +39,6 @@ class RecommendationService
     sklearn = PyCall.import_module("sklearn")
     euclidean = Numpy.round(sklearn.metrics.pairwise.euclidean_distances(df,df),2)
     user_distance_matrix = Pandas.DataFrame.new(data=euclidean, index=df.index,columns=df.index)
-    # binding.pry
   end
 
   def self.recommendation(user_id)
@@ -65,6 +63,6 @@ class RecommendationService
 
     weighted_avg(new_dataframe, unrated_cocktails, user_id)
 
-    best_drink = return_recommendation(new_dataframe)
+    return_recommendation(new_dataframe)
   end
 end

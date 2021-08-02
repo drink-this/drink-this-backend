@@ -78,8 +78,11 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
+# production:
+#   <<: *default
+#   database: drink-this-backend_production
+#   username: drink-this-backend
+#   password: <%= ENV['DRINK-THIS-BACKEND_DATABASE_PASSWORD'] %>
 production:
-  <<: *default
-  database: drink-this-backend_production
-  username: drink-this-backend
-  password: <%= ENV['DRINK-THIS-BACKEND_DATABASE_PASSWORD'] %>
+     <<: *default # this you may want
+     url: <%= ENV['DATABASE_URL'] %>
