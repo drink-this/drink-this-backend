@@ -155,6 +155,8 @@ GEM
     pycall (1.4.1)
     racc (1.5.2)
     rack (2.2.3)
+    rack-cors (1.1.1)
+      rack (>= 2.0.0)
     rack-protection (2.1.0)
       rack
     rack-test (1.1.0)
@@ -274,6 +276,7 @@ DEPENDENCIES
   pry
   puma (~> 3.11)
   pycall
+  rack-cors
   rails (~> 5.2.6)
   rspec-rails
   rubocop
