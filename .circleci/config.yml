@@ -21,9 +21,13 @@ jobs:
       - checkout
       - ruby/bundle-install
       - run: sudo apt-get install python3 python3-dev
+      - run:
+          name: Install Python deps in a venv
+          command: 
+            python3 -m venv venv
+            . venv/bin/activate
       - run: sudo apt-get install python3-pip
-      - run: python3 -m pip install pyenv
-      - run: env PYTHON_CONFIGURE_OPTS="--enable-framework" pyenv install 3.9.6
+      - run: env PYTHON_CONFIGURE_OPTS="--enable-framework" venv install 3.9.6
       - run: python3 -m pip install numpy
       - run: python3 -m pip install pandas
       - run: python3 -m pip install sklearn
