@@ -52,17 +52,23 @@ class CocktailFacade
   def self.retrieve_search_results(query, user_id)
     response = CocktailService.search_cocktails(query)
 
-    response[:drinks].map do |drink|
+    if response[:drinks].nil?
       {
-        id: drink[:idDrink],
-        name: drink[:strDrink],
-        thumbnail: drink[:strDrinkThumb],
-        rating: if Rating.find_by(cocktail_id: drink[:idDrink], user_id: user_id).present?
-                  Rating.find_by(cocktail_id: drink[:idDrink], user_id: user_id).stars
-                else
-                  0
-                end
+        error: 'Search query not valid.'
       }
+    else
+      response[:drinks].map do |drink|
+        {
+          id: drink[:idDrink],
+          name: drink[:strDrink],
+          thumbnail: drink[:strDrinkThumb],
+          rating: if Rating.find_by(cocktail_id: drink[:idDrink], user_id: user_id).present?
+                    Rating.find_by(cocktail_id: drink[:idDrink], user_id: user_id).stars
+                  else
+                    0
+                  end
+        }
+      end
     end
   end
 end
