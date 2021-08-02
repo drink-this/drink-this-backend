@@ -5,4 +5,18 @@ Rails.application.routes.draw do
 
   get "/session", to: "session#login"
   get "/token_auth", to: "authentication#token_auth"
+
+  namespace :api do
+    namespace :v1 do
+      namespace :cocktails do
+        resources :search, only: :index
+
+        scope '/:id' do
+          resources :rating, only: :create
+        end
+      end
+
+      resources :cocktails, only: :show
+    end
+  end
 end
