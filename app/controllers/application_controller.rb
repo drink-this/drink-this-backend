@@ -10,8 +10,6 @@ class ApplicationController < ActionController::API
   end
 
   def decode(token)
-    # body = JWT.decode(token, secret_key, true, {algorithm: "HS256"})[0]
-    # HashWithIndifferentAccess.new(body)
     response = Faraday.new(url: "https://oauth2.googleapis.com").get("/tokeninfo?id_token=#{token}")
     JSON.parse(response.body, symbolize_names: true)
   end
