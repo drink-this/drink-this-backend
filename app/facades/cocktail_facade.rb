@@ -1,8 +1,6 @@
 class CocktailFacade
   def self.retrieve_cocktail(cocktail_id)
-    response = CocktailService.get_cocktail_details(cocktail_id)
-
-    details = response[:drinks].first
+    details = cocktail_service(cocktail_id)[:drinks].first
 
     ingredients = get_ingredients(details)
     measurements = get_measurements(details)
@@ -18,7 +16,6 @@ class CocktailFacade
     end
 
     {
-      # id: details[:idDrink],
       name: details[:strDrink],
       thumbnail: details[:strDrinkThumb],
       glass: details[:strGlass],
@@ -26,9 +23,15 @@ class CocktailFacade
       instructions: details[:strInstructions],
       rating: rating
     }
-
-    # CocktailDetails.new(cocktail)
   end
+
+  def self.cocktail_service(cocktail_id)
+    CocktailService.get_cocktail_details(cocktail_id)
+  end
+
+  # def self.package_to_recipe
+  #
+  # end
 
   def self.get_ingredients(cocktail_data)
     cocktail_data.map do |key, value|
