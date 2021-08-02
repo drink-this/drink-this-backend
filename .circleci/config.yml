@@ -3,10 +3,6 @@ orbs:
   ruby: circleci/ruby@0.1.2
   python: circleci/python@1.4.0
   heroku: circleci/heroku@0.0.10
-dependencies:
-  pre:
-    - pyenv uninstall -f 3.9.6
-    - env PYTHON_CONFIGURE_OPTS="--enable-shared" pyenv install 3.9.6
 jobs:
   build:
     working_directory: ~/drink-this-backend
