@@ -43,6 +43,34 @@ RSpec.describe 'Cocktail Search API', :vcr do
 
         expect(second_result[:attributes][:rating]).to eq(0)
       end
+
+      it '(sad path) sends error message when blank search query' do
+        get "/api/v1/cocktails/search", params: {
+          search: '',
+          user_id: @user.id
+        }
+
+        expect(response.status).to eq(200)
+
+        search_results = JSON.parse(response.body, symbolize_names: true)
+
+        expect(search_results[:data]).to have_key :error
+        expect(search_results[:data][:error]).to eq('Search query not valid.')
+      end
+
+      it '(sad path) sends error message when search query with no results' do
+        get "/api/v1/cocktails/search", params: {
+          search: 'sdkljfs',
+          user_id: @user.id
+        }
+
+        expect(response.status).to eq(200)
+
+        search_results = JSON.parse(response.body, symbolize_names: true)
+
+        expect(search_results[:data]).to have_key :error
+        expect(search_results[:data][:error]).to eq('Search query not valid.')
+      end
     end
   end
 end
