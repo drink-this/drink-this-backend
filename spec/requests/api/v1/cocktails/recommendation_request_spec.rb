@@ -33,7 +33,7 @@ RSpec.describe '/recommendation', :vcr do
         create(:rating, user: user_4, cocktail: cocktail_3, stars: 2)
         create(:rating, user: user_4, cocktail: cocktail_4, stars: 1)
 
-        get "/api/v1/recommendation"
+        get "/api/v1/recommendation", params: {auth_token: 'sagkjsdwnkvf'}
 
         expect(response.status).to eq(200)
 
