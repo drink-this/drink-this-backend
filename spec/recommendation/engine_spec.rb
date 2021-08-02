@@ -34,10 +34,4 @@ RSpec.describe 'Testing' do
       expect(RecommendationService.recommendation(User.last.id)).to eq "Screw Driver"
     end
   end
-
-  describe 'testing euclidean distance' do
-    xit 'can run python' do
-      expect(RecommendationService.recommendation).to eq("Screw Driver") # Should take a user_id or user as a parameter (who's making the request)
-    end
-  end
 end
