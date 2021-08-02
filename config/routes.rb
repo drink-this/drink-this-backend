@@ -4,5 +4,5 @@ Rails.application.routes.draw do
   resource :users, only: [:create]
 
   get "/session", to: "session#login"
-  get "/login", to: "authentication#token_authenticate"
+  get "/token_auth", to: "authentication#token_auth"
 end
