@@ -3,13 +3,15 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :cocktails, only: :show
-      
       namespace :cocktails do
+        resources :search, only: :index
+
         scope '/:id' do
           resources :rating, only: :create
         end
       end
+      
+      resources :cocktails, only: :show
     end
   end
 end
