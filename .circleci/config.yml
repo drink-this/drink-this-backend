@@ -24,13 +24,13 @@ jobs:
       - checkout
       - ruby/bundle-install
       - run: sudo apt-get install python3 python3-dev
-      - run:
-          name: Install Python deps in a venv
-          command: 
-            sudo apt-get install python3-venv
-            python3 -m venv venv
+      # - run:
+      #     name: Install Python deps in a venv
+      #     command: 
+      #       sudo apt-get install python3-venv
+      #       python3 -m venv venv
       - run: sudo apt-get install python3-pip
-      - run: env PYTHON_CONFIGURE_OPTS="--enable-framework" venv install 3.9.6
+      - run: env PYTHON_CONFIGURE_OPTS="--enable-framework" pyenv install 3.9.6
       - run: python3 -m pip install numpy
       - run: python3 -m pip install pandas
       - run: python3 -m pip install sklearn
@@ -38,17 +38,26 @@ jobs:
       - run:
           name: Which bundler?
           command: bundle -v
-      - run: bundle install 
+
+  test:
+    docker:
+      - image: circleci/ruby:2.7.2
+    executor: ruby/default
+    steps:
+      - checkout
+      - run: bundle install
       - run: bundle exec rspec spec
 
 workflows:
   heroku_deploy:
     jobs:
       - build
-      - heroku/deploy-via-git: # Use the pre-configured job, deploy-via-git
+      - test:
           requires:
             - build
+      - heroku/deploy-via-git: # Use the pre-configured job, deploy-via-git
+          requires:
+            - test
           filters:
             branches:
               only: python_config
-           
