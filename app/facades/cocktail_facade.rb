@@ -51,6 +51,7 @@ class CocktailFacade
 
     response[:drinks].map do |drink|
       {
+        id: drink[:idDrink],
         name: drink[:strDrink],
         thumbnail: drink[:strDrinkThumb],
         rating: if Rating.find_by(cocktail_id: drink[:idDrink], user_id: user_id).present?
