@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Cocktail, type: :model do
   describe 'relationships' do
-    it {should have_many :ratings}
+    it {should have_many(:ratings).dependent(:destroy)}
   end
 
   describe 'validations' do
