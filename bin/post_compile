@@ -1,0 +1,16 @@
+set -e
+buildpack_url=https://github.com/heroku/heroku-buildpack-python
+buildpack_vsn=v197
+
+# rebuild python if it's missing enable-shared
+if  ! python3 -msysconfig | grep enable-shared \
+    > /dev/null; then
+  PYTHON_VERSION="$(< runtime.txt)"
+  git clone -b "$buildpack_vsn" "$buildpack_url" _buildpack
+  export WORKSPACE_DIR="$PWD/_buildpack/builds"
+  rm -f .heroku/python/bin/python   # prevent failing ln after build
+  sed -i 's!figure --pre!figure --enable-shared --pre!' \
+    "$WORKSPACE_DIR"/runtimes/python3
+  "$WORKSPACE_DIR/runtimes/$PYTHON_VERSION" /app/.heroku/python/
+  rm -fr _buildpack
+fi
