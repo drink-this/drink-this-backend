@@ -1,7 +1,8 @@
 class ApplicationController < ActionController::API
+  rescue_from JWT::DecodeError, with: :error_invalid
 
   def secret_key
-    "drinkthis"
+    ENV['GOOGLE_CLIENT_SECRET']
   end
 
   def encode(payload)
@@ -9,6 +10,11 @@ class ApplicationController < ActionController::API
   end
 
   def decode(token)
-    JWT.decode(token, "drinkthis", true, {algorithm: "HS256"})[0]
+    response = Faraday.new(url: "https://oauth2.googleapis.com").get("/tokeninfo?id_token=#{token}")
+    JSON.parse(response.body, symbolize_names: true)
+  end
+
+  def error_invalid
+    render json: {error: 'invalid token'}
   end
 end
