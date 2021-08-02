@@ -29,7 +29,6 @@ jobs:
           command: 
             sudo apt-get install python3-venv
             python3 -m venv venv
-            .venv/bin/activate
       - run: sudo apt-get install python3-pip
       - run: env PYTHON_CONFIGURE_OPTS="--enable-framework" venv install 3.9.6
       - run: python3 -m pip install numpy
