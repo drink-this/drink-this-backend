@@ -27,12 +27,6 @@ jobs:
       - run:
           name: Which bundler?
           command: bundle -v
-  test:
-    docker:
-      - image: circleci/ruby:2.7.2
-    executor: ruby/default
-    steps:
-      - checkout
       - run: bundle install # --path vendor/bundle
       - run: bundle exec rspec spec
 
