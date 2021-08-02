@@ -1,4 +1,4 @@
-setuptools
+python3-xlib
 numpy
 pandas
 sklearn
