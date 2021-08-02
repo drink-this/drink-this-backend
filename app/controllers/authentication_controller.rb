@@ -1,21 +1,12 @@
 class AuthenticationController < ApplicationController
-
-  def login
-    user = User.find_by(email: params[:email])
-
-    if user && user.authenticate(params[:password])
-      payload = user {user_id: user.id}
-      token = encode(payload)
-      render json: {user: user, token: token}
+  def token_auth
+    token = params[:auth_token]
+    payload = decode(token)
+    if User.where('email = ?', payload[:email])
+      render json: {in_new: false, token: token}
     else
-      render json {error: "User not found"}
+      User.create!(name: payload[:name], email: payload[:email], google_token: token)
+      render json: {is_new: true, token: token}
     end
-  end
-
-  def token_authenticate
-    token = request.headers["Authenticate"]
-    user = User.find(decode(token))["user_id"]
-
-    render json:user
   end
 end
