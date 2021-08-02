@@ -10,52 +10,21 @@ pyfrom 'sklearn.metrics.pairwise', import: :euclidean_distances
 class RecommendationService
   include Dataframeable
 
-  def self.return_recommendation(recommended_cocktails)
-    recommended_cocktails[recommended_cocktails.weightedAvgRecScore == recommended_cocktails.weightedAvgRecScore.max()]
-  end
-
-  def self.weighted_avg(new_dataframe, unrated, user_id)
-    new_dataframe['weightedAvgRecScore'] = unrated['sum_weightedRating']/unrated['count_ratings']
-  end
-
-  def self.remove_rated(pivoted_ratings, all_of_it, user_id)
-    user_pivot = pivoted_ratings[pivoted_ratings.user_id == user_id]
-    reset_sw = all_of_it.reset_index()
-    unrated = reset_sw.merge(user_pivot).set_index('cocktail_id')
-    unrated = unrated[unrated.value == 0]
-  end
-
-
-
-
-
-
-
-  def self.weighted_baselines_with_counts(baselines, weighted_baselines)
-    counts = baselines.groupby('cocktail_id').agg('count')['value']
-    complete = weighted_baselines.join(counts)
-    complete.columns = ['similarity', 'sum_weightedRating','count_ratings']
-    complete
-  end
-
   def self.recommendation(user_id)
     df = Dataframeable.create_df
-
-    cocktail_ratings = Pandas.melt(df.reset_index(),id_vars='user_id',value_vars=df.keys)
-
+    cocktail_ratings = all_ratings(df)
     baselines = merge_distances_and_ratings(cocktail_ratings, df, user_id)
-
     weighted_ratings(baselines, user_id)
-
     weighted_baselines = baselines.groupby('cocktail_id').sum()[[user_id,'weightedRating']]
-
     ratings_complete = weighted_baselines_with_counts(baselines, weighted_baselines)
-
     unrated = remove_rated(cocktail_ratings, ratings_complete, user_id)
+    recommendations = Pandas.DataFrame.new()
+    weighted_avg(recommendations, unrated, user_id)
+    top_recommendation(recommendations).reset_index['cocktail_id'].to_i
+  end
 
-    new_dataframe = Pandas.DataFrame.new()
-    weighted_avg(new_dataframe, unrated, user_id)
-    return_recommendation(new_dataframe).reset_index['cocktail_id'].to_i
+  def self.all_ratings(df)
+    Pandas.melt(df.reset_index(),id_vars='user_id',value_vars=df.keys)
   end
 
   def self.distances_from_user(df, user_id)
@@ -84,5 +53,27 @@ class RecommendationService
   def self.weighted_ratings(baseline_ratings, user_id)
     baseline_ratings[user_id] = (1 / (baseline_ratings[user_id] + 1))
     baseline_ratings['weightedRating'] = baseline_ratings[user_id] * baseline_ratings['value']
+  end
+
+  def self.weighted_baselines_with_counts(baselines, weighted_baselines)
+    counts = baselines.groupby('cocktail_id').agg('count')['value']
+    complete = weighted_baselines.join(counts)
+    complete.columns = ['similarity', 'sum_weightedRating','count_ratings']
+    complete
+  end
+
+  def self.remove_rated(pivoted_ratings, all_of_it, user_id)
+    user_pivot = pivoted_ratings[pivoted_ratings.user_id == user_id]
+    reset_sw = all_of_it.reset_index()
+    unrated = reset_sw.merge(user_pivot).set_index('cocktail_id')
+    unrated = unrated[unrated.value == 0]
+  end
+
+  def self.weighted_avg(recommendations, unrated, user_id)
+    recommendations['weightedAvgRecScore'] = unrated['sum_weightedRating']/unrated['count_ratings']
+  end
+
+  def self.top_recommendation(recommended_cocktails)
+    recommended_cocktails[recommended_cocktails.weightedAvgRecScore == recommended_cocktails.weightedAvgRecScore.max()]
   end
 end
