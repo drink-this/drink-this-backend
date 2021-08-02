@@ -4,6 +4,7 @@ class CocktailService
       req.params['i'] = cocktail_id
       req.params['api_key'] = ENV['cocktail_key']
     end
+    
 
     parse_json(response)
   end
