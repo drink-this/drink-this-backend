@@ -33,9 +33,9 @@ ActiveRecord::Schema.define(version: 2021_07_28_155223) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "uid"
     t.string "name"
     t.string "email"
+    t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "google_token"
