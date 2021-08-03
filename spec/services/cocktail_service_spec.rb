@@ -34,16 +34,6 @@ RSpec.describe CocktailService, :vcr do
 
     describe '::random_cocktail' do
       it 'returns data for a random cocktail' do
-        response_body = File.read('./spec/fixtures/random_cocktail.json')
-        stub_request(:any, "https://www.thecocktaildb.com/api/json/v1/1/random.php")
-            .with(
-              headers: {
-              'Accept'=>'*/*',
-              'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-              'User-Agent'=>'Faraday v1.4.1'
-              })
-            .to_return(status: 200, body: response_body, headers: {})
-
         response = CocktailService.random_cocktail
 
         expect(response).to be_a Hash
