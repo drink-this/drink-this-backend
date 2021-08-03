@@ -3,9 +3,8 @@ class CocktailFacade
     response = CocktailService.get_cocktail_details(cocktail_id)
 
     if response[:drinks].nil?
-      { error: "Couldn't find Cocktail" }
+      return false
     else
-
       details = response[:drinks].first
 
       ingredients = get_ingredients(details)
@@ -54,17 +53,21 @@ class CocktailFacade
   def self.retrieve_search_results(query, user_id)
     response = CocktailService.search_cocktails(query)
 
-    response[:drinks].map do |drink|
-      {
-        id: drink[:idDrink],
-        name: drink[:strDrink],
-        thumbnail: drink[:strDrinkThumb],
-        rating: if Rating.find_by(cocktail_id: drink[:idDrink], user_id: user_id).present?
-                  Rating.find_by(cocktail_id: drink[:idDrink], user_id: user_id).stars
-                else
-                  0
-                end
-      }
+    if response[:drinks].nil?
+      return false
+    else
+      response[:drinks].map do |drink|
+        {
+          id: drink[:idDrink],
+          name: drink[:strDrink],
+          thumbnail: drink[:strDrinkThumb],
+          rating: if Rating.find_by(cocktail_id: drink[:idDrink], user_id: user_id).present?
+                    Rating.find_by(cocktail_id: drink[:idDrink], user_id: user_id).stars
+                  else
+                    0
+                  end
+        }
+      end
     end
   end
 end
