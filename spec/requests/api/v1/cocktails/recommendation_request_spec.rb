@@ -86,15 +86,15 @@ RSpec.describe '/recommendation', :vcr do
   end
 
   describe 'GET /recommendation with randomness' do
+    before :all do
+      User.destroy_all
+      Cocktail.destroy_all
+      Rating.destroy_all
+    end
+    
     it 'provides a random cocktail if no similar (not identical) users exist' do
       response_body = File.read('./spec/fixtures/random_cocktail.json')
-      stub_request(:get, "https://www.thecocktaildb.com/api/json/v1/1/random.php?api_key=#{ENV['cocktail_key']}&auth_token=agnasdgn3r9n240unrfs35253")
-          .with(
-            headers: {
-            'Accept'=>'*/*',
-            'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-            'User-Agent'=>'Faraday v1.4.1'
-            })
+      stub_request(:any, "https://www.thecocktaildb.com/api/json/v1/1/random.php")
           .to_return(status: 200, body: response_body, headers: {})
 
       user_1 = create(:user, google_token: "agnasdgn3r9n240unrfs35253")
@@ -112,10 +112,9 @@ RSpec.describe '/recommendation', :vcr do
       expect(response.status).to eq(200)
 
       result = JSON.parse(response.body, symbolize_names: true)
-      require 'pry'; binding.pry
 
       expect(result[:data]).to be_a Hash
-      expect(result[:data][:id]).to be_an Integer
+      expect(result[:data][:id]).to be_nil
       expect(result[:data][:type]).to eq('cocktail')
 
       attributes = result[:data][:attributes]
