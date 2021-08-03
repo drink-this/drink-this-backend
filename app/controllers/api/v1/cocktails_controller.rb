@@ -1,14 +1,16 @@
 class Api::V1::CocktailsController < ApplicationController
   before_action :authorize_user
-  
+
   def show
-    if params[:id].nil?
-      render json: { error: 'No cocktail currently exist.' }
+    user = User.find_by(google_token: params[:auth_token])
+
+    if params[:id].nil? || !params[:id].present? || params[:id].empty?
+      render json: { errors: "Couldn't find Cocktail" }, status: 404
     else
-      if params[:user_id].nil? || Rating.find_by(cocktail_id: params[:id], user_id: params[:user_id]).nil?
-        render json: { error: 'User error.'}
+      cocktail = CocktailFacade.retrieve_cocktail(user.id, params[:id])
+      if cocktail[:error].present?
+        render json: { errors: "Couldn't find Cocktail"}, status: 404
       else
-        cocktail = CocktailFacade.retrieve_cocktail(params[:id])
         render json: CocktailDetailsSerializer.details(params[:id], cocktail)
       end
     end
