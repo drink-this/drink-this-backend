@@ -67,7 +67,7 @@ RSpec.describe CocktailFacade, :vcr do
               })
             .to_return(status: 200, body: response_body, headers: {})
 
-      cocktail = CocktailFacade.retrieve_details(nil)
+      cocktail = CocktailFacade.retrieve_cocktail(user.id, nil)
 
       expect(cocktail).to have_key :name
       expect(cocktail).to have_key :thumbnail
