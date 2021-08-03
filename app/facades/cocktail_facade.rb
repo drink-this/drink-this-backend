@@ -1,5 +1,6 @@
 class CocktailFacade
   def self.retrieve_cocktail(user_id, cocktail_id)
+    return false if cocktail_id.nil?
     details = retrieve_details(cocktail_id)[:drinks].first
     ingredients = get_ingredients(details)
     measurements = get_measurements(details)
@@ -22,9 +23,11 @@ class CocktailFacade
   end
 
   def self.find_rating(user_id, cocktail_id)
-    rating = Rating.find_by(user_id: user_id, cocktail_id: cocktail_id)
-    return rating.stars if rating.present?
-    0
+    if Rating.find_by(user_id: user_id, cocktail_id: cocktail_id).present?
+      Rating.find_by(user_id: user_id, cocktail_id: cocktail_id).stars
+    else
+      0
+    end
   end
 
   def self.build_recipe(ingredients, measurements)
@@ -48,17 +51,21 @@ class CocktailFacade
   def self.retrieve_search_results(query, user_id)
     response = CocktailService.search_cocktails(query)
 
-    response[:drinks].map do |drink|
-      {
-        id: drink[:idDrink],
-        name: drink[:strDrink],
-        thumbnail: drink[:strDrinkThumb],
-        rating: if Rating.find_by(cocktail_id: drink[:idDrink], user_id: user_id).present?
-                  Rating.find_by(cocktail_id: drink[:idDrink], user_id: user_id).stars
-                else
-                  0
-                end
-      }
+    if response[:drinks].nil?
+      return false
+    else
+      response[:drinks].map do |drink|
+        {
+          id: drink[:idDrink],
+          name: drink[:strDrink],
+          thumbnail: drink[:strDrinkThumb],
+          rating: if Rating.find_by(cocktail_id: drink[:idDrink], user_id: user_id).present?
+                    Rating.find_by(cocktail_id: drink[:idDrink], user_id: user_id).stars
+                  else
+                    0
+                  end
+        }
+      end
     end
   end
 end
