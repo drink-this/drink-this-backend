@@ -1,6 +1,6 @@
 class CocktailFacade
   def self.retrieve_cocktail(user_id, cocktail_id)
-    return false if cocktail_id.nil?
+    return false if retrieve_details(cocktail_id) == {:drinks=>nil}
     details = retrieve_details(cocktail_id)[:drinks].first
     ingredients = get_ingredients(details)
     measurements = get_measurements(details)
