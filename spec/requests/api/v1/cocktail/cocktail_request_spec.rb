@@ -8,9 +8,7 @@ RSpec.describe 'Cocktail Details API', :vcr do
         Cocktail.destroy_all
         Rating.destroy_all
         @cocktail_1 = create(:cocktail, id: 16967)
-        @cocktail_2 = create(:cocktail, id: 11005)
         @user_1 = create(:user, google_token: 'agnasdgn3r9n240unrfsdf')
-        @user_2 = create(:user)
         create(:rating, cocktail_id: @cocktail_1.id, user_id: @user_1.id, stars: 4)
       end
 
