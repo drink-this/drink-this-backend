@@ -18,7 +18,6 @@ class CocktailFacade
     end
 
     {
-      # id: details[:idDrink],
       name: details[:strDrink],
       thumbnail: details[:strDrinkThumb],
       glass: details[:strGlass],
@@ -26,8 +25,6 @@ class CocktailFacade
       instructions: details[:strInstructions],
       rating: rating
     }
-
-    # CocktailDetails.new(cocktail)
   end
 
   def self.get_ingredients(cocktail_data)

@@ -3,6 +3,11 @@ require 'rails_helper'
 RSpec.describe '/recommendation', :vcr do
   VCR.use_cassette('cocktail drink', :record => :new_episodes) do
     describe 'GET /recommendation' do
+      before :all do
+        User.destroy_all
+        Cocktail.destroy_all
+        Rating.destroy_all
+      end
       
       context 'user is not logged in' do
         it 'returns an error message and 404 status code' do
@@ -20,7 +25,7 @@ RSpec.describe '/recommendation', :vcr do
 
         it 'returns a recommendation based on other user data' do
           cocktail_1 = create(:cocktail, name: 'margarita')
-          cocktail_2 = create(:cocktail, name: 'old fashion')
+          cocktail_2 = create(:cocktail, name: 'old fashioned', id: 11001)
           cocktail_3 = create(:cocktail, name: 'whisky sour')
           cocktail_4 = create(:cocktail, name: 'godfather', id: 11423)
           cocktail_5 = create(:cocktail, name: 'long island')
@@ -30,23 +35,24 @@ RSpec.describe '/recommendation', :vcr do
           user_3 = create(:user, google_token: "agnasdgn3r9n240unrfsdf")
           user_4 = create(:user)
 
-          create(:rating, user: user_1, cocktail: cocktail_1, stars: 2)
-          create(:rating, user: user_1, cocktail: cocktail_2, stars: 2)
-          create(:rating, user: user_1, cocktail: cocktail_3, stars: 2)
-
+          create(:rating, user: user_1, cocktail: cocktail_1, stars: 1)
+          create(:rating, user: user_1, cocktail: cocktail_2, stars: 1)
+          create(:rating, user: user_1, cocktail: cocktail_3, stars: 5)
+    
           create(:rating, user: user_2, cocktail: cocktail_1, stars: 5)
           create(:rating, user: user_2, cocktail: cocktail_2, stars: 5)
-          create(:rating, user: user_2, cocktail: cocktail_3, stars: 2)
-          create(:rating, user: user_2, cocktail: cocktail_4, stars: 1)
+          create(:rating, user: user_2, cocktail: cocktail_3, stars: 1)
+          create(:rating, user: user_2, cocktail: cocktail_4, stars: 5)
           create(:rating, user: user_2, cocktail: cocktail_5, stars: 1)
-
-          create(:rating, user: user_3, cocktail: cocktail_1, stars: 2)
-
-          create(:rating, user: user_4, cocktail: cocktail_1, stars: 5)
-          create(:rating, user: user_4, cocktail: cocktail_3, stars: 2)
+    
+          create(:rating, user: user_3, cocktail: cocktail_1, stars: 5)
+          create(:rating, user: user_3, cocktail: cocktail_2, stars: 5)
+    
+          create(:rating, user: user_4, cocktail: cocktail_1, stars: 1)
+          create(:rating, user: user_4, cocktail: cocktail_3, stars: 5)
           create(:rating, user: user_4, cocktail: cocktail_4, stars: 1)
 
-          allow_any_instance_of(User).to receive(:find_by).and_return(user_3)
+          allow_any_instance_of(Api::V1::RecommendationsController).to receive(:current_user).and_return(user_3)
 
           get "/api/v1/recommendation", params: {auth_token: 'agnasdgn3r9n240unrfsdf'}
 
