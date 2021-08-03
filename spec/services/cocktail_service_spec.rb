@@ -32,6 +32,26 @@ RSpec.describe CocktailService, :vcr do
       end
     end
 
+    VCR.use_cassette('random cocktail', :record => :new_episodes) do
+      describe '::random_cocktail' do
+        it 'returns data for a random cocktail' do
+          response = CocktailService.random_cocktail
+
+          expect(response).to be_a Hash
+          expect(response[:drinks]).to be_an Array
+
+          cocktail = response[:drinks].first
+
+          expect(cocktail[:idDrink]).to be_a String
+          expect(cocktail[:strDrink]).to be_a String
+          expect(cocktail[:strInstructions]).to be_a String
+          expect(cocktail[:strDrinkThumb]).to be_a String
+          expect(cocktail[:strIngredient1]).to be_a String
+          expect(cocktail[:strMeasure1]).to be_a String
+        end
+      end
+    end
+
     VCR.use_cassette('cocktail search', :record => :new_episodes) do
       describe '::search_cocktails' do
         it 'returns search results' do
