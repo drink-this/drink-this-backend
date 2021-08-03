@@ -1,37 +1,39 @@
 class CocktailFacade
-  def self.retrieve_cocktail(cocktail_id)
-    details = cocktail_service(cocktail_id)[:drinks].first
+  def self.retrieve_cocktail(user_id, cocktail_id)
+    response = CocktailService.get_cocktail_details(cocktail_id)
 
-    ingredients = get_ingredients(details)
-    measurements = get_measurements(details)
+    if response[:drinks].nil?
+      { error: "Couldn't find Cocktail" }
+    else
 
-    recipe = measurements.zip(ingredients).map do |i|
-      i.join if i != ["", ""]
-    end.compact
+      details = response[:drinks].first
 
-    rating = if Rating.find_by(cocktail_id: cocktail_id).present?
-      Rating.find_by(cocktail_id: cocktail_id).stars
+      ingredients = get_ingredients(details)
+      measurements = get_measurements(details)
+      {
+        name: details[:strDrink],
+        thumbnail: details[:strDrinkThumb],
+        glass: details[:strGlass],
+        recipe: build_recipe(ingredients, measurements),
+        instructions: details[:strInstructions],
+        rating: find_rating(user_id, cocktail_id)
+      }
+    end
+  end
+
+  def self.find_rating(user_id, cocktail_id)
+    if Rating.find_by(user_id: user_id, cocktail_id: cocktail_id).present?
+      Rating.find_by(user_id: user_id, cocktail_id: cocktail_id).stars
     else
       0
     end
-
-    {
-      name: details[:strDrink],
-      thumbnail: details[:strDrinkThumb],
-      glass: details[:strGlass],
-      recipe: recipe,
-      instructions: details[:strInstructions],
-      rating: rating
-    }
   end
 
-  def self.cocktail_service(cocktail_id)
-    CocktailService.get_cocktail_details(cocktail_id)
+  def self.build_recipe(ingredients, measurements)
+    measurements.zip(ingredients).map do |i|
+      i.join if i != ["", ""]
+    end.compact
   end
-
-  # def self.package_to_recipe
-  #
-  # end
 
   def self.get_ingredients(cocktail_data)
     cocktail_data.map do |key, value|
@@ -52,23 +54,17 @@ class CocktailFacade
   def self.retrieve_search_results(query, user_id)
     response = CocktailService.search_cocktails(query)
 
-    if response[:drinks].nil?
+    response[:drinks].map do |drink|
       {
-        error: 'Search query not valid.'
+        id: drink[:idDrink],
+        name: drink[:strDrink],
+        thumbnail: drink[:strDrinkThumb],
+        rating: if Rating.find_by(cocktail_id: drink[:idDrink], user_id: user_id).present?
+                  Rating.find_by(cocktail_id: drink[:idDrink], user_id: user_id).stars
+                else
+                  0
+                end
       }
-    else
-      response[:drinks].map do |drink|
-        {
-          id: drink[:idDrink],
-          name: drink[:strDrink],
-          thumbnail: drink[:strDrinkThumb],
-          rating: if Rating.find_by(cocktail_id: drink[:idDrink], user_id: user_id).present?
-                    Rating.find_by(cocktail_id: drink[:idDrink], user_id: user_id).stars
-                  else
-                    0
-                  end
-        }
-      end
     end
   end
 end
