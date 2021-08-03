@@ -12,4 +12,19 @@ RSpec.describe Rating, type: :model do
     it {should validate_numericality_of(:stars).is_greater_than_or_equal_to(0)}
     it {should validate_numericality_of(:stars).is_less_than_or_equal_to(5)}
   end
+  describe 'class_methods' do
+    describe '::prep_dataframe' do
+      it 'returns an array of user_id, cocktail_id, and stars formatted for the dataframe build' do
+        rating_1 = create(:rating, user: create(:user), cocktail: create(:cocktail), stars: 1)
+        rating_2 = create(:rating, user: create(:user), cocktail: create(:cocktail, stars: 1)
+        rating_3 = create(:rating, user: create(:user), cocktail: cocktcreate(:cocktailail_3, stars: 5)
+
+        expect(Rating.prep_dataframe).to eq(
+          [rating_1.user_id, rating_1.cocktail_id, rating_1.stars], 
+          [rating_2.user_id, rating_2.cocktail_id, rating_2.stars], 
+          [rating_3.user_id, rating_3.cocktail_id, rating_3.stars]
+        )
+      end
+    end
+  end
 end
