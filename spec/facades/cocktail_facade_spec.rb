@@ -10,7 +10,9 @@ RSpec.describe CocktailFacade, :vcr do
       end
 
       it 'returns json with cocktail details and rating' do
-        vodka_fizz = CocktailFacade.retrieve_cocktail('16967')
+        user = create(:user)
+
+        vodka_fizz = CocktailFacade.retrieve_cocktail(user.id, '16967')
 
         expect(vodka_fizz).to have_key :name
         expect(vodka_fizz[:name]).to eq('Vodka Fizz')
@@ -38,12 +40,47 @@ RSpec.describe CocktailFacade, :vcr do
         user = create(:user)
         create(:cocktail, id: 16967)
         create(:rating, cocktail_id: 16967, user_id: user.id, stars: 4)
-        vodka_fizz = CocktailFacade.retrieve_cocktail('16967')
+        vodka_fizz = CocktailFacade.retrieve_cocktail(user.id, '16967')
 
         expect(vodka_fizz[:rating]).to eq(4)
       end
     end
   end
+
+  describe '::retrieve_details' do
+    before :each do
+      User.destroy_all
+      Cocktail.destroy_all
+      Rating.destroy_all
+    end
+
+    it 'returns json with cocktail details and rating' do
+      user = create(:user)
+
+      response_body = File.read('./spec/fixtures/random_cocktail.json')
+        stub_request(:get, "https://www.thecocktaildb.com/api/json/v1/1/random.php?api_key=#{ENV['cocktail_key']}")
+            .with(
+              headers: {
+              'Accept'=>'*/*',
+              'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+              'User-Agent'=>'Faraday v1.4.1'
+              })
+            .to_return(status: 200, body: response_body, headers: {})
+
+      cocktail = CocktailFacade.retrieve_cocktail(user.id, nil)
+
+      expect(cocktail).to have_key :name
+      expect(cocktail).to have_key :thumbnail
+      expect(cocktail).to have_key :glass
+      expect(cocktail).to have_key :recipe
+      expect(cocktail[:recipe]).to be_an Array
+
+      expect(cocktail).to have_key :instructions
+      expect(cocktail).to have_key :rating
+      expect(cocktail[:rating]).to eq(0)
+    end
+  end
+
 
   VCR.use_cassette('cocktail search', :record => :new_episodes) do
     describe '::retrieve_search_results' do
