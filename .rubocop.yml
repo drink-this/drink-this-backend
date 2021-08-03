@@ -14,6 +14,8 @@ AllCops:
     - 'tmp/**/*'
     - 'vendor/**/*'
     - './*'
+    - 'app/services/recommendation_service.rb'
+    - 'app/modules/dataframeable.rb'
 
 Style/FrozenStringLiteralComment:
   Enabled: false
@@ -31,4 +33,7 @@ Metrics/AbcSize:
   Enabled: false
 
 Rails/UniqueValidationWithoutIndex:
+  Enabled: false
+
+Style/WordArray:
   Enabled: false
