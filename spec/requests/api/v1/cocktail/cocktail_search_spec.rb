@@ -90,7 +90,7 @@ RSpec.describe 'Cocktail Search API', :vcr do
         expect(search_results[:data][:error]).to eq('Invalid user.')
       end
 
-      it '(sad path) sends error when user is incorrect' do
+      it '(sad path) sends error when user is incorrect'
     end
   end
 end
