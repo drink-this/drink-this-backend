@@ -10,7 +10,7 @@ class Api::V1::RecommendationsController < ApplicationController
   def authorize_user
     return if current_user
 
-    render json: { errors: "Couldn't find User" }, status: 404
+    render json: { errors: "Couldn't find User" }, status: :not_found
   end
 
   def current_user

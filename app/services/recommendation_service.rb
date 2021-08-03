@@ -19,7 +19,7 @@ class RecommendationService
     ratings_complete = weighted_baselines_with_counts(baselines, weighted_baselines)
     unrated = remove_rated(cocktail_ratings, ratings_complete, user_id)
     recommendations = Pandas.DataFrame.new()
-    weighted_avg(recommendations, unrated, user_id)
+    weighted_avg(recommendations, unrated)
     top_recommendation(recommendations).reset_index['cocktail_id'].to_i
   end
 
@@ -69,7 +69,7 @@ class RecommendationService
     unrated = unrated[unrated.value == 0]
   end
 
-  def self.weighted_avg(recommendations, unrated, user_id)
+  def self.weighted_avg(recommendations, unrated)
     recommendations['weightedAvgRecScore'] = unrated['sum_weightedRating']/unrated['count_ratings']
   end
 
