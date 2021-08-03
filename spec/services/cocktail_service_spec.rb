@@ -32,23 +32,31 @@ RSpec.describe CocktailService, :vcr do
       end
     end
 
-    VCR.use_cassette('random cocktail', :record => :new_episodes) do
-      describe '::random_cocktail' do
-        it 'returns data for a random cocktail' do
-          response = CocktailService.random_cocktail
+    describe '::random_cocktail' do
+      it 'returns data for a random cocktail' do
+        response_body = File.read('./spec/fixtures/random_cocktail.json')
+        stub_request(:get, "https://www.thecocktaildb.com/api/json/v1/1/random.php?api_key=#{ENV['cocktail_key']}")
+            .with(
+              headers: {
+              'Accept'=>'*/*',
+              'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+              'User-Agent'=>'Faraday v1.4.1'
+              })
+            .to_return(status: 200, body: response_body, headers: {})
 
-          expect(response).to be_a Hash
-          expect(response[:drinks]).to be_an Array
+        response = CocktailService.random_cocktail
 
-          cocktail = response[:drinks].first
+        expect(response).to be_a Hash
+        expect(response[:drinks]).to be_an Array
 
-          expect(cocktail[:idDrink]).to be_a String
-          expect(cocktail[:strDrink]).to be_a String
-          expect(cocktail[:strInstructions]).to be_a String
-          expect(cocktail[:strDrinkThumb]).to be_a String
-          expect(cocktail[:strIngredient1]).to be_a String
-          expect(cocktail[:strMeasure1]).to be_a String
-        end
+        cocktail = response[:drinks].first
+
+        expect(cocktail[:idDrink]).to be_a String
+        expect(cocktail[:strDrink]).to be_a String
+        expect(cocktail[:strInstructions]).to be_a String
+        expect(cocktail[:strDrinkThumb]).to be_a String
+        expect(cocktail[:strIngredient1]).to be_a String
+        expect(cocktail[:strMeasure1]).to be_a String
       end
     end
 
