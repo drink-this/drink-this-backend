@@ -1,5 +1,4 @@
 module Dataframeable
-
   def self.create_df
     all_three = Rating.all.select('user_id, cocktail_id, stars')
 
@@ -9,9 +8,9 @@ module Dataframeable
 
     df = Pandas.DataFrame.new(data = all_three_array)
 
-    df.columns=['user_id', 'cocktail_id', 'stars']
+    df.columns = %w[user_id cocktail_id stars]
 
-    df_pivot = df.pivot(index='user_id', columns='cocktail_id', values='stars')
+    df_pivot = df.pivot(index = 'user_id', columns = 'cocktail_id', values = 'stars')
     df_pivot.fillna(0)
   end
 end

@@ -6,7 +6,7 @@ class Api::V1::Cocktails::RatingController < ApplicationController
     else
       # cannot_process(rating.errors.map { |_attr, msg| msg })
       render json: { error: 'Failed to create resource', messages: rating.errors.full_messages },
-        status: :bad_request
+             status: :bad_request
     end
     # created_rating = Rating.create(rating_params)
     # render json: RatingSerializer.new(created_rating)

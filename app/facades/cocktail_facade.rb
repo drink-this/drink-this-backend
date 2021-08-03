@@ -8,14 +8,14 @@ class CocktailFacade
     measurements = get_measurements(details)
 
     recipe = measurements.zip(ingredients).map do |i|
-      i.join if i != ["", ""]
+      i.join if i != ['', '']
     end.compact
 
     rating = if Rating.find_by(cocktail_id: cocktail_id).present?
-      Rating.find_by(cocktail_id: cocktail_id).stars
-    else
-      0
-    end
+               Rating.find_by(cocktail_id: cocktail_id).stars
+             else
+               0
+             end
 
     {
       # id: details[:idDrink],
@@ -32,17 +32,13 @@ class CocktailFacade
 
   def self.get_ingredients(cocktail_data)
     cocktail_data.map do |key, value|
-      if key.to_s.include?("Ingredient")
-        value ||= ""
-      end
+      value ||= '' if key.to_s.include?('Ingredient')
     end.compact
   end
 
   def self.get_measurements(cocktail_data)
     cocktail_data.map do |key, value|
-      if key.to_s.include?("Measure")
-        value ||= ""
-      end
+      value ||= '' if key.to_s.include?('Measure')
     end.compact
   end
 
