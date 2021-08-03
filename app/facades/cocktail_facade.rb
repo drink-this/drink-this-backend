@@ -2,8 +2,7 @@ class CocktailFacade
   def self.retrieve_cocktail(user_id, cocktail_id)
     # return CocktailFacade.retrieve_random if cocktail_id.nil?
     # response = CocktailService.get_cocktail_details(cocktail_id)
-    retrieve_details(cocktail_id)
-    details = response[:drinks].first
+    details = retrieve_details(cocktail_id)[:drinks].first
     ingredients = get_ingredients(details)
     measurements = get_measurements(details)
     {

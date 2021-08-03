@@ -47,31 +47,40 @@ RSpec.describe CocktailFacade, :vcr do
     end
   end
 
-  VCR.use_cassette('random cocktail', :record => :new_episodes) do
-    describe '::retrieve_details' do
-      before :each do
-        User.destroy_all
-        Cocktail.destroy_all
-        Rating.destroy_all
-      end
+  describe '::retrieve_details' do
+    before :each do
+      User.destroy_all
+      Cocktail.destroy_all
+      Rating.destroy_all
+    end
 
-      it 'returns json with cocktail details and rating' do
-        user = create(:user)
+    it 'returns json with cocktail details and rating' do
+      user = create(:user)
 
-        cocktail = CocktailFacade.retrieve_details(nil)
+      response_body = File.read('./spec/fixtures/random_cocktail.json')
+        stub_request(:get, "https://www.thecocktaildb.com/api/json/v1/1/random.php?api_key=#{ENV['cocktail_key']}")
+            .with(
+              headers: {
+              'Accept'=>'*/*',
+              'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+              'User-Agent'=>'Faraday v1.4.1'
+              })
+            .to_return(status: 200, body: response_body, headers: {})
 
-        expect(cocktail).to have_key :name
-        expect(cocktail).to have_key :thumbnail
-        expect(cocktail).to have_key :glass
-        expect(cocktail).to have_key :recipe
-        expect(cocktail[:recipe]).to be_an Array
+      cocktail = CocktailFacade.retrieve_details(nil)
 
-        expect(cocktail).to have_key :instructions
-        expect(cocktail).to have_key :rating
-        expect(cocktail[:rating]).to eq(0)
-      end
+      expect(cocktail).to have_key :name
+      expect(cocktail).to have_key :thumbnail
+      expect(cocktail).to have_key :glass
+      expect(cocktail).to have_key :recipe
+      expect(cocktail[:recipe]).to be_an Array
+
+      expect(cocktail).to have_key :instructions
+      expect(cocktail).to have_key :rating
+      expect(cocktail[:rating]).to eq(0)
     end
   end
+
 
   VCR.use_cassette('cocktail search', :record => :new_episodes) do
     describe '::retrieve_search_results' do

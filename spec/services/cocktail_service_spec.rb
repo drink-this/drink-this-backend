@@ -35,7 +35,7 @@ RSpec.describe CocktailService, :vcr do
     describe '::random_cocktail' do
       it 'returns data for a random cocktail' do
         response_body = File.read('./spec/fixtures/random_cocktail.json')
-        stub_request(:get, "https://www.thecocktaildb.com/api/json/v1/1/random.php?api_key=#{ENV['cocktail_key']}")
+        stub_request(:any, "https://www.thecocktaildb.com/api/json/v1/1/random.php")
             .with(
               headers: {
               'Accept'=>'*/*',
