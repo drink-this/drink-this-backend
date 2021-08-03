@@ -8,10 +8,13 @@ RSpec.describe 'Cocktail Search API', :vcr do
         Cocktail.destroy_all
         Rating.destroy_all
         @user = create(:user)
+        @user_2 = create(:user)
         @cocktail_1 = create(:cocktail, id: 11324)
         @cocktail_2 = create(:cocktail, id: 11005)
+        @cocktail_3 = create(:cocktail, id: 16967)
         create(:rating, cocktail_id: 11324, user_id: @user.id, stars: 4)
         create(:rating, cocktail_id: 11005)
+        create(:rating, cocktail_id: 16967, user_id: @user.id, stars: 2)
 
         create(:rating, cocktail_id: @cocktail_1.id, user_id: @user.id, stars: 4)
         create(:rating, cocktail_id: @cocktail_2.id)
@@ -42,6 +45,8 @@ RSpec.describe 'Cocktail Search API', :vcr do
         second_result = search_results[:data].second
 
         expect(second_result[:attributes][:rating]).to eq(0)
+
+        expect(search_results[:data].third).to eq(nil)
       end
 
       it '(sad path) sends error message when blank search query' do
@@ -71,6 +76,21 @@ RSpec.describe 'Cocktail Search API', :vcr do
         expect(search_results[:data]).to have_key :error
         expect(search_results[:data][:error]).to eq('Search query not valid.')
       end
+
+      it '(sad path) sends error when user is not in params' do
+        get "/api/v1/cocktails/search", params: {
+          search: 'dry'
+        }
+
+        expect(response.status).to eq(200)
+
+        search_results = JSON.parse(response.body, symbolize_names: true)
+
+        expect(search_results[:data]).to have_key :error
+        expect(search_results[:data][:error]).to eq('Invalid user.')
+      end
+
+      it '(sad path) sends error when user is incorrect' do
     end
   end
 end
