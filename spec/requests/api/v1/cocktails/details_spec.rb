@@ -8,14 +8,13 @@ RSpec.describe 'Cocktail Details API', :vcr do
         Cocktail.destroy_all
         Rating.destroy_all
         @cocktail_1 = create(:cocktail, id: 16967)
-        @user_1 = create(:user)
+        @user_1 = create(:user, google_token: 'agnasdgn3r9n240unrfsdf')
         create(:rating, cocktail_id: @cocktail_1.id, user_id: @user_1.id, stars: 4)
       end
 
       it 'send json of cocktail details via get request' do
         get "/api/v1/cocktails/#{@cocktail_1.id}", params: {
-          user_id: @user_1.id,
-          cocktail_id: @cocktail_1.id
+          auth_token: 'agnasdgn3r9n240unrfsdf'
         }
 
         expect(response.status).to eq(200)
@@ -38,6 +37,52 @@ RSpec.describe 'Cocktail Details API', :vcr do
         expect(attributes).to have_key :instructions
         expect(attributes).to have_key :rating
         expect(attributes[:rating]).to eq(4)
+      end
+
+      it '(sad path) send json error when no params with auth token' do
+        get "/api/v1/cocktails/#{@cocktail_1.id}"
+
+        expect(response.status).to eq(404)
+
+        result = JSON.parse(response.body, symbolize_names: true)
+
+        expect(result[:errors]).to eq("Couldn't find User")
+      end
+
+      it '(sad path) send json error when auth token is empty' do
+        get "/api/v1/cocktails/#{@cocktail_1.id}", params: {
+          auth_token: ''
+        }
+
+        expect(response.status).to eq(404)
+
+        result = JSON.parse(response.body, symbolize_names: true)
+
+        expect(result[:errors]).to eq("Couldn't find User")
+      end
+
+      it '(sad path) send json error when no params with incorrect auth token' do
+        get "/api/v1/cocktails/#{@cocktail_1.id}", params: {
+          auth_token: 'dkfjeiklnskdlirenjslhdl'
+        }
+
+        expect(response.status).to eq(404)
+
+        result = JSON.parse(response.body, symbolize_names: true)
+
+        expect(result[:errors]).to eq("Couldn't find User")
+      end
+
+      it '(sad path) send json error when there is an incorrect cocktail id' do
+        get "/api/v1/cocktails/38293", params: {
+          auth_token: 'agnasdgn3r9n240unrfsdf'
+        }
+
+        expect(response.status).to eq(404)
+
+        result = JSON.parse(response.body, symbolize_names: true)
+
+        expect(result[:errors]).to eq("Couldn't find Cocktail")
       end
     end
   end
