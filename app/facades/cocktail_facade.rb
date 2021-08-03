@@ -4,21 +4,22 @@ class CocktailFacade
     details = response[:drinks].first
     ingredients = get_ingredients(details)
     measurements = get_measurements(details)
-
-    rating = if Rating.find_by(user_id: user_id, cocktail_id: cocktail_id).present?
-      Rating.find_by(user_id: user_id, cocktail_id: cocktail_id).stars
-    else
-      0
-    end
-
     {
       name: details[:strDrink],
       thumbnail: details[:strDrinkThumb],
       glass: details[:strGlass],
       recipe: build_recipe(ingredients, measurements),
       instructions: details[:strInstructions],
-      rating: rating
+      rating: find_rating(user_id, cocktail_id)
     }
+  end
+
+  def self.find_rating(user_id, cocktail_id)
+    if Rating.find_by(user_id: user_id, cocktail_id: cocktail_id).present?
+      Rating.find_by(user_id: user_id, cocktail_id: cocktail_id).stars
+    else
+      0
+    end
   end
 
   def self.build_recipe(ingredients, measurements)
