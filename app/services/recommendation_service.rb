@@ -14,12 +14,13 @@ class RecommendationService
     df = Dataframeable.create_df
     cocktail_ratings = all_ratings(df)
     baselines = merge_distances_and_ratings(cocktail_ratings, df, user_id)
+    return nil if baselines.empty
     weighted_ratings(baselines, user_id)
     weighted_baselines = baselines.groupby('cocktail_id').sum()[[user_id,'weightedRating']]
     ratings_complete = weighted_baselines_with_counts(baselines, weighted_baselines)
     unrated = remove_rated(cocktail_ratings, ratings_complete, user_id)
     recommendations = Pandas.DataFrame.new()
-    weighted_avg(recommendations, unrated, user_id)
+    weighted_avg(recommendations, unrated)
     top_recommendation(recommendations).reset_index['cocktail_id'].to_i
   end
 
@@ -69,7 +70,7 @@ class RecommendationService
     unrated = unrated[unrated.value == 0]
   end
 
-  def self.weighted_avg(recommendations, unrated, user_id)
+  def self.weighted_avg(recommendations, unrated)
     recommendations['weightedAvgRecScore'] = unrated['sum_weightedRating']/unrated['count_ratings']
   end
 

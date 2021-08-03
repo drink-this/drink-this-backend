@@ -1,22 +1,24 @@
 class CocktailFacade
   def self.retrieve_cocktail(user_id, cocktail_id)
-    response = CocktailService.get_cocktail_details(cocktail_id)
+    return false if retrieve_details(cocktail_id) == {:drinks=>nil}
+    details = retrieve_details(cocktail_id)[:drinks].first
+    ingredients = get_ingredients(details)
+    measurements = get_measurements(details)
+    {
+      name: details[:strDrink],
+      thumbnail: details[:strDrinkThumb],
+      glass: details[:strGlass],
+      recipe: build_recipe(ingredients, measurements),
+      instructions: details[:strInstructions],
+      rating: find_rating(user_id, cocktail_id)
+    }
+  end
 
-    if response[:drinks].nil?
-      return false
+  def self.retrieve_details(cocktail_id)
+    if cocktail_id.present?
+      CocktailService.get_cocktail_details(cocktail_id)
     else
-      details = response[:drinks].first
-
-      ingredients = get_ingredients(details)
-      measurements = get_measurements(details)
-      {
-        name: details[:strDrink],
-        thumbnail: details[:strDrinkThumb],
-        glass: details[:strGlass],
-        recipe: build_recipe(ingredients, measurements),
-        instructions: details[:strInstructions],
-        rating: find_rating(user_id, cocktail_id)
-      }
+      CocktailService.random_cocktail
     end
   end
 
@@ -30,23 +32,19 @@ class CocktailFacade
 
   def self.build_recipe(ingredients, measurements)
     measurements.zip(ingredients).map do |i|
-      i.join if i != ["", ""]
+      i.join if i != ['', '']
     end.compact
   end
 
   def self.get_ingredients(cocktail_data)
     cocktail_data.map do |key, value|
-      if key.to_s.include?("Ingredient")
-        value ||= ""
-      end
+      value ||= '' if key.to_s.include?('Ingredient')
     end.compact
   end
 
   def self.get_measurements(cocktail_data)
     cocktail_data.map do |key, value|
-      if key.to_s.include?("Measure")
-        value ||= ""
-      end
+      value ||= '' if key.to_s.include?('Measure')
     end.compact
   end
 

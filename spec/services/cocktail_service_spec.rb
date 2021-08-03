@@ -32,6 +32,34 @@ RSpec.describe CocktailService, :vcr do
       end
     end
 
+    describe '::random_cocktail' do
+      it 'returns data for a random cocktail' do
+        response_body = File.read('./spec/fixtures/random_cocktail.json')
+        stub_request(:any, "https://www.thecocktaildb.com/api/json/v1/1/random.php")
+            .with(
+              headers: {
+              'Accept'=>'*/*',
+              'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+              'User-Agent'=>'Faraday v1.4.1'
+              })
+            .to_return(status: 200, body: response_body, headers: {})
+
+        response = CocktailService.random_cocktail
+
+        expect(response).to be_a Hash
+        expect(response[:drinks]).to be_an Array
+
+        cocktail = response[:drinks].first
+
+        expect(cocktail[:idDrink]).to be_a String
+        expect(cocktail[:strDrink]).to be_a String
+        expect(cocktail[:strInstructions]).to be_a String
+        expect(cocktail[:strDrinkThumb]).to be_a String
+        expect(cocktail[:strIngredient1]).to be_a String
+        expect(cocktail[:strMeasure1]).to be_a String
+      end
+    end
+
     VCR.use_cassette('cocktail search', :record => :new_episodes) do
       describe '::search_cocktails' do
         it 'returns search results' do

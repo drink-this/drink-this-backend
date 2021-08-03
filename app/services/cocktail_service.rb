@@ -8,6 +8,14 @@ class CocktailService
     parse_json(response)
   end
 
+  def self.random_cocktail
+    response = Faraday.get('https://www.thecocktaildb.com/api/json/v1/1/random.php') do |req|
+      req.params['api_key'] = ENV['cocktail_key']
+    end
+
+    parse_json(response)
+  end
+
   def self.search_cocktails(query)
     response = Faraday.get('https://www.thecocktaildb.com/api/json/v1/1/search.php?') do |req|
       req.params['s'] = query
