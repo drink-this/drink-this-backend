@@ -10,11 +10,10 @@ class Api::V1::RecommendationsController < ApplicationController
   def authorize_user
     return if current_user
 
-    redirect_to root_path
-    flash[:error] = 'Error: Please log in to view this content.'
+    render json: { errors: "Couldn't find User" }, status: 404
   end
 
   def current_user
-    @current_user ||= User.find(google_token: params[:auth_token]) if params[:auth_token]
+    @current_user ||= User.find_by(google_token: params[:auth_token]) if params[:auth_token]
   end
 end
