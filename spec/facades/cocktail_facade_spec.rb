@@ -47,6 +47,32 @@ RSpec.describe CocktailFacade, :vcr do
     end
   end
 
+  VCR.use_cassette('random cocktail', :record => :new_episodes) do
+    describe '::retrieve_details' do
+      before :each do
+        User.destroy_all
+        Cocktail.destroy_all
+        Rating.destroy_all
+      end
+
+      it 'returns json with cocktail details and rating' do
+        user = create(:user)
+
+        cocktail = CocktailFacade.retrieve_details(nil)
+
+        expect(cocktail).to have_key :name
+        expect(cocktail).to have_key :thumbnail
+        expect(cocktail).to have_key :glass
+        expect(cocktail).to have_key :recipe
+        expect(cocktail[:recipe]).to be_an Array
+
+        expect(cocktail).to have_key :instructions
+        expect(cocktail).to have_key :rating
+        expect(cocktail[:rating]).to eq(0)
+      end
+    end
+  end
+
   VCR.use_cassette('cocktail search', :record => :new_episodes) do
     describe '::retrieve_search_results' do
       before :each do

@@ -19,9 +19,38 @@ RSpec.describe '/recommendation', :vcr do
       end
       
       context 'user is logged in' do
-        it 'provides a random cocktail if only one user exists'
+        it 'provides a random cocktail if no similar (not identical) users exist' do
+          user_1 = create(:user, google_token: "agnasdgn3r9n240unrfs35253")
 
-        it 'provides a random cocktail if no similar (not identical) users exist'
+          cocktail_1 = create(:cocktail, name: 'margarita')
+          cocktail_2 = create(:cocktail, name: 'old fashioned')
+          cocktail_3 = create(:cocktail, name: 'whisky sour')
+
+          create(:rating, user: user_1, cocktail: cocktail_1, stars: 1)
+          create(:rating, user: user_1, cocktail: cocktail_2, stars: 1)
+          create(:rating, user: user_1, cocktail: cocktail_3, stars: 5)
+
+          get "/api/v1/recommendation", params: {auth_token: 'agnasdgn3r9n240unrfs35253'}
+
+          expect(response.status).to eq(200)
+
+          result = JSON.parse(response.body, symbolize_names: true)
+
+          expect(result[:data]).to be_a Hash
+          expect(result[:data][:id]).to be_an Integer
+          expect(result[:data][:type]).to eq('cocktail')
+
+          attributes = result[:data][:attributes]
+
+          expect(attributes).to be_a Hash
+          expect(attributes).to have_key :name
+          expect(attributes).to have_key :thumbnail
+          expect(attributes).to have_key :glass
+          expect(attributes).to have_key :recipe
+          expect(attributes).to have_key :instructions
+          expect(attributes).to have_key :rating
+          expect(attributes[:rating]).to eq(0)
+        end
 
         it 'returns a recommendation based on other user data' do
           cocktail_1 = create(:cocktail, name: 'margarita')
