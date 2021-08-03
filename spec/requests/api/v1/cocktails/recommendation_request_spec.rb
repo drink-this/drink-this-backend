@@ -61,7 +61,7 @@ RSpec.describe '/recommendation', :vcr do
           result = JSON.parse(response.body, symbolize_names: true)
 
           expect(result[:data]).to be_a Hash
-          expect(result[:data][:id]).to eq(cocktail_3.id.to_s)
+          expect(result[:data][:id]).to eq(11423)
           expect(result[:data][:type]).to eq('cocktail')
 
           attributes = result[:data][:attributes]
