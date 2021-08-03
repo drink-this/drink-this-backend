@@ -1,12 +1,15 @@
-class Api::V1::Cocktails::SearchController < ApplicationController
+class Api::V1::Cocktails::SearchController < Api::V1::AuthorizationController
   def index
-    if params[:user_id].nil? || params[:user_id].empty?
-      render json: { data: { error: 'Invalid user.' } }
+    user = User.find_by(google_token: params[:auth_token])
+
+    if !params[:search].present?
+      render json: { errors: "Couldn't find Cocktail" }, status: 404
     else
-      if params[:search].nil? || params[:search].empty?
-        render json: { data: { error: 'Search query not valid.'} }
+      results = CocktailFacade.retrieve_search_results(params[:search], user.id)
+
+      if results == false
+        render json: { errors: "Couldn't find Cocktail" }, status: 404
       else
-        results = CocktailFacade.retrieve_search_results(params[:search], params[:user_id])
         render json: CocktailSearchSerializer.search_list(results)
       end
     end
