@@ -10,7 +10,7 @@ RSpec.describe 'Rating API' do
     end
 
     it 'can send rating of a specific cocktail' do
-      post "/api/v1/cocktails/#{@cocktail_1.id}/rating", params: {
+      post "/api/v1/cocktails/#{@cocktail_1.id}/rating/", params: {
         user_id: @user_1.id,
         cocktail_id: @cocktail_1.id,
         stars: 3
