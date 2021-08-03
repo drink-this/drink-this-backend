@@ -14,6 +14,7 @@ class RecommendationService
     df = Dataframeable.create_df
     cocktail_ratings = all_ratings(df)
     baselines = merge_distances_and_ratings(cocktail_ratings, df, user_id)
+    return nil if baselines.empty
     weighted_ratings(baselines, user_id)
     weighted_baselines = baselines.groupby('cocktail_id').sum()[[user_id,'weightedRating']]
     ratings_complete = weighted_baselines_with_counts(baselines, weighted_baselines)
