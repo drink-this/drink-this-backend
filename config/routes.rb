@@ -17,6 +17,8 @@ Rails.application.routes.draw do
       end
 
       resources :cocktails, only: :show
+
+      get '/recommendation', to: 'recommendations#show'
     end
   end
 end

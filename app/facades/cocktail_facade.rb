@@ -1,33 +1,29 @@
 class CocktailFacade
-  def self.retrieve_cocktail(cocktail_id)
+  def self.retrieve_cocktail(user_id, cocktail_id)
     response = CocktailService.get_cocktail_details(cocktail_id)
-
     details = response[:drinks].first
-
     ingredients = get_ingredients(details)
     measurements = get_measurements(details)
-
-    recipe = measurements.zip(ingredients).map do |i|
-      i.join if i != ["", ""]
-    end.compact
-
-    rating = if Rating.find_by(cocktail_id: cocktail_id).present?
-      Rating.find_by(cocktail_id: cocktail_id).stars
-    else
-      0
-    end
-
     {
-      # id: details[:idDrink],
       name: details[:strDrink],
       thumbnail: details[:strDrinkThumb],
       glass: details[:strGlass],
-      recipe: recipe,
+      recipe: build_recipe(ingredients, measurements),
       instructions: details[:strInstructions],
-      rating: rating
+      rating: find_rating(user_id, cocktail_id)
     }
+  end
 
-    # CocktailDetails.new(cocktail)
+  def self.find_rating(user_id, cocktail_id)
+    rating = Rating.find_by(user_id: user_id, cocktail_id: cocktail_id)
+    return rating.stars if rating.present?
+    0
+  end
+
+  def self.build_recipe(ingredients, measurements)
+    measurements.zip(ingredients).map do |i|
+      i.join if i != ["", ""]
+    end.compact
   end
 
   def self.get_ingredients(cocktail_data)
