@@ -10,7 +10,9 @@ RSpec.describe CocktailFacade, :vcr do
       end
 
       it 'returns json with cocktail details and rating' do
-        vodka_fizz = CocktailFacade.retrieve_cocktail('16967')
+        user = create(:user)
+
+        vodka_fizz = CocktailFacade.retrieve_cocktail(user.id, '16967')
 
         expect(vodka_fizz).to have_key :name
         expect(vodka_fizz[:name]).to eq('Vodka Fizz')
@@ -38,7 +40,7 @@ RSpec.describe CocktailFacade, :vcr do
         user = create(:user)
         create(:cocktail, id: 16967)
         create(:rating, cocktail_id: 16967, user_id: user.id, stars: 4)
-        vodka_fizz = CocktailFacade.retrieve_cocktail('16967')
+        vodka_fizz = CocktailFacade.retrieve_cocktail(user.id, '16967')
 
         expect(vodka_fizz[:rating]).to eq(4)
       end
