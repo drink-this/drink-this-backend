@@ -17,6 +17,8 @@ Rails.application.routes.draw do
       end
 
       resources :cocktails, only: :show
+
+      resources :yelp_search, only: :index
     end
   end
 end
