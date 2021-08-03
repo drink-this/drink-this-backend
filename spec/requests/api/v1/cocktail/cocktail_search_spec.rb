@@ -7,7 +7,7 @@ RSpec.describe 'Cocktail Search API', :vcr do
         User.destroy_all
         Cocktail.destroy_all
         Rating.destroy_all
-        @user = create(:user)
+        @user = create(:user, google_token: 'agnasdgn3r9n240unrfsdf')
         @user_2 = create(:user)
         @cocktail_1 = create(:cocktail, id: 11324)
         @cocktail_2 = create(:cocktail, id: 11005)
@@ -23,7 +23,7 @@ RSpec.describe 'Cocktail Search API', :vcr do
       it 'send json of cocktail list via get request' do
         get "/api/v1/cocktails/search", params: {
           search: 'dry',
-          user_id: @user.id
+          auth_token: 'agnasdgn3r9n240unrfsdf'
         }
 
         expect(response.status).to eq(200)
@@ -52,29 +52,27 @@ RSpec.describe 'Cocktail Search API', :vcr do
       it '(sad path) sends error message when blank search query' do
         get "/api/v1/cocktails/search", params: {
           search: '',
-          user_id: @user.id
+          auth_token: 'agnasdgn3r9n240unrfsdf'
         }
 
-        expect(response.status).to eq(200)
+        expect(response.status).to eq(404)
 
         search_results = JSON.parse(response.body, symbolize_names: true)
 
-        expect(search_results[:data]).to have_key :error
-        expect(search_results[:data][:error]).to eq('Search query not valid.')
+        expect(search_results[:errors]).to eq("Couldn't find Cocktail")
       end
 
-      it '(sad path) sends error message when search query with no results' do
+      it '(sad path) sends error message when search query is gibberish' do
         get "/api/v1/cocktails/search", params: {
           search: 'sdkljfs',
-          user_id: @user.id
+          auth_token: 'agnasdgn3r9n240unrfsdf'
         }
 
-        expect(response.status).to eq(200)
+        expect(response.status).to eq(404)
 
         search_results = JSON.parse(response.body, symbolize_names: true)
 
-        expect(search_results[:data]).to have_key :error
-        expect(search_results[:data][:error]).to eq('Search query not valid.')
+        expect(search_results[:errors]).to eq("Couldn't find Cocktail")
       end
 
       it '(sad path) sends error when user is not in params' do
@@ -82,15 +80,25 @@ RSpec.describe 'Cocktail Search API', :vcr do
           search: 'dry'
         }
 
-        expect(response.status).to eq(200)
+        expect(response.status).to eq(404)
 
         search_results = JSON.parse(response.body, symbolize_names: true)
 
-        expect(search_results[:data]).to have_key :error
-        expect(search_results[:data][:error]).to eq('Invalid user.')
+        expect(search_results[:errors]).to eq("Couldn't find User")
       end
 
-      it '(sad path) sends error when user is incorrect'
+      it '(sad path) sends error when user is incorrect' do
+        get "/api/v1/cocktails/search", params: {
+          search: 'dry',
+          auth_token: 'slklkekspwpmemslld32'
+        }
+
+        expect(response.status).to eq(404)
+
+        search_results = JSON.parse(response.body, symbolize_names: true)
+
+        expect(search_results[:errors]).to eq("Couldn't find User")
+      end
     end
   end
 end
