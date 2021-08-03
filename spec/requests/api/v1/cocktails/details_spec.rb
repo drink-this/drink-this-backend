@@ -8,13 +8,13 @@ RSpec.describe 'Cocktail Details API', :vcr do
         Cocktail.destroy_all
         Rating.destroy_all
         @cocktail_1 = create(:cocktail, id: 16967)
-        @user_1 = create(:user)
+        @user_1 = create(:user, google_token: '235vcnsdf3nfknsd')
         create(:rating, cocktail_id: @cocktail_1.id, user_id: @user_1.id, stars: 4)
       end
 
       it 'send json of cocktail details via get request' do
         get "/api/v1/cocktails/#{@cocktail_1.id}", params: {
-          user_id: @user_1.id,
+          auth_token: '235vcnsdf3nfknsd',
           cocktail_id: @cocktail_1.id
         }
 
