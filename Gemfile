@@ -31,6 +31,8 @@ gem 'pycall'
 gem 'numpy'
 gem 'pandas'
 
+gem 'rack-cors'
+
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 gem 'rubocop', require: false

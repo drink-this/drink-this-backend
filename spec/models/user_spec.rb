@@ -6,7 +6,7 @@ RSpec.describe User, type: :model do
   end
 
   describe 'validations' do
-    [:name, :email, :password_digest].each do |attribute|
+    [:name, :email, :google_token, :google_refresh_token].each do |attribute|
       it {should validate_presence_of attribute}
     end
 
