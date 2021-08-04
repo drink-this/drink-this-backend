@@ -112,11 +112,15 @@ GEM
     marcel (1.0.1)
     method_source (1.0.0)
     mini_mime (1.1.0)
+    mini_portile2 (2.5.3)
     minitest (5.14.4)
     msgpack (1.4.2)
     multipart-post (2.1.1)
     nio4r (2.5.7)
-    nokogiri (1.12.0-x86_64-darwin)
+    nokogiri (1.11.7)
+      mini_portile2 (~> 2.5.0)
+      racc (~> 1.4)
+    nokogiri (1.11.7-x86_64-darwin)
       racc (~> 1.4)
     numpy (0.4.0)
       pycall (>= 1.2.0.beta1)
@@ -198,10 +202,6 @@ GEM
       unicode-display_width (>= 1.4.0, < 3.0)
     rubocop-ast (1.8.0)
       parser (>= 3.0.1.1)
-    rubocop-rails (2.10.1)
-      activesupport (>= 4.2.0)
-      rack (>= 1.1)
-      rubocop (>= 1.7.0, < 2.0)
     ruby-progressbar (1.11.0)
     ruby2_keywords (0.0.5)
     ruby_dep (1.5.0)
@@ -240,6 +240,7 @@ GEM
 
 PLATFORMS
   ruby
+  x86_64-darwin-19
   x86_64-darwin-20
   x86_64-linux
 
@@ -252,6 +253,7 @@ DEPENDENCIES
   faraday
   figaro
   listen (>= 3.0.5, < 3.2)
+  nokogiri (>= 1.6)
   numpy
   pandas
   pg (>= 0.18, < 2.0)
@@ -261,7 +263,7 @@ DEPENDENCIES
   rack-cors
   rails (~> 5.2.6)
   rspec-rails
-  rubocop-rails (>= 2.10.1)
+  rubocop
   shoulda-matchers
   simplecov
   spring

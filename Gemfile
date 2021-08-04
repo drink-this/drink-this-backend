@@ -28,6 +28,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'faraday'
 
 gem 'pycall'
+gem 'nokogiri', '>= 1.6'
 gem 'numpy'
 gem 'pandas'
 
@@ -35,7 +36,7 @@ gem 'rack-cors'
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
-gem 'rubocop-rails', '>= 2.10.1', require: false
+gem 'rubocop', require: false
 
 gem 'active_model_serializers'
 
