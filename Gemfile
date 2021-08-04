@@ -28,6 +28,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'faraday'
 
 gem 'pycall'
+gem 'nokogiri', '>= 1.6'
 gem 'numpy'
 gem 'pandas'
 
