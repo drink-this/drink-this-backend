@@ -7,29 +7,13 @@ jobs:
   build:
     working_directory: ~/drink-this-backend
     docker:
-      - image: circleci/ruby:2.7.2
-      # - image: postgres:9.5
-      #   environment:
-      #     PGHOST: localhost
-      #     POSTGRES_USER: drink-this-backend
-      #     POSTGRES_DB: drink-this-backend_test
-      #     POSTGRES_HOST_AUTH_METHOD: trust
-          # POSTGRES_PASSWORD: <%= ENV['DRINK-THIS-BACKEND_DATABASE_PASSWORD'] %>
-    executor: ruby/default
+      - image: cimg/ruby:2.7.2
+      - image: cimg/python:3.8
     steps:
       - checkout
-      - ruby/bundle-install
-      - run: sudo apt-get install python3 python3-dev
-      # - run: sudo apt-get install pyenv
-      - run: sudo apt-get install python3-pip
-      # - run: env PYTHON_CONFIGURE_OPTS="--enable-framework" pyenv install 3.9.6
       - run: python3 -m pip install numpy
       - run: python3 -m pip install pandas
       - run: python3 -m pip install sklearn
-      # - run: bundle exec rake db:{create,migrate}
-      - run:
-          name: Which bundler?
-          command: bundle -v
 
   test:
     docker:
@@ -38,6 +22,11 @@ jobs:
     steps:
       - checkout
       - run: bundle install
+      # - run: sudo apt-get install python3 python3-dev
+      # - run: sudo apt-get install python3-pip
+      # - run: python3 -m pip install numpy
+      # - run: python3 -m pip install pandas
+      # - run: python3 -m pip install sklearn
       - run: bundle exec rspec spec
 
 workflows:
@@ -53,3 +42,21 @@ workflows:
           filters:
             branches:
               only: python_config
+
+#
+# set -e
+# buildpack_url=https://github.com/heroku/heroku-buildpack-python
+# buildpack_vsn=v197
+#
+# # rebuild python if it's missing enable-shared
+# if  ! python3 -msysconfig | grep enable-shared \
+#     > /dev/null; then
+#   PYTHON_VERSION="$(< runtime.txt)"
+#   git clone -b "$buildpack_vsn" "$buildpack_url" _buildpack
+#   export WORKSPACE_DIR="$PWD/_buildpack/builds"
+#   rm -f .heroku/python/bin/python   # prevent failing ln after build
+#   sed -i 's!figure --pre!figure --enable-shared --pre!' \
+#     "$WORKSPACE_DIR"/runtimes/python3
+#   "$WORKSPACE_DIR/runtimes/$PYTHON_VERSION" /app/.heroku/python/
+#   rm -fr _buildpack
+# fi
