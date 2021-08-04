@@ -1,6 +1,7 @@
 class CocktailFacade
   def self.retrieve_cocktail(user_id, cocktail_id)
-    return false if retrieve_details(cocktail_id) == {:drinks=>nil}
+    return false if retrieve_details(cocktail_id) == { drinks: nil }
+
     details = retrieve_details(cocktail_id)[:drinks].first
     ingredients = get_ingredients(details)
     measurements = get_measurements(details)
@@ -52,7 +53,7 @@ class CocktailFacade
     response = CocktailService.search_cocktails(query)
 
     if response[:drinks].nil?
-      return false
+      false
     else
       response[:drinks].map do |drink|
         {

@@ -3,12 +3,12 @@ class Api::V1::CocktailsController < Api::V1::AuthorizationController
     user = User.find_by(google_token: params[:auth_token])
 
     if !params[:id].present?
-      render json: { errors: "Couldn't find Cocktail" }, status: 404
+      render json: { errors: "Couldn't find Cocktail" }, status: :not_found
     else
       cocktail = CocktailFacade.retrieve_cocktail(user.id, params[:id])
 
       if cocktail == false
-        render json: { errors: "Couldn't find Cocktail"}, status: 404
+        render json: { errors: "Couldn't find Cocktail" }, status: :not_found
       else
         render json: CocktailDetailsSerializer.details(params[:id], cocktail)
       end
