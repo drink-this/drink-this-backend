@@ -12,7 +12,7 @@ jobs:
     steps:
       - checkout
       - run: sudo apt-get update
-      - run: sudo apt-get install postgresql-client-9.6
+      - run: sudo apt-get install postgresql
       - run: sudo apt-get install python3 python3-dev
       - run: sudo apt-get install python3-pip
       - run: curl https://pyenv.run | bash
