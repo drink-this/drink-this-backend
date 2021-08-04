@@ -8,6 +8,9 @@ jobs:
     working_directory: ~/drink-this-backend
     docker:
       - image: cimg/ruby:2.7.2
+        environment:
+          PG_HOST: localhost
+          PG_USER: circleci
       # - image: cimg/python:3.8
       - image: postgres:13.3
         environment:
@@ -27,7 +30,13 @@ jobs:
       - run: pip install pandas
       - run: pip install sklearn
       - run: bundle install
-      - run: rake db:create
+      - run:
+        name: set up DB
+        command: |
+          bundle exec rake db:create db:schema:load --trace
+          bundle exec rake db:migrate
+        environment:
+            DATABASE_URL: "postgres://circleci@localhost:5432/drink-this-backend_test"
       - run: bundle exec rspec spec
 
   # test:
