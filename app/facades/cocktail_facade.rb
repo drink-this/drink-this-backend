@@ -23,6 +23,20 @@ class CocktailFacade
     end
   end
 
+  def self.retrieve_search_results(query, user_id)
+    response = CocktailService.search_cocktails(query)
+    return false if response[:drinks].nil?
+
+    response[:drinks].map do |drink|
+      {
+        id: drink[:idDrink],
+        name: drink[:strDrink],
+        thumbnail: drink[:strDrinkThumb],
+        rating: find_rating(user_id, drink[:idDrink])
+      }
+    end
+  end
+
   def self.find_rating(user_id, cocktail_id)
     if Rating.find_by(user_id: user_id, cocktail_id: cocktail_id).present?
       Rating.find_by(user_id: user_id, cocktail_id: cocktail_id).stars
@@ -47,26 +61,5 @@ class CocktailFacade
     cocktail_data.map do |key, value|
       value ||= '' if key.to_s.include?('Measure')
     end.compact
-  end
-
-  def self.retrieve_search_results(query, user_id)
-    response = CocktailService.search_cocktails(query)
-
-    if response[:drinks].nil?
-      false
-    else
-      response[:drinks].map do |drink|
-        {
-          id: drink[:idDrink],
-          name: drink[:strDrink],
-          thumbnail: drink[:strDrinkThumb],
-          rating: if Rating.find_by(cocktail_id: drink[:idDrink], user_id: user_id).present?
-                    Rating.find_by(cocktail_id: drink[:idDrink], user_id: user_id).stars
-                  else
-                    0
-                  end
-        }
-      end
-    end
   end
 end
