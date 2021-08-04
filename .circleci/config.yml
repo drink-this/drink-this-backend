@@ -55,12 +55,12 @@ workflows:
   heroku_deploy:
     jobs:
       - build
-      # - test:
-      #     requires:
-      #       - build
-      # - heroku/deploy-via-git: # Use the pre-configured job, deploy-via-git
-      #     requires:
-      #       - test
-      #     filters:
-      #       branches:
-      #         only: python_config
+      - test:
+          requires:
+            - build
+      - heroku/deploy-via-git: # Use the pre-configured job, deploy-via-git
+          requires:
+            - test
+          filters:
+            branches:
+              only: python_config
