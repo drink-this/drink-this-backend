@@ -13,14 +13,14 @@ jobs:
       - checkout
       - run: sudo apt-get update
       - run: sudo apt-get install postgresql
+      - run: user: su - postgres
+      - run: rake db:{create}
       - run: sudo apt-get install python3 python3-dev
       - run: sudo apt-get install python3-pip
       - run: curl https://pyenv.run | bash
       - run: pip install numpy
       - run: pip install pandas
       - run: pip install sklearn
-      - run: psql
-      - run: bundle install
       - run: bundle exec rspec spec
 
   # test:
