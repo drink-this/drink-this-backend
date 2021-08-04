@@ -31,12 +31,12 @@ jobs:
       - run: pip install sklearn
       - run: bundle install
       - run:
-        name: set up DB
-        command: |
-          bundle exec rake db:create db:schema:load --trace
-          bundle exec rake db:migrate
-        environment:
-            DATABASE_URL: "postgres://circleci@localhost:5432/drink-this-backend_test"
+          name: set up DB
+          command: |
+            bundle exec rake db:create db:schema:load --trace
+            bundle exec rake db:migrate
+          environment:
+              DATABASE_URL: "postgres://circleci@localhost:5432/drink-this-backend_test"
       - run: bundle exec rspec spec
 
   # test:
