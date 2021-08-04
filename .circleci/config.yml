@@ -65,4 +65,4 @@ workflows:
             - test
           filters:
             branches:
-              only: main
+              only: define-app-name
