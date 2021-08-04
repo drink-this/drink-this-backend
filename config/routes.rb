@@ -18,6 +18,8 @@ Rails.application.routes.draw do
 
       resources :cocktails, only: :show
 
+      resources :yelp_search, only: :index
+
       get '/recommendation', to: 'recommendations#show'
     end
   end
