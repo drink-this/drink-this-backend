@@ -14,10 +14,4 @@ class Api::V1::Cocktails::RatingController < Api::V1::AuthorizationController
     details = CocktailFacade.retrieve_cocktail(current_user.id, cocktail_id)
     Cocktail.create(id: cocktail_id, name: details[:name], thumbnail: details[:thumbnail]) unless details == false
   end
-
-  # private
-
-  # def rating_params
-  #   params.permit(:user_id, :cocktail_id, :stars)
-  # end
 end
