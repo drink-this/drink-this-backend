@@ -59,7 +59,7 @@ RSpec.describe 'Cocktail Search API', :vcr do
 
         search_results = JSON.parse(response.body, symbolize_names: true)
 
-        expect(search_results[:errors]).to eq("Couldn't find Cocktail")
+        expect(search_results[:error]).to eq("Couldn't find Cocktail")
       end
 
       it '(sad path) sends error message when search query is gibberish' do
@@ -72,7 +72,7 @@ RSpec.describe 'Cocktail Search API', :vcr do
 
         search_results = JSON.parse(response.body, symbolize_names: true)
 
-        expect(search_results[:errors]).to eq("Couldn't find Cocktail")
+        expect(search_results[:error]).to eq("Couldn't find Cocktail")
       end
 
       it '(sad path) sends error when user is not in params' do
