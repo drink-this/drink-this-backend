@@ -27,6 +27,7 @@ jobs:
       - run: pip install numpy
       - run: pip install pandas
       - run: pip install sklearn
+      - run: bundle install
       - run: bundle exec rspec spec
 
   # test:
