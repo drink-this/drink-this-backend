@@ -1,5 +1,4 @@
 module Dataframeable
-
   def self.create_df
     df = Pandas.DataFrame.new(data = Rating.prep_dataframe)
     df.columns=['user_id', 'cocktail_id', 'stars']
