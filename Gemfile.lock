@@ -259,7 +259,7 @@ DEPENDENCIES
   rack-cors
   rails (~> 5.2.6)
   rspec-rails
-  rubocop-rails
+  rubocop-rails (>= 2.10.1)
   shoulda-matchers
   simplecov
   spring
