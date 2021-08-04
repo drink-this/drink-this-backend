@@ -1,6 +1,6 @@
 class Api::V1::Cocktails::SearchController < Api::V1::AuthorizationController
   def index
-    if !params[:search].present?
+    if params[:search].blank?
       render json: { error: "Couldn't find Cocktail" }, status: :not_found
     else
       search_results(params[:search], current_user.id)

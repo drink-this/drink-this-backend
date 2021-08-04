@@ -1,6 +1,6 @@
 class Api::V1::CocktailsController < Api::V1::AuthorizationController
   def show
-    if !params[:id].present?
+    if params[:id].blank?
       render json: { error: "Couldn't find Cocktail" }, status: :not_found
     else
       cocktail = CocktailFacade.retrieve_cocktail(current_user.id, params[:id])
