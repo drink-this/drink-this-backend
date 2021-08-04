@@ -4,6 +4,5 @@ class YelpFacade
     results.map do |result|
       Business.new(result)
     end
-
   end
 end

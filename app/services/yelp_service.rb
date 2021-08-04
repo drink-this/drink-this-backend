@@ -5,7 +5,7 @@ class YelpService
   end
 
   def self.conn
-    Faraday.new(url: "https://api.yelp.com/v3/") do |faraday|
+    Faraday.new(url: 'https://api.yelp.com/v3/') do |faraday|
       faraday.headers['Authorization'] = "Bearer #{ENV['YELP_KEY']}"
     end
   end
