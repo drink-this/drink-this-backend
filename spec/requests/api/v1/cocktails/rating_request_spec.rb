@@ -37,21 +37,16 @@ RSpec.describe 'Rating API' do
         response_body = JSON.parse(response.body, symbolize_names: true)
 
         expect(response_body[:error]).to eq("Failed to create resource")
-        expect(response_body[:messages].first).to eq("User must exist")
-        expect(response_body[:messages].second).to eq("Cocktail must exist")
-        expect(response_body[:messages].third).to eq("Stars can't be blank")
+        expect(response_body[:messages].first).to eq("Stars can't be blank")
       end
 
       it 'request must have auth_token param' do
         post "/api/v1/cocktails/#{@cocktail_1.id}/rating", params: { stars: 3 }
 
-        expect(response.status).to eq(400)
+        expect(response.status).to eq(404)
         response_body = JSON.parse(response.body, symbolize_names: true)
 
-        expect(response_body[:error]).to eq("Failed to create resource")
-        expect(response_body[:messages].first).to eq("User must exist")
-        expect(response_body[:messages].second).to eq("Cocktail must exist")
-        expect(response_body[:messages].third).to eq("Stars can't be blank")
+        expect(response_body[:error]).to eq("Couldn't find User")
       end
 
       it 'request must have stars as an integer' do
@@ -98,8 +93,7 @@ RSpec.describe 'Rating API' do
         response_body = JSON.parse(response.body, symbolize_names: true)
 
         expect(response_body[:error]).to eq("Failed to create resource")
-        expect(response_body[:messages].first).to eq("User must exist")
-        expect(response_body[:messages].second).to eq("Cocktail must exist")
+        expect(response_body[:messages].first).to eq("Cocktail must exist")
       end
     end
   end

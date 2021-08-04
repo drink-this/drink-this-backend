@@ -1,6 +1,7 @@
-class Api::V1::Cocktails::RatingController < ApplicationController
+class Api::V1::Cocktails::RatingController < Api::V1::AuthorizationController
   def create
-    rating = Rating.new(rating_params)
+    # require 'pry'; binding.pry
+    rating = Rating.new(user_id: current_user.id, cocktail_id: params[:id], stars: params[:stars])
     if rating.save
       render json: rating, status: :created
     else

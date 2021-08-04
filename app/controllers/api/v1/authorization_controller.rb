@@ -10,6 +10,6 @@ class Api::V1::AuthorizationController < ApplicationController
   def authorize_user
     return if current_user
 
-    render json: { errors: "Couldn't find User" }, status: :not_found
+    render json: { error: "Couldn't find User" }, status: :not_found
   end
 end
