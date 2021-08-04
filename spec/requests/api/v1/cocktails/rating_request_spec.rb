@@ -64,7 +64,7 @@ RSpec.describe 'Rating API' do
     end
 
     context 'the cocktail does not yet exist in our database' do
-      it 'creates the cocktail in the database and adds the rating as well' do
+      it 'creates the cocktail in the database and adds the rating as well', :vcr do
         post "/api/v1/cocktails/11423/rating/", params: {
           auth_token: 'BBBasdsgergn240unrfs35253',
           stars: 3
@@ -80,10 +80,10 @@ RSpec.describe 'Rating API' do
         rating = Rating.find(cocktail_1_rating[:data][:id])
         expect(rating).to be_a Rating
 
-        excpect(rating.stars).to eq 3
+        expect(rating.stars).to eq 3
       end
 
-      it 'returns error if cocktail not found by the API' do
+      it 'returns error if cocktail not found by the API', :vcr do
         post "/api/v1/cocktails/912480267934824/rating", params: {
           auth_token: 'BBBasdsgergn240unrfs35253',
           stars: 3
