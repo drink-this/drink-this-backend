@@ -13,7 +13,8 @@ jobs:
       - checkout
       - run: sudo apt-get update
       - run: sudo apt-get install postgresql
-      - run: su - postgres
+      - run: sudo -u postgres createuser circleci
+      - run: sudo -u postgres createdb circleci_test_db
       - run: rake db:{create}
       - run: sudo apt-get install python3 python3-dev
       - run: sudo apt-get install python3-pip
