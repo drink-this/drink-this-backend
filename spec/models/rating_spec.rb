@@ -14,6 +14,12 @@ RSpec.describe Rating, type: :model do
   end
 
   describe 'class_methods' do
+    before :all do
+      User.destroy_all
+      Cocktail.destroy_all
+      Rating.destroy_all
+    end
+    
     describe '::prep_dataframe' do
       it 'returns an array of user_id, cocktail_id, and stars formatted for the dataframe build' do
         rating_1 = create(:rating, user: create(:user), cocktail: create(:cocktail), stars: 1)
