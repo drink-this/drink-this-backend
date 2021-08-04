@@ -84,7 +84,7 @@ RSpec.describe 'Cocktail Search API', :vcr do
 
         search_results = JSON.parse(response.body, symbolize_names: true)
 
-        expect(search_results[:errors]).to eq("Couldn't find User")
+        expect(search_results[:error]).to eq("Couldn't find User")
       end
 
       it '(sad path) sends error when user is incorrect' do
@@ -97,7 +97,7 @@ RSpec.describe 'Cocktail Search API', :vcr do
 
         search_results = JSON.parse(response.body, symbolize_names: true)
 
-        expect(search_results[:errors]).to eq("Couldn't find User")
+        expect(search_results[:error]).to eq("Couldn't find User")
       end
     end
   end

@@ -46,7 +46,7 @@ RSpec.describe 'Cocktail Details API', :vcr do
 
         result = JSON.parse(response.body, symbolize_names: true)
 
-        expect(result[:errors]).to eq("Couldn't find User")
+        expect(result[:error]).to eq("Couldn't find User")
       end
 
       it '(sad path) send json error when auth token is empty' do
@@ -58,7 +58,7 @@ RSpec.describe 'Cocktail Details API', :vcr do
 
         result = JSON.parse(response.body, symbolize_names: true)
 
-        expect(result[:errors]).to eq("Couldn't find User")
+        expect(result[:error]).to eq("Couldn't find User")
       end
 
       it '(sad path) send json error when no params with incorrect auth token' do
@@ -70,7 +70,7 @@ RSpec.describe 'Cocktail Details API', :vcr do
 
         result = JSON.parse(response.body, symbolize_names: true)
 
-        expect(result[:errors]).to eq("Couldn't find User")
+        expect(result[:error]).to eq("Couldn't find User")
       end
 
       it '(sad path) send json error when there is an incorrect cocktail id' do
@@ -82,7 +82,7 @@ RSpec.describe 'Cocktail Details API', :vcr do
 
         result = JSON.parse(response.body, symbolize_names: true)
 
-        expect(result[:errors]).to eq("Couldn't find Cocktail")
+        expect(result[:error]).to eq("Couldn't find Cocktail")
       end
     end
   end
