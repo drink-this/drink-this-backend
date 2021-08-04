@@ -14,20 +14,22 @@ jobs:
       - run: python3 -m pip install numpy
       - run: python3 -m pip install pandas
       - run: python3 -m pip install sklearn
-
-  test:
-    docker:
-      - image: circleci/ruby:2.7.2
-    executor: ruby/default
-    steps:
-      - checkout
       - run: bundle install
-      # - run: sudo apt-get install python3 python3-dev
-      # - run: sudo apt-get install python3-pip
-      # - run: python3 -m pip install numpy
-      # - run: python3 -m pip install pandas
-      # - run: python3 -m pip install sklearn
       - run: bundle exec rspec spec
+
+  # test:
+  #   docker:
+  #     - image: circleci/ruby:2.7.2
+  #   executor: ruby/default
+  #   steps:
+  #     - checkout
+  #     - run: bundle install
+  #     # - run: sudo apt-get install python3 python3-dev
+  #     # - run: sudo apt-get install python3-pip
+  #     # - run: python3 -m pip install numpy
+  #     # - run: python3 -m pip install pandas
+  #     # - run: python3 -m pip install sklearn
+  #     - run: bundle exec rspec spec
 
 workflows:
   heroku_deploy:
