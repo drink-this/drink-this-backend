@@ -8,9 +8,12 @@ jobs:
     working_directory: ~/drink-this-backend
     docker:
       - image: cimg/ruby:2.7.2
-      - image: cimg/python:3.8
+      # - image: cimg/python:3.8
     steps:
       - checkout
+      - run: sudo apt-get install python3 python3-dev
+      - run: sudo apt-get install python3-pip
+      - run: curl https://pyenv.run | bash
       - run: pip install numpy
       - run: pip install pandas
       - run: pip install sklearn
