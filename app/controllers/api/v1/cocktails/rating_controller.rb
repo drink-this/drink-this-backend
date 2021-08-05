@@ -1,7 +1,8 @@
 class Api::V1::Cocktails::RatingController < Api::V1::AuthorizationController
   def create
     create_cocktail(params[:id]) if Cocktail.where(id: params[:id]).empty?
-    rating = Rating.new(user_id: current_user.id, cocktail_id: params[:id], stars: params[:stars])
+    rating = Rating.find_or_create_by(user_id: current_user.id, cocktail_id: params[:id])
+    rating.stars = params[:stars]
     if rating.save
       render json: rating, status: :created
     else
