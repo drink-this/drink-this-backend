@@ -11,7 +11,8 @@ Drink This provides cocktail recommendations using a memory-based approach to co
 #### Configuration
 <!-- cli to get project running, potentially file descriptions, maybe just link to wiki -->
 
-#### Database Setup
+#### Database
+<img width="685" alt="Screen Shot 2021-08-05 at 8 12 40 AM" src="https://user-images.githubusercontent.com/10294841/128374788-a88a6835-a76b-44f1-9a8a-91c2dc9c3f11.png">
 <!-- also explain dataset? -->
 
 #### How to run Test Suite
