@@ -19,7 +19,7 @@ RSpec.describe Cocktail, type: :model do
     end
 
     describe 'random_five' do
-      it 'returns 5 random cocktails' do
+      it 'returns 5 random cocktails and ratings if available' do
         cocktail_1 = create(:cocktail, id: 11324)
         cocktail_2 = create(:cocktail, id: 11005)
         cocktail_3 = create(:cocktail, id: 11408)
@@ -33,8 +33,12 @@ RSpec.describe Cocktail, type: :model do
         cocktail_11 = create(:cocktail, id: 11410)
         cocktail_12 = create(:cocktail, id: 13070)
 
+        ids = [11324, 11005, 11408, 11415, 11419, 13202, 17197, 11382, 15427, 17230, 11410, 13070]
+
         expect(Cocktail.dashboard_five.length).to eq(5)
-        expect(Cocktail.dashboard_five.first).to be_a(Cocktail)
+        expect(Cocktail.dashboard_five.first).to be_a Cocktail
+        expect(ids).to include(Cocktail.dashboard_five.first.id) 
+        expect(Cocktail.dashboard_five.first.rating).to eq 0
       end
     end
   end

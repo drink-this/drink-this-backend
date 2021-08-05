@@ -3,9 +3,9 @@ class Cocktail < ApplicationRecord
 
   has_many :ratings, dependent: :destroy
   def self.dashboard_five
-    select('*')
-    .from('cocktails')
-    .order('Random()')
+    left_outer_joins(:ratings)
+    .select('cocktails.*, case when ratings.stars is null then 0 else ratings.stars end as rating')
+    .order(Arel.sql('RANDOM()'))
     .limit(5)
   end
 end
