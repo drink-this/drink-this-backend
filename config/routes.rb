@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       resources :yelp_search, only: :index
 
       get '/recommendation', to: 'recommendations#show'
+      get '/dashboard', to: 'dashboard#index'
     end
   end
 end
