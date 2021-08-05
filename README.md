@@ -8,16 +8,20 @@ Check out our [Wiki](https://github.com/drink-this/drink-this-backend/wiki) for 
 
 #### System Dependencies
 ##### Some useful gems needed:
+
+###### Standard Rails Gems
 - `gem faraday`
-- `gem pycall`
-- `gem numpy`
-- `gem pandas`
 - `gem atcive_model_serializer`
 - `gem figaro`
 
+###### Python Gems
+- `gem pycall`
+- `gem numpy`
+- `gem pandas`
+
 From the `numpy` gem we reached into `sklearn` to import the module `metrics`, which includes score functions, performance metrics and pairwise metrics and distance computations. Leveraging the `pairwise` metrics submodule, we were able to reach into this library of equations for distance metrics, including a popular one in the data science arena -- the [Euclidean Distance](https://en.wikipedia.org/wiki/Euclidean_distance). In Euclidean geometry, simply put, the Euclidean distance is the usual distance between two points, and this distance is measured as a line segment. In our app, we used the Euclidean distance method to calculate, among users when compared to the current user, which users (the 15% of users in our database) is closest in the rating of cocktails to the current user. This method enables our app to recommend an accurate cocktail to the current user with like users. 
 
-From the `pandas` gem, were able to manipulate the data into dataframes and apply the Euclidean distance method into the data inputs we received. As the user base grows in our app, the recommendation model would be more precise in provide the most accurate recommended cocktail to a particular user so that the current user may enjoy that nice drink.
+Since we are using Ruby on Rails and wanted to incorporate data science tools into our app, Python, with its many computational libraries, was the language we wanted to incorporate. The `pycall` and `pandas` gems allowed us to leverage the Python language and libraries for computational methods. From the `pandas` gem, we were able to manipulate the data into dataframes and apply the Euclidean distance method into the data inputs we received. As the user base grows in our app, the recommendation model would be more precise in provide the most accurate recommended cocktail to a particular user so that the current user may enjoy that nice drink.
 <!-- list of packages/gems etc that are used, link to wiki for this? -->
 
 #### Configuration
