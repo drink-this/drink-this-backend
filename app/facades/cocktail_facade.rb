@@ -47,7 +47,8 @@ class CocktailFacade
 
   def self.build_recipe(ingredients, measurements)
     measurements.zip(ingredients).map do |i|
-      i.join(' ') if i != ['', '']
+    require 'pry'; binding.pry
+    i.map {|str| str.strip}.join(' ') if i != ['', '']
     end.compact
   end
 
