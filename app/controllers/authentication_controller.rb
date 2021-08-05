@@ -2,7 +2,9 @@ class AuthenticationController < ApplicationController
   def token_auth
     token = params[:auth_token]
     payload = GoogleService.decode(token)
-    if User.where('email = ?', payload[:email])
+    if user = User.find_by(email: payload[:email])
+      user.google_token = token
+      user.save
       render json: { is_new: false, token: token }
     else
       User.create!(name: payload[:name], email: payload[:email], google_token: token)
