@@ -19,7 +19,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 05 Aug 2021 03:40:41 GMT
+      - Thu, 05 Aug 2021 20:42:46 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -36,13 +36,13 @@ http_interactions:
       Expect-Ct:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=%2F4CzL5bOc00aWCjdSQGg6DyODuxcvq9aysXkmTqwOUEvZ1oUbL2NVe%2FZGVGUnoxY2hqPMvsDkmhMjs5gaog4e9HDfCReX1pLJHjgEPKIdykCliAEtRmbNVvA1ujJ8IB9zLaWfeRLRcg%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=T8hCUFB7NC%2FCoGaeZhCIpOYGG5QM2nq7sd2Nhj4qvZoKyfE0GfclUYoCa5DinY34Q4uIqn4E9rPd30w4nuvoatSCgryrano%2BUR3RBjJ7NN%2Ft8FdZQibPHh74WJQHH1IAlatjjmaTY3I%3D"}],"group":"cf-nel","max_age":604800}'
       Nel:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Cf-Ray:
-      - 679d0163dffb0f32-DFW
+      - 67a2da98fef5e027-DFW
       Alt-Svc:
       - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
         ma=86400
@@ -59,5 +59,5 @@ http_interactions:
         or 3 ","strMeasure5":"1 ","strMeasure6":"1 twist of ","strMeasure7":null,"strMeasure8":null,"strMeasure9":null,"strMeasure10":null,"strMeasure11":null,"strMeasure12":null,"strMeasure13":null,"strMeasure14":null,"strMeasure15":null,"strImageSource":"https:\/\/commons.wikimedia.org\/wiki\/File:Oak_Fired_Manhattan_-_Stierch_1.jpg","strImageAttribution":"Sarah
         Stierch (CC BY 4.0)","strCreativeCommonsConfirmed":"Yes","dateModified":"2017-09-02
         12:07:09"}]}'
-  recorded_at: Thu, 05 Aug 2021 03:40:41 GMT
+  recorded_at: Thu, 05 Aug 2021 20:42:46 GMT
 recorded_with: VCR 6.0.0
