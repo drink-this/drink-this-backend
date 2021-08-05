@@ -10,8 +10,6 @@ class Rating < ApplicationRecord
                     }
 
   def self.prep_dataframe
-    Rating.all.select('user_id, cocktail_id, stars').map do |col|
-      [col.user_id, col.cocktail_id, col.stars]
-    end
+    Rating.pluck(:user_id, :cocktail_id, :stars)
   end
 end
