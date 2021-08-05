@@ -7,6 +7,10 @@ RSpec.describe 'Rating API' do
       Cocktail.destroy_all
       @cocktail_1 = create(:cocktail)
       @user_1 = create(:user, google_token: 'BBBasdsgergn240unrfs35253')
+
+      @cocktail_2 = create(:cocktail, id: 16967)
+      @user_2 = create(:user, google_token: 'agnasdgn3r9n240unrfsdf')
+      create(:rating, cocktail_id: @cocktail_2.id, user_id: @user_2.id, stars: 2)
     end
 
     context 'the cocktail exists in our database' do
@@ -94,6 +98,36 @@ RSpec.describe 'Rating API' do
 
         expect(response_body[:error]).to eq("Failed to create resource")
         expect(response_body[:messages].first).to eq("Cocktail must exist")
+      end
+    end
+
+    context 'the rating of a cocktail exists and is updated' do
+      it 'checks that cocktail and rating of cocktail by user exists' do
+        rating = Rating.find_by(user_id: @user_2.id, cocktail_id: @cocktail_2.id)
+
+        expect(rating.stars).to eq(2)
+
+        previous_rating = rating.stars
+
+        post "/api/v1/cocktails/#{@cocktail_2.id}/rating/", params: {
+          auth_token: 'agnasdgn3r9n240unrfsdf',
+          stars: 5
+        }
+
+        expect(response.status).to eq(201)
+
+        cocktail_2_rating = JSON.parse(response.body, symbolize_names: true)
+        new_rating = Rating.find(cocktail_2_rating[:data][:id])
+
+        expect(cocktail_2_rating).to have_key(:data)
+        expect(cocktail_2_rating[:data]).to be_a Hash
+
+        expect(cocktail_2_rating[:data][:type]).to eq("cocktail_rating")
+        expect(cocktail_2_rating[:data][:attributes][:user_id]).to eq(new_rating.user_id)
+        expect(cocktail_2_rating[:data][:attributes][:cocktail_id]).to eq(new_rating.cocktail_id)
+        expect(cocktail_2_rating[:data][:attributes][:stars]).to eq(new_rating.stars)
+
+        expect(cocktail_2_rating[:data][:attributes][:stars]).to_not eq(previous_rating)
       end
     end
   end
