@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://www.thecocktaildb.com/api/json/v1/1/lookup.php?api_key&i=16967
+    uri: https://www.thecocktaildb.com/api/json/v1/1/lookup.php?api_key=<api_key>&i=16967
     body:
       encoding: US-ASCII
       string: ''
@@ -19,7 +19,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 05 Aug 2021 19:51:02 GMT
+      - Thu, 05 Aug 2021 20:42:37 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -36,13 +36,13 @@ http_interactions:
       Expect-Ct:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=opI5NbF%2FihuOuVumn%2BtfS%2BupMuecCZMYReYT1YKbRPR1BofmCMG8S1e8%2FsaoqeCREK3GM86r%2BRYTKZvmmB1fWGH6d6ay0XvjccAnN1Otfq4E98Hzdl8KHJxKdQIRLorNON2kromku2s%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=WMJuzm0%2FYp9S7Q8Bg4umufBhTJ2DPyRI0ZXRUyKqZe93p0SoAv09vi8ga3JFU0wTd3JQMN2kEfaqDPrEBFEVZLGoleojx7PAErVTzBW%2FiZ5NmPx8ZWmXK83GGpBCHSn9jBoIfYHutqg%3D"}],"group":"cf-nel","max_age":604800}'
       Nel:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Cf-Ray:
-      - 67a28ed20c000c2b-DFW
+      - 67a2da5e8d94d266-DFW
       Alt-Svc:
       - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
         ma=86400
@@ -57,10 +57,10 @@ http_interactions:
         vino bianco e cospargere di noce moscata.","strInstructionsZH-HANS":null,"strInstructionsZH-HANT":null,"strDrinkThumb":"https:\/\/www.thecocktaildb.com\/images\/media\/drink\/xwxyux1441254243.jpg","strIngredient1":"Vodka","strIngredient2":"Half-and-half","strIngredient3":"Limeade","strIngredient4":"Ice","strIngredient5":"Nutmeg","strIngredient6":null,"strIngredient7":null,"strIngredient8":null,"strIngredient9":null,"strIngredient10":null,"strIngredient11":null,"strIngredient12":null,"strIngredient13":null,"strIngredient14":null,"strIngredient15":null,"strMeasure1":"2
         oz ","strMeasure2":"2 oz ","strMeasure3":"2 oz ","strMeasure4":null,"strMeasure5":null,"strMeasure6":null,"strMeasure7":null,"strMeasure8":null,"strMeasure9":null,"strMeasure10":null,"strMeasure11":null,"strMeasure12":null,"strMeasure13":null,"strMeasure14":null,"strMeasure15":null,"strImageSource":null,"strImageAttribution":null,"strCreativeCommonsConfirmed":"No","dateModified":"2015-09-03
         05:24:03"}]}'
-  recorded_at: Thu, 05 Aug 2021 19:51:02 GMT
+  recorded_at: Thu, 05 Aug 2021 20:42:37 GMT
 - request:
     method: get
-    uri: https://www.thecocktaildb.com/api/json/v1/1/lookup.php?api_key&i=16967
+    uri: https://www.thecocktaildb.com/api/json/v1/1/lookup.php?api_key=<api_key>&i=16967
     body:
       encoding: US-ASCII
       string: ''
@@ -77,7 +77,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 05 Aug 2021 19:51:03 GMT
+      - Thu, 05 Aug 2021 20:42:37 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -94,13 +94,13 @@ http_interactions:
       Expect-Ct:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=V4B1y2icagn6Xu1hKHTA%2F8z1U41yGvTSsielwjtcL10MIX7hFe9l8kOOHhqdVtDme6Qzx40b6VaQeJUuGZkS1X0ZSIEnLA9UqXfbU0NtZaIU5ZgmjcqUb3oEdWzeR31jfkyqvx5M7eM%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=nAeFcqJubZFOhhtM3mGx36myYP73%2BhFzdB%2BLgKvuzbmR9JwZHD0GAuEQED%2FRhbxPez9GM0JJGv7IkptyR7dPnrujJlObmckxy5L3MtXZElUddgj7aRSnWh%2B73rOdUGHh2qI5mXdcWog%3D"}],"group":"cf-nel","max_age":604800}'
       Nel:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Cf-Ray:
-      - 67a28ed49a910e62-DFW
+      - 67a2da60aa920ece-DFW
       Alt-Svc:
       - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
         ma=86400
@@ -115,5 +115,5 @@ http_interactions:
         vino bianco e cospargere di noce moscata.","strInstructionsZH-HANS":null,"strInstructionsZH-HANT":null,"strDrinkThumb":"https:\/\/www.thecocktaildb.com\/images\/media\/drink\/xwxyux1441254243.jpg","strIngredient1":"Vodka","strIngredient2":"Half-and-half","strIngredient3":"Limeade","strIngredient4":"Ice","strIngredient5":"Nutmeg","strIngredient6":null,"strIngredient7":null,"strIngredient8":null,"strIngredient9":null,"strIngredient10":null,"strIngredient11":null,"strIngredient12":null,"strIngredient13":null,"strIngredient14":null,"strIngredient15":null,"strMeasure1":"2
         oz ","strMeasure2":"2 oz ","strMeasure3":"2 oz ","strMeasure4":null,"strMeasure5":null,"strMeasure6":null,"strMeasure7":null,"strMeasure8":null,"strMeasure9":null,"strMeasure10":null,"strMeasure11":null,"strMeasure12":null,"strMeasure13":null,"strMeasure14":null,"strMeasure15":null,"strImageSource":null,"strImageAttribution":null,"strCreativeCommonsConfirmed":"No","dateModified":"2015-09-03
         05:24:03"}]}'
-  recorded_at: Thu, 05 Aug 2021 19:51:03 GMT
+  recorded_at: Thu, 05 Aug 2021 20:42:37 GMT
 recorded_with: VCR 6.0.0
