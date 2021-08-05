@@ -7,6 +7,13 @@ Check out our [Wiki](https://github.com/drink-this/drink-this-backend/wiki) for 
 <!-- features, example of the ML code, link to demo vid, link to wiki homepage -->
 
 #### System Dependencies
+##### Some useful gems needed:
+- `gem faraday`
+- `gem pycall`
+- `gem numpy`
+- `gem pandas`
+- `gem atcive_model_serializer`
+- `gem figaro`
 <!-- list of packages/gems etc that are used, link to wiki for this? -->
 
 #### Configuration
@@ -24,16 +31,17 @@ Gems required for testing:
 - [rspec-rails](https://github.com/rspec/rspec-rails)
 - [shoulda-matchers](https://github.com/thoughtbot/shoulda-matchers)
 - [simplecov](https://github.com/simplecov-ruby/simplecov)
+- [vcr](https://github.com/vcr/vcr)
 - [webmock](https://github.com/bblimke/webmock)
+- [rubocop](https://github.com/rubocop/rubocop)
 
-  
-
-#### Deployment
+#### Deployment schema
 <!-- touch on the sadness that is ruby+python -->
 Since this Rails app also requires Python, both [this Ruby buildpack](https://elements.heroku.com/buildpacks/heroku/heroku-buildpack-ruby) and [this Python buildpack](https://elements.heroku.com/buildpacks/heroku/heroku-buildpack-python) are required for deploying to Heroku. The Python buildpack **must** be ordered **before** the Ruby buildpack. The Python buildpack includes a built in post compile hook, which will run the `bin/post_compile` script included in this app to ensure that Python is built with shared libraries enabled. This is required for your local environment as well. We have written some [basic instructions for installing Python](https://github.com/drink-this/drink-this-backend/wiki/Python-pyenv-Installation), but these may not work for all environments. The app requires Python 3.9.6.
 
 #### Future features
 - Implement GraphQL
+- Using the microservices approach on python, instead of the `gem pycall`
 - Implement Docker
 
 #### Contributers
