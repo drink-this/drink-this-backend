@@ -2,7 +2,7 @@
 <!-- logo here -->
 <!-- badges here -->
 <!-- badges for last commit, commit activity, state of the build, dependencies up to date -->
-Drink This provides cocktail recommendations using a memory-based approach to collaborative filtering. We use the PyCall gem to import key Python libraries into our Rails app, including `numpy`, `pandas`, and `sklearn`. This allows us, for example, to calculate similarity between users with sci-kit learn's `euclidean_distance` method and to use pandas DataFrames to manipulate data as we pass it through the engine. The recommendation model takes a users ratings history into account, identifies the closest 15% of users, then makes a recommendation to the requester based on what similar users have rated highly in the past.
+Drink This provides cocktail recommendations using a memory-based approach to collaborative filtering. We use the PyCall gem to import key Python libraries into our Rails app, including `numpy`, `pandas`, and `sklearn`. This allows us, for example, to calculate similarity among users in our application with sci-kit learn's `euclidean_distance` method and to use pandas DataFrames to manipulate data as we pass it through our recommendation engine. The recommendation model takes a users ratings history into account, identifies the closest 15% of users, then makes a recommendation to the requester based on what similar users who have rated highly in the past.
 Check out our [Wiki](https://github.com/drink-this/drink-this-backend/wiki) for more info.
 <!-- features, example of the ML code, link to demo vid, link to wiki homepage -->
 
@@ -14,6 +14,10 @@ Check out our [Wiki](https://github.com/drink-this/drink-this-backend/wiki) for 
 - `gem pandas`
 - `gem atcive_model_serializer`
 - `gem figaro`
+
+From the `numpy` gem we reached into `sklearn` to import the module `metrics`, which includes score functions, performance metrics and pairwise metrics and distance computations. Leveraging the `pairwise` metrics submodule, we were able to reach into this library of equations for distance metrics, including a popular one in the data science arena -- the [Euclidean Distance](https://en.wikipedia.org/wiki/Euclidean_distance). In Euclidean geometry, simply put, the Euclidean distance is the usual distance between two points, and this distance is measured as a line segment. In our app, we used the Euclidean distance method to calculate, among users when compared to the current user, which users (the 15% of users in our database) is closest in the rating of cocktails to the current user. This method enables our app to recommend an accurate cocktail to the current user with like users. 
+
+From the `pandas` gem, were able to manipulate the data into dataframes and apply the Euclidean distance method into the data inputs we received. As the user base grows in our app, the recommendation model would be more precise in provide the most accurate recommended cocktail to a particular user so that the current user may enjoy that nice drink.
 <!-- list of packages/gems etc that are used, link to wiki for this? -->
 
 #### Configuration
