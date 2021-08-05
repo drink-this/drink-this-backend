@@ -16,6 +16,7 @@ class RecommendationService
     baselines = merge_distances_and_ratings(cocktail_ratings, df, user_id)
     return nil if baselines.empty
     weighted_ratings(baselines, user_id)
+    weighted_rating = baselines[user_id] * baselines['value']
     weighted_baselines = baselines.groupby('cocktail_id').sum()[[user_id,'weightedRating']]
     ratings_complete = weighted_baselines_with_counts(baselines, weighted_baselines)
     unrated = remove_rated(cocktail_ratings, ratings_complete, user_id)
@@ -40,7 +41,7 @@ class RecommendationService
   end
 
   def self.user_distances(user_distance_matrix, df, user_id)
-    other_users = user_distance_matrix.loc[user_id].sort_values(0,ascending=true)
+    other_users = user_distance_matrix.loc[user_id].sort_values()
     cap = (other_users.size * 0.15).ceil
     user_removed = other_users[other_users>0][0..cap]
     Pandas.DataFrame.new(data=user_removed, index=df.index)
@@ -52,8 +53,10 @@ class RecommendationService
   end
 
   def self.weighted_ratings(baseline_ratings, user_id)
-    baseline_ratings[user_id] = (1 / (baseline_ratings[user_id] + 1))
-    baseline_ratings['weightedRating'] = baseline_ratings[user_id] * baseline_ratings['value']
+      inverted = (1 / (baseline_ratings[user_id] + 1))
+      baseline_ratings.insert(1, 'inverted', inverted.values)
+      weighted_rating = baseline_ratings[user_id] * baseline_ratings['value']
+      baseline_ratings.insert(5, 'weightedRating', weighted_rating.values)
   end
 
   def self.weighted_baselines_with_counts(baselines, weighted_baselines)
