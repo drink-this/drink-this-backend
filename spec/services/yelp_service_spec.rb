@@ -21,11 +21,14 @@ RSpec.describe YelpService do
       guard_and_grace = response[:businesses].second
 
       expect(guard_and_grace).to be_a Hash
-      expect(guard_and_grace[:name]).to eq('Guard and Grace')
-      expect(guard_and_grace[:image_url]).to eq('https://s3-media1.fl.yelpcdn.com/bphoto/ACYHAtcRL4c-8lcTQ2L5kQ/o.jpg')
-      expect(guard_and_grace[:url]).to eq('https://www.yelp.com/biz/guard-and-grace-denver?adjust_creative=9gPw-kuPiDZgFQ3Tr4ox3Q&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=9gPw-kuPiDZgFQ3Tr4ox3Q')
-      expect(guard_and_grace[:categories]).to eq([{:alias=>"steak", :title=>"Steakhouses"}, {:alias=>"wine_bars", :title=>"Wine Bars"}, {:alias=>"seafood", :title=>"Seafood"}])
-      expect(guard_and_grace[:location][:display_address]).to eq(["1801 California St", "Denver, CO 80202"])
+      expect(guard_and_grace).to have_key(:name)
+      expect(guard_and_grace).to have_key(:image_url)
+      expect(guard_and_grace).to have_key(:url)
+      expect(guard_and_grace).to have_key(:categories)
+      expect(guard_and_grace[:categories].first).to have_key(:alias)
+      expect(guard_and_grace[:categories].first).to have_key(:title)
+      expect(guard_and_grace).to have_key(:location)
+      expect(guard_and_grace[:location]).to have_key(:display_address)
     end
   end
 end
