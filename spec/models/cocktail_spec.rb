@@ -34,7 +34,7 @@ RSpec.describe Cocktail, type: :model do
         cocktail_12 = create(:cocktail, id: 13070)
 
         expect(Cocktail.dashboard_five.length).to eq(5)
-        expect(Cocktail.dashboard_five.first).to be_an(Cocktail)
+        expect(Cocktail.dashboard_five.first).to be_a(Cocktail)
       end
     end
   end
