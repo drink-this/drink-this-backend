@@ -19,14 +19,20 @@ Check out our [Wiki](https://github.com/drink-this/drink-this-backend/wiki) for 
 #### How to run Test Suite
 <!-- link to wiki -->
 Gems required for testing:
-<ul>
- <li>[faker](https://github.com/faker-ruby/faker)</li> 
- <li>[factory_bot_rails](https://github.com/thoughtbot/factory_bot_rails)</li>
- <li>[rspec-rails](https://github.com/rspec/rspec-rails)</li>
- <li>[shoulda-matchers](https://github.com/thoughtbot/shoulda-matchers)</li>
- <li>[simplecov](https://github.com/simplecov-ruby/simplecov)</li>
- <li>[webmock](https://github.com/bblimke/webmock)</li>
-</ul>
+
+- [faker](https://github.com/faker-ruby/faker)
+
+- [factory_bot_rails](https://github.com/thoughtbot/factory_bot_rails)
+
+- [rspec-rails](https://github.com/rspec/rspec-rails)
+
+- [shoulda-matchers](https://github.com/thoughtbot/shoulda-matchers)
+
+- [simplecov](https://github.com/simplecov-ruby/simplecov)
+
+- [webmock](https://github.com/bblimke/webmock)
+
+  
 
 #### Deployment
 <!-- touch on the sadness that is ruby+python -->
