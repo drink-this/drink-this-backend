@@ -40,6 +40,7 @@ RSpec.describe 'Cocktail Dashboard API' do
 
       expect(first_result[:attributes]).to have_key :name
       expect(first_result[:attributes]).to have_key :thumbnail
+      expect(first_result[:attributes]).to have_key :rating
     end
   end
 end

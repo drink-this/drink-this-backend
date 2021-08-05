@@ -10,7 +10,7 @@ http_interactions:
       Authorization:
       - Bearer MVRw_yo_7gSNxWtebXeketPj9PFLCQQkey_ywVJ86HWGMWxW_fWR63TOB0-3RLWEhnR0KXC6zSzbbPD-0HObaB08m5cs83eCF4SpiFpJq0e6BGiUEayn6P0gxEfKYHYx
       User-Agent:
-      - Faraday v1.6.0
+      - Faraday v1.5.1
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -24,32 +24,32 @@ http_interactions:
       - keep-alive
       Content-Type:
       - application/json
-      Ratelimit-Remaining:
-      - '4998'
-      Ratelimit-Resettime:
-      - '2021-08-05T00:00:00+00:00'
-      Server:
-      - envoy
+      X-Routing-Service:
+      - routing-main--uswest2-768597dfcc-s8w8q; site=public_api_v3
       Ratelimit-Dailylimit:
       - '5000'
-      X-Routing-Service:
-      - routing-main--useast1-7854bcbdb5-xvmjh; site=public_api_v3
+      Ratelimit-Remaining:
+      - '4986'
+      Ratelimit-Resettime:
+      - '2021-08-04T00:00:00+00:00'
+      Server:
+      - envoy
       X-Cloudmap:
-      - routing_useast1
+      - routing_uswest2
       X-Proxied:
-      - 10-65-160-255-useast1bprod
+      - 10-69-170-205-uswest2bprod
       X-Extlb:
-      - 10-65-160-255-useast1bprod
+      - 10-69-170-205-uswest2bprod
       Cache-Control:
       - max-age=0, no-store, private, no-transform
       Accept-Ranges:
       - bytes
       Date:
-      - Wed, 04 Aug 2021 23:04:59 GMT
+      - Tue, 03 Aug 2021 23:54:14 GMT
       Via:
       - 1.1 varnish
       X-Served-By:
-      - cache-ams21035-AMS
+      - cache-pao17466-PAO
       X-Cache:
       - MISS
       X-Cache-Hits:
@@ -63,7 +63,7 @@ http_interactions:
       string: '{"businesses": [{"id": "LRyRNUWVSZ8NXPuCzTrfpA", "alias": "union-lodge-no-1-denver",
         "name": "Union Lodge No.1", "image_url": "https://s3-media2.fl.yelpcdn.com/bphoto/oQcctWaIVGkoE1pKGlHA6Q/o.jpg",
         "is_closed": false, "url": "https://www.yelp.com/biz/union-lodge-no-1-denver?adjust_creative=9gPw-kuPiDZgFQ3Tr4ox3Q&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=9gPw-kuPiDZgFQ3Tr4ox3Q",
-        "review_count": 556, "categories": [{"alias": "cocktailbars", "title": "Cocktail
+        "review_count": 555, "categories": [{"alias": "cocktailbars", "title": "Cocktail
         Bars"}, {"alias": "lounges", "title": "Lounges"}], "rating": 5.0, "coordinates":
         {"latitude": 39.746295, "longitude": -104.994652}, "transactions": [], "price":
         "$$", "location": {"address1": "1543 Champa St", "address2": "", "address3":
@@ -81,10 +81,20 @@ http_interactions:
         "", "city": "Denver", "zip_code": "80202", "country": "US", "state": "CO",
         "display_address": ["1801 California St", "Denver, CO 80202"]}, "phone": "+13032938500",
         "display_phone": "(303) 293-8500", "distance": 2140.4033736245196}, {"id":
-        "svJWwW0ilssyqk_UML0mUg", "alias": "work-and-class-denver", "name": "Work
-        & Class", "image_url": "https://s3-media2.fl.yelpcdn.com/bphoto/2FCKkfCtdwN2nsEwOu6O_A/o.jpg",
+        "i8VF3q7dTszCcigJSMcJzQ", "alias": "angelo-s-taverna-denver", "name": "Angelo\u2019s
+        Taverna", "image_url": "https://s3-media2.fl.yelpcdn.com/bphoto/nrWS_kPhlGofYXQaiHE8Jg/o.jpg",
+        "is_closed": false, "url": "https://www.yelp.com/biz/angelo-s-taverna-denver?adjust_creative=9gPw-kuPiDZgFQ3Tr4ox3Q&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=9gPw-kuPiDZgFQ3Tr4ox3Q",
+        "review_count": 1215, "categories": [{"alias": "italian", "title": "Italian"},
+        {"alias": "seafood", "title": "Seafood"}, {"alias": "bars", "title": "Bars"}],
+        "rating": 4.5, "coordinates": {"latitude": 39.725523, "longitude": -104.979224},
+        "transactions": ["delivery", "pickup"], "price": "$$", "location": {"address1":
+        "620 E 6th Ave", "address2": "", "address3": "", "city": "Denver", "zip_code":
+        "80203", "country": "US", "state": "CO", "display_address": ["620 E 6th Ave",
+        "Denver, CO 80203"]}, "phone": "+13037443366", "display_phone": "(303) 744-3366",
+        "distance": 1351.3929919123793}, {"id": "svJWwW0ilssyqk_UML0mUg", "alias":
+        "work-and-class-denver", "name": "Work & Class", "image_url": "https://s3-media2.fl.yelpcdn.com/bphoto/2FCKkfCtdwN2nsEwOu6O_A/o.jpg",
         "is_closed": false, "url": "https://www.yelp.com/biz/work-and-class-denver?adjust_creative=9gPw-kuPiDZgFQ3Tr4ox3Q&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=9gPw-kuPiDZgFQ3Tr4ox3Q",
-        "review_count": 1482, "categories": [{"alias": "newamerican", "title": "American
+        "review_count": 1479, "categories": [{"alias": "newamerican", "title": "American
         (New)"}, {"alias": "latin", "title": "Latin American"}, {"alias": "cocktailbars",
         "title": "Cocktail Bars"}], "rating": 4.5, "coordinates": {"latitude": 39.75761,
         "longitude": -104.98604}, "transactions": ["delivery"], "price": "$$", "location":
@@ -92,19 +102,8 @@ http_interactions:
         "Denver", "zip_code": "80205", "country": "US", "state": "CO", "display_address":
         ["2500 Larimer St", "Ste 101", "Denver, CO 80205"]}, "phone": "+13032920700",
         "display_phone": "(303) 292-0700", "distance": 2810.0960698608437}, {"id":
-        "i8VF3q7dTszCcigJSMcJzQ", "alias": "angelo-s-taverna-denver", "name": "Angelo\u2019s
-        Taverna", "image_url": "https://s3-media2.fl.yelpcdn.com/bphoto/nrWS_kPhlGofYXQaiHE8Jg/o.jpg",
-        "is_closed": false, "url": "https://www.yelp.com/biz/angelo-s-taverna-denver?adjust_creative=9gPw-kuPiDZgFQ3Tr4ox3Q&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=9gPw-kuPiDZgFQ3Tr4ox3Q",
-        "review_count": 1216, "categories": [{"alias": "italian", "title": "Italian"},
-        {"alias": "seafood", "title": "Seafood"}, {"alias": "bars", "title": "Bars"}],
-        "rating": 4.5, "coordinates": {"latitude": 39.725523, "longitude": -104.979224},
-        "transactions": ["delivery", "pickup"], "price": "$$", "location": {"address1":
-        "620 E 6th Ave", "address2": "", "address3": "", "city": "Denver", "zip_code":
-        "80203", "country": "US", "state": "CO", "display_address": ["620 E 6th Ave",
-        "Denver, CO 80203"]}, "phone": "+13037443366", "display_phone": "(303) 744-3366",
-        "distance": 1351.3929919123793}, {"id": "9izE1WR8-2LNDq3RE0dOug", "alias":
-        "society-sports-and-spirits-denver", "name": "Society Sports And Spirits",
-        "image_url": "https://s3-media4.fl.yelpcdn.com/bphoto/y5FcLZ3pmXPNZ-02CTOlfQ/o.jpg",
+        "9izE1WR8-2LNDq3RE0dOug", "alias": "society-sports-and-spirits-denver", "name":
+        "Society Sports And Spirits", "image_url": "https://s3-media4.fl.yelpcdn.com/bphoto/y5FcLZ3pmXPNZ-02CTOlfQ/o.jpg",
         "is_closed": false, "url": "https://www.yelp.com/biz/society-sports-and-spirits-denver?adjust_creative=9gPw-kuPiDZgFQ3Tr4ox3Q&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=9gPw-kuPiDZgFQ3Tr4ox3Q",
         "review_count": 229, "categories": [{"alias": "sportsbars", "title": "Sports
         Bars"}, {"alias": "whiskeybars", "title": "Whiskey Bars"}], "rating": 4.5,
@@ -165,5 +164,5 @@ http_interactions:
         "display_address": ["233 E 7th Ave", "Denver, CO 80203"]}, "phone": "+17203280314",
         "display_phone": "(720) 328-0314", "distance": 1475.1617370380188}], "total":
         302, "region": {"center": {"longitude": -104.97024536132812, "latitude": 39.73552421220229}}}'
-  recorded_at: Wed, 04 Aug 2021 23:04:59 GMT
+  recorded_at: Tue, 03 Aug 2021 23:54:14 GMT
 recorded_with: VCR 6.0.0

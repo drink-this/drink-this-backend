@@ -6,9 +6,12 @@ class CocktailDashboardSerializer < ActiveModel::Serializer
       data:
         cocktails.map do |cocktail|
           {
+            id: cocktail.id,
+            type: 'dashboard_cocktail',
             attributes: {
               name: cocktail[:name],
               thumbnail: cocktail[:thumbnail],
+              rating: cocktail[:rating]
             }
           }
         end
