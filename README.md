@@ -2,7 +2,7 @@
 <!-- logo here -->
 <!-- badges here -->
 <!-- badges for last commit, commit activity, state of the build, dependencies up to date -->
-Drink This provides cocktail recommendations using a memory-based approach to collaborative filtering. We use the PyCall gem to import key Python libraries into our Rails app, including `numpy`, `pandas`, and `sklearn`. This allows us, for example, to calculate similarity between users with sci-kit learn's `euclidean_distance` method and to use pandas DataFrames to manipulate data as we pass it through the engine. The recommendation model takes a users ratings history into account, identifies the closest 15% of users, then makes a recommendation to the requester based on what similar users have rated highly in the past. 
+Drink This provides cocktail recommendations using a memory-based approach to collaborative filtering. We use the PyCall gem to import key Python libraries into our Rails app, including `numpy`, `pandas`, and `sklearn`. This allows us, for example, to calculate similarity between users with sci-kit learn's `euclidean_distance` method and to use pandas DataFrames to manipulate data as we pass it through the engine. The recommendation model takes a users ratings history into account, identifies the closest 15% of users, then makes a recommendation to the requester based on what similar users have rated highly in the past.
 <!-- features, example of the ML code, link to demo vid, link to wiki homepage -->
 
 #### System Dependencies
@@ -16,12 +16,12 @@ Drink This provides cocktail recommendations using a memory-based approach to co
 
 #### How to run Test Suite
 <!-- link to wiki -->
-    * [faker](https://github.com/faker-ruby/faker)
-    * [factory_bot_rails](https://github.com/thoughtbot/factory_bot_rails)
-    * [rspec-rails](https://github.com/rspec/rspec-rails)
-    * [shoulda-matchers](https://github.com/thoughtbot/shoulda-matchers)
-    * [simplecov](https://github.com/simplecov-ruby/simplecov)
-    * [webmock](https://github.com/bblimke/webmock)
+[faker](https://github.com/faker-ruby/faker)
+[factory_bot_rails](https://github.com/thoughtbot/factory_bot_rails)
+[rspec-rails](https://github.com/rspec/rspec-rails)
+[shoulda-matchers](https://github.com/thoughtbot/shoulda-matchers)
+[simplecov](https://github.com/simplecov-ruby/simplecov)
+[webmock](https://github.com/bblimke/webmock)
 
 #### Deployment
 <!-- touch on the sadness that is ruby+python -->
