@@ -5,7 +5,7 @@
 [Explore the frontend repo](https://github.com/drink-this/drink-this-frontend)
 <!-- badges here -->
 <!-- badges for last commit, commit activity, state of the build, dependencies up to date -->
-Drink This provides cocktail recommendations using a memory-based approach to collaborative filtering. We use the PyCall gem to import key Python libraries into our Rails app, including `numpy`, `pandas`, and `sklearn`. This allows us, for example, to calculate similarity among users in our application with sci-kit learn's `euclidean_distance` method and to use pandas DataFrames to manipulate data as we pass it through our recommendation engine. The recommendation model takes a user's rating history into account, identifies the closest 15% of users, then makes a recommendation to the requester based on what similar users who have rated highly in the past.
+Drink This provides cocktail recommendations using a memory-based approach to collaborative filtering. We use the PyCall gem to import key Python libraries into our Rails app, including `numpy`, `pandas`, and `sklearn`. This allows us, for example, to calculate similarity among users in our application with sci-kit learn's `euclidean_distance` method and to use pandas DataFrames to manipulate data as we pass it through our recommendation engine. The recommendation model takes a user's rating history into account, identifies the closest 15% of users, then makes a recommendation to the requester based on what similar users have rated highly.
 
 Check out our [Wiki](https://github.com/drink-this/drink-this-backend/wiki) for more info.
 <!-- features, example of the ML code, link to demo vid, link to wiki homepage -->
@@ -23,14 +23,13 @@ Check out our [Wiki](https://github.com/drink-this/drink-this-backend/wiki) for 
 - `gem numpy`
 - `gem pandas`
 
-We make use of three Python libraries commonly used in data science to construct our recommendation model: NumPy, pandas, and sci-kit learn (`sklearn` here). In order to use these inside of a Rails application, we utilize a gem called `PyCall`, which allows us to import and use these libraries, and by extension Python syntax and functions, within Ruby methods. The bulk of our model is constructed with Python, once we convert an array of Ruby objects (Ratings) from our database into a pandas DataFrame in our Dataframeable module:
+We make use of three Python libraries commonly used in data science to construct our recommendation model: NumPy, pandas, and sci-kit learn (`sklearn` here). In order to use these inside of a Rails application, we utilize a gem called `PyCall`, which allows us to import and use these libraries, and by extension Python syntax and functions, within Ruby methods. The bulk of our model is constructed with Python, after converting an array of Ruby objects (Ratings) from our database into a pandas [DataFrame](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html) in our Dataframeable module:
 
 <img width="784" alt="dataframeable" src="https://user-images.githubusercontent.com/26797256/128450438-682f1478-3820-4823-9ca1-3c089a0f9003.png">
 
-The sci-kit learn library gives us access to `metrics`, which includes score functions, performance metrics and pairwise metrics and distance computations, and by extension `pairwise`, from which we get the calculation of [Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance). In Euclidean geometry, the Euclidean distance is the usual distance between two points (roughly, distance in multi-dimensional space), and this distance is measured as a line segment. In our model, we use the Euclidean distance to calculate, among users when compared to the current user, which users (the 15% of users in our database) is closest in preferences to the current user. This method enables our app to recommend an accurate cocktail to the current user based on the preferences of other users. 
+The sci-kit learn library gives us access to [`metrics`](https://scikit-learn.org/stable/modules/model_evaluation.html), which includes score functions, performance metrics and pairwise metrics and distance computations, and by extension `pairwise`, from which we get the calculation of [Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance). In Euclidean geometry, the Euclidean distance is the usual distance between two points (roughly, distance in multi-dimensional space), and this distance is measured as a line segment. In our model, we use the Euclidean distance to calculate, among users when compared to the current user, which users (the 15% of users in our database) is closest in preferences to the current user. This method enables our app to recommend an accurate cocktail to the current user based on the preferences of other similar users. 
 
 Some examples of this in action: 
-
 
 <img width="844" alt="distance_calculations" src="https://user-images.githubusercontent.com/26797256/128450433-1f90c288-b48e-4174-9f6b-ff0c1feb12b0.png">
 
@@ -59,7 +58,6 @@ As the user base grows in our app (and thus our database of user ratings also gr
 #### How to run Test Suite
 
 To run the full test suite, simply run `bundle exec rspec`.
-<!-- link to wiki -->
 Gems required for testing:
 - [faker](https://github.com/faker-ruby/faker)
 - [factory_bot_rails](https://github.com/thoughtbot/factory_bot_rails)
