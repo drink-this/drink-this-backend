@@ -19,9 +19,10 @@ class RecommendationService
     weighted_baselines = baselines.groupby('cocktail_id').sum()[[user_id,'weightedRating']]
     ratings_complete = weighted_baselines_with_counts(baselines, weighted_baselines)
     unrated = remove_rated(cocktail_ratings, ratings_complete, user_id)
+    return nil if unrated.empty
     recommendations = Pandas.DataFrame.new()
     weighted_avg(recommendations, unrated)
-    top_recommendation(recommendations).reset_index['cocktail_id'].to_i
+    top_recommendation(recommendations).reset_index['cocktail_id'].to_i unless recommendations.empty
   end
 
   def self.all_ratings(df)
