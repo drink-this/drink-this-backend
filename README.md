@@ -74,6 +74,8 @@ NOTE: All endpoints require a user authorization token from OAuth
   * Requires a `cocktail_id` parameter
 
   <img width="1178" alt="cocktail_show_page" src="https://user-images.githubusercontent.com/26797256/128459231-5f231bd0-8feb-4f7f-93bf-44691688196b.png">
+
+  ##### Sample Response
   
   ```json
   {
@@ -94,16 +96,30 @@ NOTE: All endpoints require a user authorization token from OAuth
             "rating": 0
         }
     }
-}
+  }
   ```
-
 #### Create or update a user cocktail rating
 
-  `POST /rating`
+  `POST /cocktails/:id/rating`
   
-  * Requires `cocktail_id` and `stars` parameters
+  * Requires `stars` parameter
   * Stars parameter must be an integer from 1-5
 
+  ##### Sample Response
+
+  ```json
+  {
+    "data": {
+        "id": "701",
+        "type": "cocktail_rating",
+        "attributes": {
+            "user_id": 7,
+            "cocktail_id": 11007,
+            "stars": 4
+        }
+    }
+  }
+  ```
 #### Display 5 random cocktails for new user to rate
 
   `GET /dashboard`
