@@ -2,7 +2,8 @@
 <!-- logo here -->
 <!-- badges here -->
 <!-- badges for last commit, commit activity, state of the build, dependencies up to date -->
-Drink This provides cocktail recommendations using a memory-based approach to collaborative filtering. We use the PyCall gem to import key Python libraries into our Rails app, including `numpy`, `pandas`, and `sklearn`. This allows us, for example, to calculate similarity among users in our application with sci-kit learn's `euclidean_distance` method and to use pandas DataFrames to manipulate data as we pass it through our recommendation engine. The recommendation model takes a users ratings history into account, identifies the closest 15% of users, then makes a recommendation to the requester based on what similar users who have rated highly in the past.
+Drink This provides cocktail recommendations using a memory-based approach to collaborative filtering. We use the PyCall gem to import key Python libraries into our Rails app, including `numpy`, `pandas`, and `sklearn`. This allows us, for example, to calculate similarity among users in our application with sci-kit learn's `euclidean_distance` method and to use pandas DataFrames to manipulate data as we pass it through our recommendation engine. The recommendation model takes a user's rating history into account, identifies the closest 15% of users, then makes a recommendation to the requester based on what similar users who have rated highly in the past.
+
 Check out our [Wiki](https://github.com/drink-this/drink-this-backend/wiki) for more info.
 <!-- features, example of the ML code, link to demo vid, link to wiki homepage -->
 
@@ -14,7 +15,7 @@ Check out our [Wiki](https://github.com/drink-this/drink-this-backend/wiki) for 
 - `gem atcive_model_serializer`
 - `gem figaro`
 
-###### Python Gems
+###### Using Python
 - `gem pycall`
 - `gem numpy`
 - `gem pandas`
@@ -26,12 +27,22 @@ Since we are using Ruby on Rails and wanted to incorporate data science tools in
 
 #### Configuration
 <!-- cli to get project running, potentially file descriptions, maybe just link to wiki -->
+1. Fork and clone this repo
+2. Install Python3 locally with shared libraries enabled. Detailed instructions for installing Python and the packages we rely on can be found [in this Wiki article](https://github.com/drink-this/drink-this-backend/wiki/Python-pyenv-Installation).
+3. Bundle install
+4. Configure API keys:
+
+    - Run `bundle exec figaro install` for [Figaro](https://github.com/laserlemon/figaro) to generate an application.yml file where secure information can be stored locally
+    - Create an app and retrieve an API key from the [Yelp Fusion API](https://www.yelp.com/developers/documentation/v3/authentication)
+    - Sign up to get an API key for [TheCocktailDB](https://www.thecocktaildb.com/api.php)
 
 #### Database schema
 <img width="685" alt="Screen Shot 2021-08-05 at 8 12 40 AM" src="https://user-images.githubusercontent.com/10294841/128374788-a88a6835-a76b-44f1-9a8a-91c2dc9c3f11.png">
 <!-- also explain dataset? -->
 
 #### How to run Test Suite
+
+To run the full test suite, simply run `bundle exec rspec`
 <!-- link to wiki -->
 Gems required for testing:
 - [faker](https://github.com/faker-ruby/faker)
