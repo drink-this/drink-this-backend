@@ -127,9 +127,9 @@ Since this Rails app also requires Python, both [this Ruby buildpack](https://el
 
 ### Contributers
 <!-- each of us with links to github and linked in profiles -->
-  * Mark Yen - [markcyen](https://github.com/markcyen)
-  * Taija Warbelow - [twarbelow](https://github.com/twarbelow)
-  * Molly Krumholz - [mkrumholz](https://github.com/mkrumholz)
-  * Zach Green - [zachjamesgreen](https://github.com/zachjamesgreen)
-  * Richard DeSilvey - [redferret](https://github.com/redferret)
-  * Jermaine Braumuller - [Jaybraum](https://github.com/Jaybraum)
+- Mark Yen: [Github](https://github.com/markcyen) & [Linkedin](https://www.linkedin.com/in/markcyen/)
+- Taija Warbelow: [Github](https://github.com/twarbelow) & [Linkedin](https://www.linkedin.com/in/taija-warbelow/)
+- Molly Krumholz: [Github](https://github.com/mkrumholz) & [Linkedin](https://www.linkedin.com/in/mkrumholz/)
+- Zach Green: [Github](https://github.com/zachjamesgreen) & [Linkedin](https://www.linkedin.com/in/zachjamesgreen/)
+- Richard DeSilvey: [Github](https://github.com/redferret) & [Linkedin](https://www.linkedin.com/in/richard-desilvey-33161696/)
+- Jermaine Braumuller: [Github](https://github.com/Jaybraum) & [Linkedin](https://www.linkedin.com/in/jermaine-braumuller/)
