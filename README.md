@@ -12,18 +12,31 @@ Check out our [Wiki](https://github.com/drink-this/drink-this-backend/wiki) for 
 
 ###### Standard Rails Gems
 - `gem faraday`
-- `gem atcive_model_serializer`
+- `gem active_model_serializer`
 - `gem figaro`
 
-###### Using Python
+###### Using Python in Rails
 - `gem pycall`
 - `gem numpy`
 - `gem pandas`
 
-From the `numpy` gem we reached into `sklearn` to import the module `metrics`, which includes score functions, performance metrics and pairwise metrics and distance computations. Leveraging the `pairwise` metrics submodule, we were able to reach into this library of equations for distance metrics, including a popular one in the data science arena -- the [Euclidean Distance](https://en.wikipedia.org/wiki/Euclidean_distance). In Euclidean geometry, simply put, the Euclidean distance is the usual distance between two points, and this distance is measured as a line segment. In our app, we used the Euclidean distance method to calculate, among users when compared to the current user, which users (the 15% of users in our database) is closest in the rating of cocktails to the current user. This method enables our app to recommend an accurate cocktail to the current user with like users. 
+We make use of three Python libraries commonly used in data science to construct our recommendation model: NumPy, pandas, and sci-kit learn (`sklearn` here). In order to use these inside of a Rails application, we utilize a gem called `PyCall`, which allows us to import and use these libraries, and by extension Python syntax and functions, within Ruby methods. The bulk of our model is constructed with Python, once we convert an array of Ruby objects (Ratings) from our database into a pandas DataFrame in our Dataframeable module:
 
-Since we are using Ruby on Rails and wanted to incorporate data science tools into our app, Python, with its many computational libraries, was the language we wanted to incorporate. The `pycall` and `pandas` gems allowed us to leverage the Python language and libraries for computational methods. From the `pandas` gem, we were able to manipulate the data into dataframes and apply the Euclidean distance method into the data inputs we received. As the user base grows in our app, the recommendation model would be more precise in provide the most accurate recommended cocktail to a particular user so that the current user may enjoy that nice drink.
+<img width="784" alt="dataframeable" src="https://user-images.githubusercontent.com/26797256/128450438-682f1478-3820-4823-9ca1-3c089a0f9003.png">
+
+The sci-kit learn library gives us access to `metrics`, which includes score functions, performance metrics and pairwise metrics and distance computations, and by extension `pairwise`, from which we get the calculation of [Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance). In Euclidean geometry, the Euclidean distance is the usual distance between two points (roughly, distance in multi-dimensional space), and this distance is measured as a line segment. In our model, we use the Euclidean distance to calculate, among users when compared to the current user, which users (the 15% of users in our database) is closest in preferences to the current user. This method enables our app to recommend an accurate cocktail to the current user based on the preferences of other users. 
+
+Some examples of this in action: 
+
+
+<img width="844" alt="distance_calculations" src="https://user-images.githubusercontent.com/26797256/128450433-1f90c288-b48e-4174-9f6b-ff0c1feb12b0.png">
+
+<img width="670" alt="weighted_ratings" src="https://user-images.githubusercontent.com/26797256/128450437-8794b1c0-1c6e-4869-ab72-0bf9217275d1.png">
+
+As the user base grows in our app (and thus our database of user ratings also grows), the recommendation model will become more accurate in providing a recommendation to a particular user that the they will enjoy.
 <!-- list of packages/gems etc that are used, link to wiki for this? -->
+
+
 
 #### Configuration
 <!-- cli to get project running, potentially file descriptions, maybe just link to wiki -->
