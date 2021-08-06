@@ -1,5 +1,6 @@
-![Logo](https://user-images.githubusercontent.com/26797256/128451731-ba02dea0-b1cc-4296-b8f3-a81f5cb649f1.png)
-# Drink This
+![Logo](https://user-images.githubusercontent.com/26797256/128535635-2d333cd0-59f7-49e3-bf03-ecac53207c5a.jpg)
+# Drink This!
+
 
 [Check out the app on Heroku](https://drink-this-frontend.herokuapp.com/)
 [Explore the frontend repo](https://github.com/drink-this/drink-this-frontend)
