@@ -16,8 +16,8 @@ RSpec.describe 'Cocktail Search API', :vcr do
         create(:rating, cocktail_id: 11005)
         create(:rating, cocktail_id: 16967, user_id: @user.id, stars: 2)
 
-        create(:rating, cocktail_id: @cocktail_1.id, user_id: @user.id, stars: 4)
-        create(:rating, cocktail_id: @cocktail_2.id)
+        # create(:rating, cocktail_id: @cocktail_1.id, user_id: @user.id, stars: 4)
+        # create(:rating, cocktail_id: @cocktail_2.id)
       end
 
       it 'send json of cocktail list via get request' do
