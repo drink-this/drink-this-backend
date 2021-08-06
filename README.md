@@ -1,5 +1,8 @@
-# Drink This
 ![Logo](https://user-images.githubusercontent.com/26797256/128451731-ba02dea0-b1cc-4296-b8f3-a81f5cb649f1.png)
+# Drink This
+
+[Check out the app on Heroku](https://drink-this-frontend.herokuapp.com/)
+[Explore the frontend repo](https://github.com/drink-this/drink-this-frontend)
 <!-- badges here -->
 <!-- badges for last commit, commit activity, state of the build, dependencies up to date -->
 Drink This provides cocktail recommendations using a memory-based approach to collaborative filtering. We use the PyCall gem to import key Python libraries into our Rails app, including `numpy`, `pandas`, and `sklearn`. This allows us, for example, to calculate similarity among users in our application with sci-kit learn's `euclidean_distance` method and to use pandas DataFrames to manipulate data as we pass it through our recommendation engine. The recommendation model takes a user's rating history into account, identifies the closest 15% of users, then makes a recommendation to the requester based on what similar users who have rated highly in the past.
