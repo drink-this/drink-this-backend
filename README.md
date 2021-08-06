@@ -74,6 +74,28 @@ NOTE: All endpoints require a user authorization token from OAuth
   * Requires a `cocktail_id` parameter
 
   <img width="1178" alt="cocktail_show_page" src="https://user-images.githubusercontent.com/26797256/128459231-5f231bd0-8feb-4f7f-93bf-44691688196b.png">
+  
+  ```json
+  {
+    "data": {
+        "id": "11007",
+        "type": "cocktail",
+        "attributes": {
+            "name": "Margarita",
+            "thumbnail": "https://www.thecocktaildb.com/images/media/drink/5noda61589575158.jpg",
+            "glass": "Cocktail glass",
+            "recipe": [
+                "1 1/2 oz Tequila",
+                "1/2 oz Triple sec",
+                "1 oz Lime juice",
+                "Salt"
+            ],
+            "instructions": "Rub the rim of the glass with the lime slice to make the salt stick to it. Take care to moisten only the outer rim and sprinkle the salt on it. The salt should present to the lips of the imbiber and never mix into the cocktail. Shake the other ingredients with ice, then carefully pour into the glass.",
+            "rating": 0
+        }
+    }
+}
+  ```
 
 #### Create or update a user cocktail rating
 
