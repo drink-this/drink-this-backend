@@ -22,7 +22,7 @@ class RecommendationService
     return nil if unrated.empty
     recommendations = Pandas.DataFrame.new()
     weighted_avg(recommendations, unrated)
-    top_recommendation(recommendations).reset_index['cocktail_id'].to_i unless recommendations.empty
+    top_recommendation(recommendations).sample.reset_index['cocktail_id'].to_i
   end
 
   def self.all_ratings(df)
