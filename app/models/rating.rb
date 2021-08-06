@@ -8,4 +8,9 @@ class Rating < ApplicationRecord
                       greater_than_or_equal_to: 0,
                       less_than_or_equal_to: 5
                     }
+  # validates :user_id, uniqueness: {scope: :cocktail_id}
+
+  def self.prep_dataframe
+    Rating.pluck(:user_id, :cocktail_id, :stars)
+  end
 end
