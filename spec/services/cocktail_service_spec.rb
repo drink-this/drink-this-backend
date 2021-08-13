@@ -2,33 +2,38 @@ require 'rails_helper'
 
 RSpec.describe CocktailService, :vcr do
   describe 'class methods' do
-    VCR.use_cassette('cocktail drink', :record => :new_episodes) do
-      describe '::get_cocktail_details' do
-        it 'returns cocktail data' do
-          response = CocktailService.get_cocktail_details(11008)
+    describe '::get_cocktail_details' do
+      it 'returns cocktail data', :vcr do
+        response = CocktailService.get_cocktail_details(11008)
 
-          expect(response).to be_a Hash
-          expect(response[:drinks]).to be_an Array
+        expect(response).to be_a Hash
+        expect(response[:drinks]).to be_an Array
 
-          manhattan = response[:drinks].first
+        manhattan = response[:drinks].first
 
-          expect(manhattan[:idDrink]).to be_a String
-          expect(manhattan[:idDrink]).to eq('11008')
+        expect(manhattan[:idDrink]).to be_a String
+        expect(manhattan[:idDrink]).to eq('11008')
 
-          expect(manhattan[:strDrink]).to be_a String
-          expect(manhattan[:strDrink]).to eq('Manhattan')
-          expect(manhattan[:strInstructions]).to be_a String
-          expect(manhattan[:strInstructions]).to eq('Stirred over ice, strained into a chilled glass, garnished, and served up.')
+        expect(manhattan[:strDrink]).to be_a String
+        expect(manhattan[:strDrink]).to eq('Manhattan')
+        expect(manhattan[:strInstructions]).to be_a String
+        expect(manhattan[:strInstructions]).to eq('Stirred over ice, strained into a chilled glass, garnished, and served up.')
 
-          expect(manhattan[:strDrinkThumb]).to be_a String
-          expect(manhattan[:strDrinkThumb]).to eq('https://www.thecocktaildb.com/images/media/drink/yk70e31606771240.jpg')
+        expect(manhattan[:strDrinkThumb]).to be_a String
+        expect(manhattan[:strDrinkThumb]).to eq('https://www.thecocktaildb.com/images/media/drink/yk70e31606771240.jpg')
 
-          expect(manhattan[:strIngredient1]).to be_a String
-          expect(manhattan[:strIngredient1]).to eq('Sweet Vermouth')
+        expect(manhattan[:strIngredient1]).to be_a String
+        expect(manhattan[:strIngredient1]).to eq('Sweet Vermouth')
 
-          expect(manhattan[:strMeasure1]).to be_a String
-          expect(manhattan[:strMeasure1]).to eq('3/4 oz ')
-        end
+        expect(manhattan[:strMeasure1]).to be_a String
+        expect(manhattan[:strMeasure1]).to eq('3/4 oz ')
+      end
+
+      it 'returns an empty array if no cocktail exists', :vcr do
+        response = CocktailService.get_cocktail_details(258134685-83468934)
+
+        expect(response).to be_a Hash
+        expect(response[:drinks]).to be nil
       end
     end
 
@@ -50,33 +55,39 @@ RSpec.describe CocktailService, :vcr do
       end
     end
 
-    VCR.use_cassette('cocktail search', :record => :new_episodes) do
-      describe '::search_by_name' do
-        it 'returns search results' do
-          response = CocktailService.search_by_name('vodka')
 
-          expect(response).to be_a Hash
-          expect(response[:drinks]).to be_an Array
+    describe '::search_by_name' do
+      it 'returns search results', :vcr do
+        response = CocktailService.search_by_name('vodka')
 
-          long_vodka = response[:drinks].first
+        expect(response).to be_a Hash
+        expect(response[:drinks]).to be_an Array
 
-          expect(long_vodka).to be_a Hash
-          expect(long_vodka[:idDrink]).to eq('13196')
-          expect(long_vodka[:strDrink]).to eq('Long vodka')
-          expect(long_vodka[:strDrinkThumb]).to eq('https://www.thecocktaildb.com/images/media/drink/9179i01503565212.jpg')
+        long_vodka = response[:drinks].first
 
-          vodka_and_tonic = response[:drinks].second
+        expect(long_vodka).to be_a Hash
+        expect(long_vodka[:idDrink]).to eq('13196')
+        expect(long_vodka[:strDrink]).to eq('Long vodka')
+        expect(long_vodka[:strDrinkThumb]).to eq('https://www.thecocktaildb.com/images/media/drink/9179i01503565212.jpg')
 
-          expect(vodka_and_tonic).to be_a Hash
-          expect(vodka_and_tonic[:idDrink]).to eq('16967')
-          expect(vodka_and_tonic[:strDrink]).to eq('Vodka Fizz')
-          expect(vodka_and_tonic[:strDrinkThumb]).to eq('https://www.thecocktaildb.com/images/media/drink/xwxyux1441254243.jpg')
-        end
+        vodka_and_tonic = response[:drinks].second
+
+        expect(vodka_and_tonic).to be_a Hash
+        expect(vodka_and_tonic[:idDrink]).to eq('16967')
+        expect(vodka_and_tonic[:strDrink]).to eq('Vodka Fizz')
+        expect(vodka_and_tonic[:strDrinkThumb]).to eq('https://www.thecocktaildb.com/images/media/drink/xwxyux1441254243.jpg')
+      end
+
+      it 'returns nil if no results are found', :vcr do
+        response = CocktailService.search_by_name('Green Chartreuse')
+
+        expect(response).to be_a Hash
+        expect(response[:drinks]).to be nil
       end
     end
 
-    describe '::search_by_ingredient', :vcr do
-      it 'returns search results' do
+    describe '::search_by_ingredient' do
+      it 'returns search results', :vcr do
         response = CocktailService.search_by_ingredient('Green Chartreuse')
 
         expect(response).to be_a Hash
@@ -95,6 +106,13 @@ RSpec.describe CocktailService, :vcr do
         expect(brigadier[:idDrink]).to eq('17825')
         expect(brigadier[:strDrink]).to eq('Brigadier')
         expect(brigadier[:strDrinkThumb]).to eq('https://www.thecocktaildb.com/images/media/drink/nl89tf1518947401.jpg')
+      end
+
+      it 'returns nil if no results are found', :vcr do
+        response = CocktailService.search_by_ingredient('dry')
+
+        expect(response).to be_a Hash
+        expect(response[:drinks]).to be nil
       end
     end
   end
