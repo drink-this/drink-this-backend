@@ -51,9 +51,9 @@ RSpec.describe CocktailService, :vcr do
     end
 
     VCR.use_cassette('cocktail search', :record => :new_episodes) do
-      describe '::search_cocktails' do
+      describe '::search_by_name' do
         it 'returns search results' do
-          response = CocktailService.search_cocktails('vodka')
+          response = CocktailService.search_by_name('vodka')
 
           expect(response).to be_a Hash
           expect(response[:drinks]).to be_an Array

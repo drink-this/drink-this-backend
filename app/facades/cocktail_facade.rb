@@ -24,7 +24,7 @@ class CocktailFacade
   end
 
   def self.retrieve_search_results(query, user_id)
-    response = CocktailService.search_cocktails(query)
+    response = CocktailService.search_by_name(query)
     return false if response[:drinks].nil?
 
     response[:drinks].map do |drink|
@@ -38,11 +38,9 @@ class CocktailFacade
   end
 
   def self.find_rating(user_id, cocktail_id)
-    if Rating.find_by(user_id: user_id, cocktail_id: cocktail_id).present?
-      Rating.find_by(user_id: user_id, cocktail_id: cocktail_id).stars
-    else
-      0
-    end
+    rating = Rating.find_by(user_id: user_id, cocktail_id: cocktail_id)
+    return rating.stars if rating.present?
+    0
   end
 
   def self.build_recipe(ingredients, measurements)
