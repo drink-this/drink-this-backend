@@ -3,8 +3,8 @@ class CocktailFacade
     return false if retrieve_details(cocktail_id) == { drinks: nil }
 
     details = retrieve_details(cocktail_id)[:drinks].first
-    ingredients = get_ingredients(details)
-    measurements = get_measurements(details)
+    ingredients = collect_from(details, 'Ingredient')
+    measurements = collect_from(details, 'Measure')
     {
       name: details[:strDrink],
       thumbnail: details[:strDrinkThumb],
@@ -27,6 +27,7 @@ class CocktailFacade
     by_name = CocktailService.search_by_name(query)
     by_ingredient = CocktailService.search_by_ingredient(query)
     return false if by_name[:drinks].nil? && by_ingredient[:drinks].nil?
+
     search_results = merge_results(by_name, by_ingredient)
     search_results.map do |drink|
       {
@@ -47,24 +48,19 @@ class CocktailFacade
   def self.find_rating(user_id, cocktail_id)
     rating = Rating.find_by(user_id: user_id, cocktail_id: cocktail_id)
     return rating.stars if rating.present?
+
     0
   end
 
   def self.build_recipe(ingredients, measurements)
     measurements.zip(ingredients).map do |i|
-    i.map {|str| str.strip}.join(' ').strip if i != ['', '']
+      i.map { |str| str.strip }.join(' ').strip if i != ['', '']
     end.compact
   end
 
-  def self.get_ingredients(cocktail_data)
+  def self.collect_from(cocktail_data, key_type)
     cocktail_data.map do |key, value|
-      value ||= '' if key.to_s.include?('Ingredient')
-    end.compact
-  end
-
-  def self.get_measurements(cocktail_data)
-    cocktail_data.map do |key, value|
-      value ||= '' if key.to_s.include?('Measure')
+      value ||= '' if key.to_s.include?(key_type)
     end.compact
   end
 end
