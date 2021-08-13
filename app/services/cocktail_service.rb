@@ -16,7 +16,8 @@ class CocktailService
 
   def self.search_by_ingredient(ingredient)
     response = conn.get('filter.php?', { i: ingredient })
-    return parse_json(response) unless response.body.blank?
+    return parse_json(response) if response.body.present?
+
     { drinks: nil }
   end
 
