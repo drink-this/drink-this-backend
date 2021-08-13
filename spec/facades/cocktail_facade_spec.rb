@@ -110,14 +110,14 @@ RSpec.describe CocktailFacade, :vcr do
     it 'returns search results by name and ingredient', :vcr do
       user = create(:user)
       create(:cocktail, id: 12618)
-      create(:cocktail, id: 11005)
+      create(:cocktail, id: 17834)
       create(:rating, cocktail_id: 12618, user_id: user.id, stars: 1)
-      create(:rating, cocktail_id: 11005, user_id: user.id, stars: 3)
+      create(:rating, cocktail_id: 17834, user_id: user.id, stars: 3)
 
       orange_drinks = CocktailFacade.retrieve_search_results('orange', user.id)
 
       expect(orange_drinks).to be_an Array
-      expect(orange_drinks.length).to eq 12
+      expect(orange_drinks.length).to eq 13
 
       result_1 = orange_drinks.first
 

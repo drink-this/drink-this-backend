@@ -24,10 +24,11 @@ class CocktailFacade
   end
 
   def self.retrieve_search_results(query, user_id)
-    response = CocktailService.search_by_name(query)
-    return false if response[:drinks].nil?
-
-    response[:drinks].map do |drink|
+    by_name = CocktailService.search_by_name(query)
+    by_ingredient = CocktailService.search_by_ingredient(query)
+    return false if by_name[:drinks].nil? && by_ingredient[:drinks].nil?
+    search_results = merge_results(by_name, by_ingredient)
+    search_results.map do |drink|
       {
         id: drink[:idDrink],
         name: drink[:strDrink],
@@ -35,6 +36,12 @@ class CocktailFacade
         rating: find_rating(user_id, drink[:idDrink])
       }
     end
+  end
+
+  def self.merge_results(by_name, by_ingredient)
+    by_name[:drinks] = [] if by_name[:drinks].nil?
+    by_ingredient[:drinks] = [] if by_ingredient[:drinks].nil?
+    by_name[:drinks] += by_ingredient[:drinks]
   end
 
   def self.find_rating(user_id, cocktail_id)
