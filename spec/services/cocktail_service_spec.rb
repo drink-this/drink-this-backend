@@ -74,5 +74,28 @@ RSpec.describe CocktailService, :vcr do
         end
       end
     end
+
+    describe '::search_by_ingredient', :vcr do
+      it 'returns search results' do
+        response = CocktailService.search_by_ingredient('Green Chartreuse')
+
+        expect(response).to be_a Hash
+        expect(response[:drinks]).to be_an Array
+
+        bijou = response[:drinks].first
+
+        expect(bijou).to be_a Hash
+        expect(bijou[:idDrink]).to eq('17254')
+        expect(bijou[:strDrink]).to eq('Bijou')
+        expect(bijou[:strDrinkThumb]).to eq('https://www.thecocktaildb.com/images/media/drink/rysb3r1513706985.jpg')
+
+        brigadier = response[:drinks].second
+
+        expect(brigadier).to be_a Hash
+        expect(brigadier[:idDrink]).to eq('17825')
+        expect(brigadier[:strDrink]).to eq('Brigadier')
+        expect(brigadier[:strDrinkThumb]).to eq('https://www.thecocktaildb.com/images/media/drink/nl89tf1518947401.jpg')
+      end
+    end
   end
 end
