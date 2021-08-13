@@ -14,6 +14,11 @@ class CocktailService
     parse_json(response)
   end
 
+  def self.search_by_ingredient(ingredient)
+    response = conn.get('filter.php?', { i: ingredient })
+    parse_json(response)
+  end
+
   def self.conn
     Faraday.new(url: 'https://www.thecocktaildb.com/api/json/v1/1/') do |req|
       req.params['api_key'] = ENV['cocktail_key']
