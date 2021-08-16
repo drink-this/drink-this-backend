@@ -3,24 +3,12 @@ class CocktailFacade
     return false if retrieve_details(cocktail_id) == { drinks: nil }
 
     details = retrieve_details(cocktail_id)[:drinks].first
-    ingredients = collect_from(details, 'Ingredient')
-    measurements = collect_from(details, 'Measure')
-    {
-      name: details[:strDrink],
-      thumbnail: details[:strDrinkThumb],
-      glass: details[:strGlass],
-      recipe: build_recipe(ingredients, measurements),
-      instructions: details[:strInstructions],
-      rating: find_rating(user_id, cocktail_id)
-    }
+    build_details_hash(details, user_id, cocktail_id)
   end
 
   def self.retrieve_details(cocktail_id)
-    if cocktail_id.present?
-      CocktailService.get_cocktail_details(cocktail_id)
-    else
-      CocktailService.random_cocktail
-    end
+    return CocktailService.get_cocktail_details(cocktail_id) if cocktail_id.present?
+    CocktailService.random_cocktail
   end
 
   def self.retrieve_search_results(query, user_id)
@@ -29,14 +17,7 @@ class CocktailFacade
     return false if by_name[:drinks].nil? && by_ingredient[:drinks].nil?
 
     search_results = merge_results(by_name, by_ingredient)
-    search_results.map do |drink|
-      {
-        id: drink[:idDrink],
-        name: drink[:strDrink],
-        thumbnail: drink[:strDrinkThumb],
-        rating: find_rating(user_id, drink[:idDrink])
-      }
-    end
+    build_basics_hash(search_results, user_id)
   end
 
   def self.merge_results(by_name, by_ingredient)
@@ -62,5 +43,29 @@ class CocktailFacade
     cocktail_data.map do |key, value|
       value ||= '' if key.to_s.include?(key_type)
     end.compact
+  end
+
+  def self.build_basics_hash(search_results, user_id)
+    search_results.map do |drink|
+      {
+        id: drink[:idDrink],
+        name: drink[:strDrink],
+        thumbnail: drink[:strDrinkThumb],
+        rating: find_rating(user_id, drink[:idDrink])
+      }
+    end
+  end
+
+  def self.build_details_hash(details, user_id, cocktail_id)
+    ingredients = collect_from(details, 'Ingredient')
+    measurements = collect_from(details, 'Measure')
+    {
+      name: details[:strDrink],
+      thumbnail: details[:strDrinkThumb],
+      glass: details[:strGlass],
+      recipe: build_recipe(ingredients, measurements),
+      instructions: details[:strInstructions],
+      rating: find_rating(user_id, cocktail_id)
+    }
   end
 end
