@@ -16,6 +16,7 @@ AllCops:
     - './*'
     - 'app/services/recommendation_service.rb'
     - 'app/modules/dataframeable.rb'
+    - 'app/serializers/*'
 
 Style/FrozenStringLiteralComment:
   Enabled: false
