@@ -12,4 +12,9 @@ class Api::V1::CocktailsController < Api::V1::AuthorizationController
       end
     end
   end
+
+  def rated
+    cocktails = current_user.cocktails.select('cocktails.*, ratings.stars')
+    render json: RatedCocktailsSerializer.serialize(cocktails).to_json
+  end
 end

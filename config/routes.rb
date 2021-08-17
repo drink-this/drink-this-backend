@@ -16,6 +16,7 @@ Rails.application.routes.draw do
         end
       end
 
+      get '/cocktails/rated', to: 'cocktails#rated'
       resources :cocktails, only: :show
 
       resources :yelp_search, only: :index
