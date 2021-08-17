@@ -9,9 +9,16 @@ class CocktailService
     parse_json(response)
   end
 
-  def self.search_cocktails(query)
+  def self.search_by_name(query)
     response = conn.get('search.php?', { s: query })
     parse_json(response)
+  end
+
+  def self.search_by_ingredient(ingredient)
+    response = conn.get('filter.php?', { i: ingredient })
+    return parse_json(response) if response.body.present?
+
+    { drinks: nil }
   end
 
   def self.conn

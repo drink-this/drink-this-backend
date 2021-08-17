@@ -57,16 +57,6 @@ RSpec.describe CocktailFacade, :vcr do
     it 'returns json with cocktail details and rating' do
       user = create(:user)
 
-      response_body = File.read('./spec/fixtures/random_cocktail.json')
-        stub_request(:get, "https://www.thecocktaildb.com/api/json/v1/1/random.php?api_key=#{ENV['cocktail_key']}")
-            .with(
-              headers: {
-              'Accept'=>'*/*',
-              'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-              'User-Agent'=>'Faraday v1.4.1'
-              })
-            .to_return(status: 200, body: response_body, headers: {})
-
       cocktail = CocktailFacade.retrieve_cocktail(user.id, nil)
 
       expect(cocktail).to have_key :name
@@ -82,41 +72,126 @@ RSpec.describe CocktailFacade, :vcr do
   end
 
 
-  VCR.use_cassette('cocktail search', :record => :new_episodes) do
-    describe '::retrieve_search_results' do
-      before :each do
-        User.destroy_all
-        Cocktail.destroy_all
-        Rating.destroy_all
-      end
+  describe '::retrieve_search_results' do
+    before :each do
+      User.destroy_all
+      Cocktail.destroy_all
+      Rating.destroy_all
+    end
 
-      it 'returns json with list of cocktails by query' do
-        user = create(:user)
-        create(:cocktail, id: 11324)
-        create(:cocktail, id: 11005)
-        create(:rating, cocktail_id: 11324, user_id: user.id, stars: 4)
-        create(:rating, cocktail_id: 11005)
+    it 'returns json with list of cocktails by query', :vcr do
+      user = create(:user)
+      create(:cocktail, id: 11324)
+      create(:cocktail, id: 11005)
+      create(:rating, cocktail_id: 11324, user_id: user.id, stars: 4)
+      create(:rating, cocktail_id: 11005)
 
-        dry = CocktailFacade.retrieve_search_results('dry', user.id)
+      dry = CocktailFacade.retrieve_search_results('dry', user.id)
 
-        expect(dry).to be_an Array
+      expect(dry).to be_an Array
 
-        result_1 = dry.first
+      result_1 = dry.first
 
-        expect(result_1).to be_a Hash
-        expect(result_1[:id]).to eq('11324')
-        expect(result_1[:name]).to eq('Dry Rob Roy')
-        expect(result_1[:thumbnail]).to eq('https://www.thecocktaildb.com/images/media/drink/typuyq1439456976.jpg')
-        expect(result_1[:rating]).to eq(4)
+      expect(result_1).to be_a Hash
+      expect(result_1[:id]).to eq('11324')
+      expect(result_1[:name]).to eq('Dry Rob Roy')
+      expect(result_1[:thumbnail]).to eq('https://www.thecocktaildb.com/images/media/drink/typuyq1439456976.jpg')
+      expect(result_1[:rating]).to eq(4)
 
-        result_2 = dry.second
+      result_2 = dry.second
 
-        expect(result_2).to be_a Hash
-        expect(result_2[:id]).to eq('11005')
-        expect(result_2[:name]).to eq('Dry Martini')
-        expect(result_2[:thumbnail]).to eq('https://www.thecocktaildb.com/images/media/drink/6ck9yi1589574317.jpg')
-        expect(result_2[:rating]).to eq(0)
-      end
+      expect(result_2).to be_a Hash
+      expect(result_2[:id]).to eq('11005')
+      expect(result_2[:name]).to eq('Dry Martini')
+      expect(result_2[:thumbnail]).to eq('https://www.thecocktaildb.com/images/media/drink/6ck9yi1589574317.jpg')
+      expect(result_2[:rating]).to eq(0)
+    end
+
+    it 'returns search results by name and ingredient', :vcr do
+      user = create(:user)
+      create(:cocktail, id: 12618)
+      create(:cocktail, id: 17834)
+      create(:rating, cocktail_id: 12618, user_id: user.id, stars: 1)
+      create(:rating, cocktail_id: 17834, user_id: user.id, stars: 3)
+
+      orange_drinks = CocktailFacade.retrieve_search_results('orange', user.id)
+
+      expect(orange_drinks).to be_an Array
+      expect(orange_drinks.length).to eq 13
+
+      result_1 = orange_drinks.first
+
+      expect(result_1).to be_a Hash
+      expect(result_1[:id]).to eq('12618')
+      expect(result_1[:name]).to eq('Orangeade')
+      expect(result_1[:thumbnail]).to eq('https://www.thecocktaildb.com/images/media/drink/ytsxxw1441167732.jpg')
+      expect(result_1[:rating]).to eq(1)
+
+      result_2 = orange_drinks[9]
+
+      expect(result_2).to be_a Hash
+      expect(result_2[:id]).to eq('17834')
+      expect(result_2[:name]).to eq('Abbey Cocktail')
+      expect(result_2[:thumbnail]).to eq('https://www.thecocktaildb.com/images/media/drink/mr30ob1582479875.jpg')
+      expect(result_2[:rating]).to eq(3)
+    end
+
+    it 'returns search results by name (ingredient does not exist)', :vcr do
+      user = create(:user)
+      create(:cocktail, id: 13497)
+      create(:cocktail, id: 17002)
+      create(:rating, cocktail_id: 13497, user_id: user.id, stars: 1)
+      create(:rating, cocktail_id: 17002, user_id: user.id, stars: 2)
+      
+      results = CocktailFacade.retrieve_search_results('Green', user.id)
+
+      expect(results).to be_an Array
+      expect(results.length).to eq 3
+
+      result_1 = results.first
+
+      expect(result_1).to be_a Hash
+      expect(result_1[:id]).to eq('13497')
+      expect(result_1[:name]).to eq('Green Goblin')
+      expect(result_1[:thumbnail]).to eq('https://www.thecocktaildb.com/images/media/drink/qxprxr1454511520.jpg')
+      expect(result_1[:rating]).to eq(1)
+
+      result_2 = results.last
+
+      expect(result_2).to be_a Hash
+      expect(result_2[:id]).to eq('17002')
+      expect(result_2[:name]).to eq("Gideon's Green Dinosaur")
+      expect(result_2[:thumbnail]).to eq('https://www.thecocktaildb.com/images/media/drink/p5r0tr1503564636.jpg')
+      expect(result_2[:rating]).to eq(2)
+    end
+
+    it 'returns search results by name (name does not exist)', :vcr do
+      user = create(:user)
+      create(:cocktail, id: 17254)
+      create(:cocktail, id: 17828)
+      create(:rating, cocktail_id: 17254, user_id: user.id, stars: 5)
+      create(:rating, cocktail_id: 17828, user_id: user.id, stars: 4)
+      
+      results = CocktailFacade.retrieve_search_results('Green Chartreuse', user.id)
+
+      expect(results).to be_an Array
+      expect(results.length).to eq 5
+
+      result_1 = results.first
+
+      expect(result_1).to be_a Hash
+      expect(result_1[:id]).to eq('17254')
+      expect(result_1[:name]).to eq('Bijou')
+      expect(result_1[:thumbnail]).to eq('https://www.thecocktaildb.com/images/media/drink/rysb3r1513706985.jpg')
+      expect(result_1[:rating]).to eq(5)
+
+      result_2 = results.last
+
+      expect(result_2).to be_a Hash
+      expect(result_2[:id]).to eq('17828')
+      expect(result_2[:name]).to eq('Tipperary')
+      expect(result_2[:thumbnail]).to eq('https://www.thecocktaildb.com/images/media/drink/b522ek1521761610.jpg')
+      expect(result_2[:rating]).to eq(4)
     end
   end
 end

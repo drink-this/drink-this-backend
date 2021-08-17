@@ -123,8 +123,9 @@ RSpec.describe 'Rating API' do
         expect(cocktail_2_rating[:data]).to be_a Hash
 
         expect(cocktail_2_rating[:data][:type]).to eq("cocktail_rating")
-        expect(cocktail_2_rating[:data][:attributes][:user_id]).to eq(new_rating.user_id)
-        expect(cocktail_2_rating[:data][:attributes][:cocktail_id]).to eq(new_rating.cocktail_id)
+        expect(cocktail_2_rating[:data][:id]).to eq(rating.id.to_s)
+        expect(cocktail_2_rating[:data][:attributes][:user_id]).to eq(rating.user_id)
+        expect(cocktail_2_rating[:data][:attributes][:cocktail_id]).to eq(rating.cocktail_id)
         expect(cocktail_2_rating[:data][:attributes][:stars]).to eq(new_rating.stars)
 
         expect(cocktail_2_rating[:data][:attributes][:stars]).to_not eq(previous_rating)
