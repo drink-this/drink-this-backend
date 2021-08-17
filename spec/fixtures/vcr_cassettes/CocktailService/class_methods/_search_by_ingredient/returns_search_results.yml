@@ -19,7 +19,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 13 Aug 2021 21:53:46 GMT
+      - Tue, 17 Aug 2021 22:05:30 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -36,13 +36,13 @@ http_interactions:
       Expect-Ct:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=2%2FiMJphuI%2BqpUnqnNN1yHjiY3RjIFIzEnFJXmjnVT7xLIuOyKpK%2B21pnOyzvmLFEFOaTwILq5lCMynVhr5CzLpzcOxN21Dy1JnVMLQyYwkehKNQW%2BvL%2B%2FuoiVFPLC9Oz3das6hpCJp8%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=Cz%2Ft%2F4eeF4sOGsnQXd01l7NvYrVjL%2FPourqEXbvLtmW49vHcWnqekF3Q3m1WEEHPFvC8dDJBT4GUpbnZP0NbBGmMReRGfyuIzimlpOdXXC6%2BtN%2FEL3S3FD6iV%2BH4VR%2F5rxgCJ3R88IA%3D"}],"group":"cf-nel","max_age":604800}'
       Nel:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Cf-Ray:
-      - 67e52d996a822836-DFW
+      - 6806344b1a0528d1-DFW
       Alt-Svc:
       - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
         ma=86400
@@ -51,5 +51,5 @@ http_interactions:
       string: '{"drinks":[{"strDrink":"Bijou","strDrinkThumb":"https:\/\/www.thecocktaildb.com\/images\/media\/drink\/rysb3r1513706985.jpg","idDrink":"17254"},{"strDrink":"Brigadier","strDrinkThumb":"https:\/\/www.thecocktaildb.com\/images\/media\/drink\/nl89tf1518947401.jpg","idDrink":"17825"},{"strDrink":"Jewel
         Of The Nile","strDrinkThumb":"https:\/\/www.thecocktaildb.com\/images\/media\/drink\/hx4nrb1504884947.jpg","idDrink":"11566"},{"strDrink":"The
         Last Word","strDrinkThumb":"https:\/\/www.thecocktaildb.com\/images\/media\/drink\/91oule1513702624.jpg","idDrink":"17247"},{"strDrink":"Tipperary","strDrinkThumb":"https:\/\/www.thecocktaildb.com\/images\/media\/drink\/b522ek1521761610.jpg","idDrink":"17828"}]}'
-  recorded_at: Fri, 13 Aug 2021 21:53:46 GMT
+  recorded_at: Tue, 17 Aug 2021 22:06:46 GMT
 recorded_with: VCR 6.0.0
