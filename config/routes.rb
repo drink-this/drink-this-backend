@@ -23,6 +23,7 @@ Rails.application.routes.draw do
 
       get '/recommendation', to: 'recommendations#show'
       get '/dashboard', to: 'dashboard#index'
+      get '/homepage', to: 'homepage#index'
     end
   end
 end
