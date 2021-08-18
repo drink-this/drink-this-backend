@@ -23,7 +23,12 @@ class CocktailFacade
   def self.merge_results(by_name, by_ingredient)
     by_name[:drinks] = [] if by_name[:drinks].nil?
     by_ingredient[:drinks] = [] if by_ingredient[:drinks].nil?
-    by_name[:drinks] += by_ingredient[:drinks]
+    current_results = by_name[:drinks].map {|drink| drink[:idDrink]}
+    by_name[:drinks] += remove_duplicates(by_ingredient, current_results)
+  end
+
+  def self.remove_duplicates(by_ingredient, current_results)
+    by_ingredient[:drinks].filter_map {|drink| drink unless current_results.include?(drink[:idDrink])}
   end
 
   def self.find_rating(user_id, cocktail_id)
