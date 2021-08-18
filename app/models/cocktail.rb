@@ -16,11 +16,13 @@ class Cocktail < ApplicationRecord
 
   def self.sample_rated(sample_size)
     joins(:ratings)
+      .select('cocktails.*, ratings.stars as rating')
       .sample(sample_size)
   end
 
   def self.sample_unrated(user_id, sample_size)
     left_outer_joins(:ratings)
+      .select('cocktails.*, 0 as rating')
       .where('not exists (select * from ratings where cocktail_id = cocktails.id and ratings.user_id=?)', user_id)
       .sample(sample_size)
   end

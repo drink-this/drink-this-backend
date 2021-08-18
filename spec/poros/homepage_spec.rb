@@ -1,6 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe Homepage do
+  before do
+    VCR.turn_off!
+    WebMock.allow_net_connect!
+  end
+  
+  after do
+    VCR.turn_on!
+    WebMock.disable_net_connect!
+  end
+
   it 'contains all necessary data for homepage display' do
     user = create(:user)
 
@@ -18,15 +28,15 @@ RSpec.describe Homepage do
     expect(homepage.rated[:cocktails]).to be_an Array
     expect(homepage.rated[:cocktails].length).to eq 5
     homepage.rated[:cocktails].each do |cocktail|
-      expect(cocktail).to be_a Cocktail
-      expect(cocktail.rating).to be_greater_than 0
+      expect(cocktail).to be_a Hash
+      expect(cocktail[:rating] > 0).to be true
     end
 
     expect(homepage.unrated[:cocktails]).to be_an Array
     expect(homepage.unrated[:cocktails].length).to eq 5
     homepage.unrated[:cocktails].each do |cocktail|
-      expect(cocktail).to be_a Cocktail
-      expect(cocktail.rating).to eq 0
+      expect(cocktail).to be_a Hash
+      expect(cocktail[:rating]).to eq 0
     end
 
     expect(homepage.glass).to be_a Hash
@@ -35,7 +45,6 @@ RSpec.describe Homepage do
     expect(homepage.glass[:cocktails].length).to eq 5
     homepage.glass[:cocktails].each do |cocktail|
       expect(cocktail).to be_a Hash
-      
     end
 
     expect(homepage.alcohol).to be_a Hash
