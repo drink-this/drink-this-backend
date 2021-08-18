@@ -71,6 +71,37 @@ RSpec.describe CocktailFacade, :vcr do
     end
   end
 
+  describe '::retrieve_by_glass' do
+    before :each do
+      User.destroy_all
+      Cocktail.destroy_all
+      Rating.destroy_all
+    end
+
+    it 'returns cocktails for glass type and ratings' do
+      user = create(:user)
+
+      cocktails = CocktailFacade.retrieve_by_glass('Collins glass', user.id)
+
+      expect(cocktails).to be_an Array
+
+      expect(cocktails.first).to be_a Hash
+      expect(cocktails.first).to have_key :id
+      expect(cocktails.first).to have_key :name
+      expect(cocktails.first).to have_key :thumbnail
+      expect(cocktails.first).to have_key :rating
+      expect(cocktails.first[:rating]).to eq(0)
+    end
+
+    it 'returns an empty array if no cocktails for glass type' do
+      user = create(:user)
+
+      cocktails = CocktailFacade.retrieve_by_glass('rocks', user.id)
+
+      expect(cocktails).to eq false
+    end
+  end
+
 
   describe '::retrieve_search_results' do
     before :each do
