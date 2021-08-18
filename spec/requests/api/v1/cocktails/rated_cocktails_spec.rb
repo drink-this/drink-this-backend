@@ -4,6 +4,7 @@ RSpec.describe 'Rated Cocktails' do
   before :all do
     @user1 = create(:user)
     @user2 = create(:user)
+    @user3 = create(:user)
 
     @cocktails1 = create_list(:cocktail, 3)
     @cocktails1.each do |cocktail|
@@ -25,5 +26,12 @@ RSpec.describe 'Rated Cocktails' do
     not_ids = @cocktails2.map(&:id)
     expect(attrs).to match_array(ids)
     expect(attrs).to_not match_array(not_ids)
+  end
+
+  it 'returns an empty array if user has no rated cocktails' do
+    get '/api/v1/cocktails/rated', params: { auth_token: @user3.google_token }
+    data = JSON.parse(response.body)['data']
+    expect(data.keys).to include('id', 'type', 'attributes')
+    expect(data['attributes']).to eq([])
   end
 end
