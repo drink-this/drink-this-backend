@@ -117,7 +117,7 @@ RSpec.describe CocktailFacade, :vcr do
       orange_drinks = CocktailFacade.retrieve_search_results('orange', user.id)
 
       expect(orange_drinks).to be_an Array
-      expect(orange_drinks.length).to eq 13
+      expect(orange_drinks.length).to eq 11
 
       result_1 = orange_drinks.first
 
@@ -192,6 +192,32 @@ RSpec.describe CocktailFacade, :vcr do
       expect(result_2[:name]).to eq('Tipperary')
       expect(result_2[:thumbnail]).to eq('https://www.thecocktaildb.com/images/media/drink/b522ek1521761610.jpg')
       expect(result_2[:rating]).to eq(4)
+    end
+
+    it 'does not return duplicate cocktails', :vcr do
+      user = create(:user)
+      create(:cocktail, id: 178325)
+
+      cocktails = CocktailFacade.retrieve_search_results('aperol', user.id)
+
+      expect(cocktails).to be_an Array
+      expect(cocktails.length).to eq 3
+
+      result_1 = cocktails.first
+
+      expect(result_1).to be_a Hash
+      expect(result_1[:id]).to eq('178325')
+      expect(result_1[:name]).to eq('Aperol Spritz')
+      expect(result_1[:thumbnail]).to eq('https://www.thecocktaildb.com/images/media/drink/iloasq1587661955.jpg')
+      expect(result_1[:rating]).to eq(0)
+
+      result_2 = cocktails.second
+
+      expect(result_2).to be_a Hash
+      expect(result_2[:id]).to eq('12706')
+      expect(result_2[:name]).to eq('Imperial Cocktail')
+      expect(result_2[:thumbnail]).to eq('https://www.thecocktaildb.com/images/media/drink/bcsj2e1487603625.jpg')
+      expect(result_2[:rating]).to eq(0)
     end
   end
 end
