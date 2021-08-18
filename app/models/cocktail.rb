@@ -13,4 +13,15 @@ class Cocktail < ApplicationRecord
       .order(Arel.sql('RANDOM()'))
       .limit(5)
   end
+
+  def self.sample_rated(sample_size)
+    joins(:ratings)
+      .sample(sample_size)
+  end
+
+  def self.sample_unrated(user_id, sample_size)
+    left_outer_joins(:ratings)
+      .where('not exists (select * from ratings where cocktail_id = cocktails.id and ratings.user_id=?)', user_id)
+      .sample(sample_size)
+  end
 end
