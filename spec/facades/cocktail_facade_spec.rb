@@ -117,7 +117,7 @@ RSpec.describe CocktailFacade, :vcr do
       orange_drinks = CocktailFacade.retrieve_search_results('orange', user.id)
 
       expect(orange_drinks).to be_an Array
-      expect(orange_drinks.length).to eq 13
+      expect(orange_drinks.length).to eq 11
 
       result_1 = orange_drinks.first
 
