@@ -19,7 +19,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 13 Aug 2021 23:17:34 GMT
+      - Wed, 18 Aug 2021 01:38:27 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -36,13 +36,13 @@ http_interactions:
       Expect-Ct:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=BrwjExF6uOfjZNkJnoZzEmP58xPIHvInL2YbjWMZrbXHPnH%2BczQrIPUYiKzMUPuGIwBL2fV3icnHmXdEH5GLF1EBuwIeyOApnK%2FXVy1OngjoK1Ekr4bffSX343Y8QFDEhH%2FCYp1Hz%2FA%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=pQPhGDN34LbZqu%2Fzy3lhvbgrWr%2FUZRbnm2t7thHAOVZgvYW4xtL7Po%2BIcJqphCYVbBF8wZRU%2B27flYjV7LFMKR331CTFkNaQeEkoIHY3zEfedm58FAm3whm4oNufoceGQAizb2FEsj8%3D"}],"group":"cf-nel","max_age":604800}'
       Nel:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Cf-Ray:
-      - 67e5a85629b10f0e-DFW
+      - 68076c3b18d12847-DFW
       Alt-Svc:
       - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
         ma=86400
@@ -170,7 +170,7 @@ http_interactions:
         2-inch strips ","strMeasure4":"1\/2 tsp instant ","strMeasure5":"1\/8 tsp
         ground ","strMeasure6":null,"strMeasure7":null,"strMeasure8":null,"strMeasure9":null,"strMeasure10":null,"strMeasure11":null,"strMeasure12":null,"strMeasure13":null,"strMeasure14":null,"strMeasure15":null,"strImageSource":null,"strImageAttribution":null,"strCreativeCommonsConfirmed":"No","dateModified":"2017-02-20
         15:05:31"}]}'
-  recorded_at: Fri, 13 Aug 2021 23:17:34 GMT
+  recorded_at: Wed, 18 Aug 2021 01:39:44 GMT
 - request:
     method: get
     uri: https://www.thecocktaildb.com/api/json/v1/1/filter.php?api_key=<api_key>&i=orange
@@ -190,7 +190,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 13 Aug 2021 23:17:34 GMT
+      - Wed, 18 Aug 2021 01:38:28 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -207,13 +207,13 @@ http_interactions:
       Expect-Ct:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=lPGnxhHkFNaW27mCharaunaCyR2szk5FkT0Ofam1WuOq3GiXhRVenez3LsGBXhj3U0gEAfxmgrvmz2MGSGfIcX2ML%2Bsz6NZntoPJ3kSm%2BnS7XnhuINtnRtis%2F92wN8z7MOBWmgshNrU%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=PeVToWWVDzFe%2FsjlTgIyaIWHDp%2FpM54EVc8N69uChto2X2oDmeTT3jpxw%2Bze0ny5LNjN6SOTBYXsY%2F0nl3%2BsBEIt4qiHQHpEyvOasy1BI8Oy99%2FdFMiev7JVPRZkkSWd%2B44uIw5y%2FYg%3D"}],"group":"cf-nel","max_age":604800}'
       Nel:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Cf-Ray:
-      - 67e5a8590a4b0ece-DFW
+      - 68076c3dab78e02b-DFW
       Alt-Svc:
       - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
         ma=86400
@@ -223,5 +223,5 @@ http_interactions:
         Surgeon","strDrinkThumb":"https:\/\/www.thecocktaildb.com\/images\/media\/drink\/usuvvr1472719118.jpg","idDrink":"16295"},{"strDrink":"Caribbean
         Orange Liqueur","strDrinkThumb":"https:\/\/www.thecocktaildb.com\/images\/media\/drink\/qwxuwy1472667570.jpg","idDrink":"12796"},{"strDrink":"Mango
         Orange Smoothie","strDrinkThumb":"https:\/\/www.thecocktaildb.com\/images\/media\/drink\/vdp2do1487603520.jpg","idDrink":"12716"}]}'
-  recorded_at: Fri, 13 Aug 2021 23:17:34 GMT
+  recorded_at: Wed, 18 Aug 2021 01:39:44 GMT
 recorded_with: VCR 6.0.0

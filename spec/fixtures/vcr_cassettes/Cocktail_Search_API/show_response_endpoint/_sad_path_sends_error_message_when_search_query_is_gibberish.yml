@@ -19,7 +19,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 13 Aug 2021 23:50:24 GMT
+      - Wed, 18 Aug 2021 01:38:32 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -36,20 +36,20 @@ http_interactions:
       Expect-Ct:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=eTgPBfn1P0vlhy6w%2Fn4tgXjnLIhYtd2mOxOrMNGNw6SRyAhIip90sHbyXyazSH87vKskuGaOXs84zn4muEOhJcuKy1oCvjR4GK7GQ5QDAiU%2FCRpA7M5uQyI2Ql696DaxuZg3lgvb9P4%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=JPU1JQX9cmbSxtKuSSf0oawHWFltjFnoSvDLiUndQ1MKEjPm8a2evHAM5JL7wXRvwUuzGu%2F7hd1WiF061MzquzGkRFD8N5xQjKlvVaJEOFeYBegeRtZg5C5i%2FneSS7vY67RRhnBd87g%3D"}],"group":"cf-nel","max_age":604800}'
       Nel:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Cf-Ray:
-      - 67e5d86feaf4285f-DFW
+      - 68076c55b92c2f49-DFW
       Alt-Svc:
       - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
         ma=86400
     body:
       encoding: UTF-8
       string: '{"drinks":null}'
-  recorded_at: Fri, 13 Aug 2021 23:50:24 GMT
+  recorded_at: Wed, 18 Aug 2021 01:39:48 GMT
 - request:
     method: get
     uri: https://www.thecocktaildb.com/api/json/v1/1/filter.php?api_key=<api_key>&i=sdkljfs
@@ -69,7 +69,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 13 Aug 2021 23:50:24 GMT
+      - Wed, 18 Aug 2021 01:38:32 GMT
       Content-Type:
       - text/html; charset=UTF-8
       Transfer-Encoding:
@@ -86,18 +86,18 @@ http_interactions:
       Expect-Ct:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=vSU9V3tT6BLzOxMb2We4XkXsi3tnvdPwJT2A6dSefy8ScBa2VvDNNlQsfXFahxWQNPU%2B2%2BJIjfxvaoadUrXhfAFddfsvECDOp7yJr0FgNGho9LxXDi6Y4w7yKPmk5o5pwkA5Bis%2F6A0%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=gn5DEPq68GrfthW%2BOOskwql2oDQpQs0HPxrHNq9OEib3aF8uHQ0Ib%2FXq0AwP8s0wIGpF%2B4SF36Wccc5q0HKHqpFO0lCDMTx%2BJTgbIoOhcYFI1SmiPKLNo9Ds8vBUATD6p2xH4%2F8Jquw%3D"}],"group":"cf-nel","max_age":604800}'
       Nel:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Cf-Ray:
-      - 67e5d872884a283f-DFW
+      - 68076c57aea62f0d-DFW
       Alt-Svc:
       - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
         ma=86400
     body:
       encoding: ASCII-8BIT
       string: ''
-  recorded_at: Fri, 13 Aug 2021 23:50:24 GMT
+  recorded_at: Wed, 18 Aug 2021 01:39:49 GMT
 recorded_with: VCR 6.0.0
