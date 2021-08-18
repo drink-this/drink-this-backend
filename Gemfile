@@ -38,6 +38,7 @@ gem 'rack-cors'
 # gem 'rack-cors'
 gem 'rubocop', require: false
 
+gem 'jsonapi-serializer'
 gem 'active_model_serializers'
 
 group :development, :test do
