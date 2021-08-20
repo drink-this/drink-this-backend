@@ -12,6 +12,13 @@ class CocktailFacade
     CocktailService.random_cocktail
   end
 
+  def self.retrieve_by_glass(glass_type, user_id)
+    by_glass = CocktailService.search_by_glass(glass_type)
+    return false if by_glass[:drinks].nil?
+
+    build_basics_hash(by_glass[:drinks], user_id)
+  end
+
   def self.retrieve_search_results(query, user_id)
     by_name = CocktailService.search_by_name(query)
     by_ingredient = CocktailService.search_by_ingredient(query)
@@ -51,8 +58,8 @@ class CocktailFacade
     end.compact
   end
 
-  def self.build_basics_hash(search_results, user_id)
-    search_results.map do |drink|
+  def self.build_basics_hash(cocktail_list, user_id)
+    cocktail_list.map do |drink|
       {
         id: drink[:idDrink],
         name: drink[:strDrink],

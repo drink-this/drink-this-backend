@@ -72,5 +72,98 @@ RSpec.describe Cocktail, type: :model do
         #expect(Cocktail.dashboard_five(user.id).first.rating).to eq 3
       end
     end
+
+    describe '::sample_rated' do
+      before :each do
+        @user1 = create(:user)
+        @user2 = create(:user)
+    
+        @rated_cocktails = create_list(:cocktail, 6)
+        @rated_cocktails.each do |cocktail|
+          Rating.create!(user: @user1, cocktail: cocktail, stars: 4)
+        end
+
+        @rated_for_alt_user = create_list(:cocktail, 2)
+        @rated_for_alt_user.each do |cocktail|
+          Rating.create!(user: @user2, cocktail: cocktail, stars: 2)
+        end
+    
+        @unrated_cocktails = create_list(:cocktail, 6)
+      end
+
+      it 'returns specified length sample from rated cocktails' do
+        rated_sample = @user1.cocktails.sample_rated(5)
+
+        expect(rated_sample.length).to eq 5
+        expect(rated_sample.first).to be_a Cocktail
+        rated_sample.each do |cocktail|
+          expect(@rated_cocktails).to include(cocktail)
+          expect(@rated_for_alt_user).not_to include(cocktail)
+          expect(@unrated_cocktails).not_to include(cocktail)
+        end
+      end
+
+      it 'returns only as many are rated, if less than sample requested' do
+        rated_sample = @user1.cocktails.sample_rated(8)
+
+        expect(rated_sample.length).to eq 6
+      end
+
+      it 'returns an empty array if no cocktails have been rated' do
+        user3 = create(:user)
+
+        rated_sample = user3.cocktails.sample_rated(5)
+        expect(rated_sample).to eq([])
+      end
+    end
+
+    describe '::sample_unrated' do
+      before :each do
+        @user1 = create(:user)
+        @user2 = create(:user)
+    
+        @rated_cocktails = create_list(:cocktail, 6)
+        @rated_cocktails.each do |cocktail|
+          Rating.create!(user: @user1, cocktail: cocktail, stars: 4)
+        end
+        
+        @rated_for_alt_user = create_list(:cocktail, 9)
+        @rated_for_alt_user.each do |cocktail|
+          Rating.create!(user: @user2, cocktail: cocktail, stars: 2)
+        end
+
+        @rated_for_alt_user.first(3).each do |cocktail|
+          Rating.create!(user: @user1, cocktail: cocktail, stars: 4)
+        end
+      end
+
+      it 'returns specified length sample from unrated cocktails' do
+        unrated_sample = Cocktail.sample_unrated(@user1.id, 5)
+
+        expect(unrated_sample.length).to eq 5
+        expect(unrated_sample.first).to be_a Cocktail
+        unrated_sample.each do |cocktail|
+          expect(@rated_for_alt_user.last(6)).to include(cocktail)
+          expect(@rated_for_alt_user.first(3)).not_to include(cocktail)
+          expect(@rated_cocktails).not_to include(cocktail)
+        end
+      end
+
+      it 'returns only as many are unrated, if less than sample requested' do
+        unrated_sample = Cocktail.sample_unrated(@user1.id, 8)
+
+        expect(unrated_sample.length).to eq 6
+      end
+
+      it 'returns an empty array if no cocktails are left unrated' do
+        @rated_for_alt_user.last(6).each do |cocktail|
+          Rating.create!(user: @user1, cocktail: cocktail, stars: 2)
+        end
+
+        unrated_sample = Cocktail.sample_unrated(@user1.id, 5)
+        expect(unrated_sample).to eq([])
+      end
+    end
   end
 end
+  

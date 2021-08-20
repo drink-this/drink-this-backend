@@ -115,5 +115,35 @@ RSpec.describe CocktailService, :vcr do
         expect(response[:drinks]).to be nil
       end
     end
+
+    describe '::search_by_glass' do
+      it 'returns search results for given glass type', :vcr do
+        response = CocktailService.search_by_glass('Collins glass')
+
+        expect(response).to be_a Hash
+        expect(response[:drinks]).to be_an Array
+
+        wise_men = response[:drinks].first
+
+        expect(wise_men).to be_a Hash
+        expect(wise_men[:idDrink]).to eq('13899')
+        expect(wise_men[:strDrink]).to eq('3 Wise Men')
+        expect(wise_men[:strDrinkThumb]).to eq('https://www.thecocktaildb.com/images/media/drink/wxqpyw1468877677.jpg')
+
+        long_island = response[:drinks].second
+
+        expect(long_island).to be_a Hash
+        expect(long_island[:idDrink]).to eq('15300')
+        expect(long_island[:strDrink]).to eq('3-Mile Long Island Iced Tea')
+        expect(long_island[:strDrinkThumb]).to eq('https://www.thecocktaildb.com/images/media/drink/rrtssw1472668972.jpg')
+      end
+
+      it 'returns nil if no results are found', :vcr do
+        response = CocktailService.search_by_glass('rocks')
+
+        expect(response).to be_a Hash
+        expect(response[:drinks]).to be nil
+      end
+    end
   end
 end
