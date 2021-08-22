@@ -14,9 +14,10 @@ class Cocktail < ApplicationRecord
       .limit(5)
   end
 
-  def self.sample_rated(sample_size)
+  def self.sample_rated(user_id, sample_size)
     joins(:ratings)
       .select('cocktails.*, ratings.stars as rating')
+      .where('user_id = ?', user_id)
       .sample(sample_size)
   end
 

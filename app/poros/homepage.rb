@@ -10,7 +10,7 @@ class Homepage
   end
 
   def rated
-    rated_cocktails = @user.cocktails.sample_rated(5)
+    rated_cocktails = Cocktail.sample_rated(@user.id, 5)
     { cocktails: cocktail_basics(rated_cocktails) }
   end
 
