@@ -39,7 +39,7 @@ RSpec.describe Cocktail, type: :model do
 
         expect(Cocktail.dashboard_five(user.id).length).to eq(5)
         expect(Cocktail.dashboard_five(user.id).first).to be_a Cocktail
-        expect(ids).to include(Cocktail.dashboard_five(user.id).first.id) 
+        expect(ids).to include(Cocktail.dashboard_five(user.id).first.id)
         #expect(Cocktail.dashboard_five(user.id).first.rating).to eq 0
       end
 
@@ -68,16 +68,16 @@ RSpec.describe Cocktail, type: :model do
         ids = [11324, 11005, 11408, 11415, 11419]
         expect(Cocktail.dashboard_five(user.id).length).to eq(5)
         expect(Cocktail.dashboard_five(user.id).first).to be_a Cocktail
-        expect(ids).to include(Cocktail.dashboard_five(user.id).first.id) 
+        expect(ids).to include(Cocktail.dashboard_five(user.id).first.id)
         #expect(Cocktail.dashboard_five(user.id).first.rating).to eq 3
       end
     end
 
-    describe '::sample_rated' do
+    describe '::top_rated' do
       before :each do
         @user1 = create(:user)
         @user2 = create(:user)
-    
+
         @rated_cocktails = create_list(:cocktail, 6)
         @rated_cocktails.each do |cocktail|
           Rating.create!(user: @user1, cocktail: cocktail, stars: 4)
@@ -87,16 +87,16 @@ RSpec.describe Cocktail, type: :model do
         @rated_for_alt_user.each do |cocktail|
           Rating.create!(user: @user2, cocktail: cocktail, stars: 2)
         end
-    
+
         @unrated_cocktails = create_list(:cocktail, 6)
       end
 
       it 'returns specified length sample from rated cocktails' do
-        rated_sample = @user1.cocktails.sample_rated(5)
+        top_rated = Cocktail.top_rated(@user1.id)
 
-        expect(rated_sample.length).to eq 5
-        expect(rated_sample.first).to be_a Cocktail
-        rated_sample.each do |cocktail|
+        expect(top_rated.length).to eq 5
+        expect(top_rated.first).to be_a Cocktail
+        top_rated.each do |cocktail|
           expect(@rated_cocktails).to include(cocktail)
           expect(@rated_for_alt_user).not_to include(cocktail)
           expect(@unrated_cocktails).not_to include(cocktail)
@@ -104,16 +104,34 @@ RSpec.describe Cocktail, type: :model do
       end
 
       it 'returns only as many are rated, if less than sample requested' do
-        rated_sample = @user1.cocktails.sample_rated(8)
+        top_rated = Cocktail.top_rated(@user1.id)
 
-        expect(rated_sample.length).to eq 6
+        expect(top_rated.length).to eq 5
       end
 
       it 'returns an empty array if no cocktails have been rated' do
         user3 = create(:user)
 
-        rated_sample = user3.cocktails.sample_rated(5)
-        expect(rated_sample).to eq([])
+        top_rated = Cocktail.top_rated(user3.id)
+        expect(top_rated).to eq([])
+      end
+
+      it 'returns no duplicates of cocktail that has been rated' do
+        user4 = create(:user)
+        user5 = create(:user)
+
+        rated_cocktails = create_list(:cocktail, 4)
+        rated_cocktails.each do |cocktail|
+          Rating.create!(user: user4, cocktail: cocktail, stars: 4)
+          Rating.create!(user: user5, cocktail: cocktail, stars: 4)
+        end
+
+        last_rated_cocktail = create(:cocktail)
+        Rating.create!(user: user4, cocktail: last_rated_cocktail, stars: 3)
+
+        top_rated = Cocktail.top_rated(user5.id)
+
+        expect(top_rated.length).to eq(4)
       end
     end
 
@@ -121,12 +139,12 @@ RSpec.describe Cocktail, type: :model do
       before :each do
         @user1 = create(:user)
         @user2 = create(:user)
-    
+
         @rated_cocktails = create_list(:cocktail, 6)
         @rated_cocktails.each do |cocktail|
           Rating.create!(user: @user1, cocktail: cocktail, stars: 4)
         end
-        
+
         @rated_for_alt_user = create_list(:cocktail, 9)
         @rated_for_alt_user.each do |cocktail|
           Rating.create!(user: @user2, cocktail: cocktail, stars: 2)
@@ -166,4 +184,3 @@ RSpec.describe Cocktail, type: :model do
     end
   end
 end
-  

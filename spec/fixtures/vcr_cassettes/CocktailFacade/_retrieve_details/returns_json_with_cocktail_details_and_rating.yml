@@ -19,7 +19,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 17 Aug 2021 22:05:23 GMT
+      - Sun, 22 Aug 2021 23:11:49 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -36,33 +36,31 @@ http_interactions:
       Expect-Ct:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=kQ0X6SiSzLak9sqbDxj9ozS%2FqO0QkSZQ7y7NyAjXHsRle%2BhO15qJjM8Kr2yGU33lfD7HCEllpoIdFHKF3Q2ktKw%2BUClZNA2DUkL1L3PHY1V%2F4x1ixi6VHipm4ppNGEupTUCuF4O0o34%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=f8VGtMWjmtWFlqMODW3yItEMIhvKuJaf0P5%2F9Yw3XthI%2BK8z0wcv9nZeEfORooevx81BMVabTT6h2ZdxdLSzIte9i50McA72XtxBZpi0KpUKkN4Ad6NIzOBsCrx8dNyD5dwKLYYrBMA%3D"}],"group":"cf-nel","max_age":604800}'
       Nel:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Cf-Ray:
-      - 6806341bf87d2851-DFW
+      - 682fc84b787f0bff-DFW
       Alt-Svc:
       - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
         ma=86400
     body:
       encoding: ASCII-8BIT
-      string: '{"drinks":[{"idDrink":"11580","strDrink":"John Collins","strDrinkAlternate":null,"strTags":"IBA","strVideo":null,"strCategory":"Ordinary
-        Drink","strIBA":null,"strAlcoholic":"Alcoholic","strGlass":"Collins glass","strInstructions":"Pour
-        all ingredients directly into highball glass filled with ice. Stir gently.
-        Garnish. Add a dash of Angostura bitters.","strInstructionsES":null,"strInstructionsDE":"Alle
-        Zutaten direkt in ein mit Eis gef\u00fclltes Highball-Glas gie\u00dfen. Vorsichtig
-        umr\u00fchren. Garnieren. F\u00fcge einen Schuss Angostura-Bitter hinzu.","strInstructionsFR":null,"strInstructionsIT":"Versare
-        tutti gli ingredienti direttamente nel bicchiere highball pieno di ghiaccio.Aggiungi
-        un pizzico di Angostura bitter.Mescola delicatamente.","strInstructionsZH-HANS":null,"strInstructionsZH-HANT":null,"strDrinkThumb":"https:\/\/www.thecocktaildb.com\/images\/media\/drink\/0t4bv71606854479.jpg","strIngredient1":"Bourbon","strIngredient2":"Lemon
-        juice","strIngredient3":"Sugar","strIngredient4":"Club soda","strIngredient5":"Maraschino
-        cherry","strIngredient6":"Orange","strIngredient7":null,"strIngredient8":null,"strIngredient9":null,"strIngredient10":null,"strIngredient11":null,"strIngredient12":null,"strIngredient13":null,"strIngredient14":null,"strIngredient15":null,"strMeasure1":"2
-        oz ","strMeasure2":"1 oz ","strMeasure3":"1 tsp superfine ","strMeasure4":"3
-        oz ","strMeasure5":"1 ","strMeasure6":"1 ","strMeasure7":null,"strMeasure8":null,"strMeasure9":null,"strMeasure10":null,"strMeasure11":null,"strMeasure12":null,"strMeasure13":null,"strMeasure14":null,"strMeasure15":null,"strImageSource":"https:\/\/commons.wikimedia.org\/wiki\/File:IBA_Cocktail_John_Collins_(29221732881).jpg","strImageAttribution":"Michael
-        Styne https:\/\/www.flickr.com\/people\/76148228@N00","strCreativeCommonsConfirmed":"Yes","dateModified":"2017-09-02
-        12:04:31"}]}'
-  recorded_at: Tue, 17 Aug 2021 22:06:39 GMT
+      string: '{"drinks":[{"idDrink":"13128","strDrink":"Diesel","strDrinkAlternate":null,"strTags":null,"strVideo":null,"strCategory":"Beer","strIBA":null,"strAlcoholic":"Alcoholic","strGlass":"Pint
+        glass","strInstructions":"Pour the lager first then add the blackcurrant cordial.
+        Top up with the cider. The colour sholud be very dark approaching the colour
+        of Guiness.","strInstructionsES":null,"strInstructionsDE":"Zuerst das Lagerbier
+        gie\u00dfen und dann die schwarze Johannisbeere hinzuf\u00fcgen. Mit dem Apfelmost
+        auff\u00fcllen. Die Farbe sollte sehr dunkel sein und sich der Farbe von Guiness
+        n\u00e4hern.","strInstructionsFR":null,"strInstructionsIT":"Versare prima
+        la birra chiara e poi lo sciroppo di ribes nero.\r\nRabboccare il sidro.\r\nIl
+        colore dovrebbe essere molto scuro, avvicinandosi al colore della Guinness.","strInstructionsZH-HANS":null,"strInstructionsZH-HANT":null,"strDrinkThumb":"https:\/\/www.thecocktaildb.com\/images\/media\/drink\/sxrrqq1454512852.jpg","strIngredient1":"Lager","strIngredient2":"Cider","strIngredient3":"Blackcurrant
+        cordial","strIngredient4":null,"strIngredient5":null,"strIngredient6":null,"strIngredient7":null,"strIngredient8":null,"strIngredient9":null,"strIngredient10":null,"strIngredient11":null,"strIngredient12":null,"strIngredient13":null,"strIngredient14":null,"strIngredient15":null,"strMeasure1":"1\/2
+        pint ","strMeasure2":"1\/2 pint ","strMeasure3":"1 dash ","strMeasure4":null,"strMeasure5":null,"strMeasure6":null,"strMeasure7":null,"strMeasure8":null,"strMeasure9":null,"strMeasure10":null,"strMeasure11":null,"strMeasure12":null,"strMeasure13":null,"strMeasure14":null,"strMeasure15":null,"strImageSource":null,"strImageAttribution":null,"strCreativeCommonsConfirmed":"No","dateModified":"2016-02-03
+        15:20:52"}]}'
+  recorded_at: Sun, 22 Aug 2021 23:11:49 GMT
 - request:
     method: get
     uri: https://www.thecocktaildb.com/api/json/v1/1/random.php?api_key=<api_key>
@@ -82,7 +80,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 17 Aug 2021 22:05:23 GMT
+      - Sun, 22 Aug 2021 23:11:49 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -99,30 +97,25 @@ http_interactions:
       Expect-Ct:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=%2F%2BmCwDZeDggJgm7UL%2BWuvc7V5fqe6gHlBcoPsC586%2FmLuoxmq5i7jQANE%2BDQyURKnZ%2Bnn%2Bixh2Ema2QbDkIH%2F9o9cH8fSE5U%2B6dRa%2F9cJau2Bu75oH8JVXqVxIWPauohfCk%2BQ534Xgg%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=SxiaDHnyMfJbUj5BbFDN4Ar1hK9rLJNHPgDgDIGC2Kl9g3VuYq8yA7Mk7H0FzpGviu3opN3anpMUXjGD2hXLBxMZmUyIimqCkVnpSH8azKiWvcgH1FTaboCTJmmlqknzPAS0dlMJMf0%3D"}],"group":"cf-nel","max_age":604800}'
       Nel:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Cf-Ray:
-      - 6806341edd7628ab-DFW
+      - 682fc84dab530bd9-DFW
       Alt-Svc:
       - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
         ma=86400
     body:
       encoding: ASCII-8BIT
-      string: '{"drinks":[{"idDrink":"17266","strDrink":"Oatmeal Cookie","strDrinkAlternate":null,"strTags":null,"strVideo":null,"strCategory":"Cocktail","strIBA":null,"strAlcoholic":"Alcoholic","strGlass":"Mason
-        jar","strInstructions":"Just mix it all together.\r\nIt''s meant to be a shot,
-        but it works just fine as a proper adult-sized drink over lots of ice.\r\n\r\nTastes
-        like an oatmeal cookie.","strInstructionsES":null,"strInstructionsDE":"Einfach
-        alles zusammenmischen. Es soll ein Shot sein, aber es funktioniert genauso
-        gut wie ein richtiges Getr\u00e4nk in Erwachsenengr\u00f6\u00dfe \u00fcber
-        viel Eis. Schmeckt wie ein Haferflockenpl\u00e4tzchen.","strInstructionsFR":null,"strInstructionsIT":"Mescola
-        tutto insieme.\r\n\u00c8 pensato per essere uno shot, ma funziona perfettamente
-        come una bevanda per adulti con un sacco di ghiaccio.","strInstructionsZH-HANS":null,"strInstructionsZH-HANT":null,"strDrinkThumb":"https:\/\/www.thecocktaildb.com\/images\/media\/drink\/bsvmlg1515792693.jpg","strIngredient1":"Kahlua","strIngredient2":"Bailey","strIngredient3":"Butterscotch
-        schnapps","strIngredient4":"Jagermeister","strIngredient5":"Goldschlager","strIngredient6":null,"strIngredient7":null,"strIngredient8":null,"strIngredient9":null,"strIngredient10":null,"strIngredient11":null,"strIngredient12":null,"strIngredient13":null,"strIngredient14":null,"strIngredient15":null,"strMeasure1":"2
-        parts","strMeasure2":"2 parts","strMeasure3":"4 parts","strMeasure4":"1 part","strMeasure5":"1\/2
-        part","strMeasure6":null,"strMeasure7":null,"strMeasure8":null,"strMeasure9":null,"strMeasure10":null,"strMeasure11":null,"strMeasure12":null,"strMeasure13":null,"strMeasure14":null,"strMeasure15":null,"strImageSource":null,"strImageAttribution":null,"strCreativeCommonsConfirmed":"No","dateModified":"2018-01-12
-        21:31:33"}]}'
-  recorded_at: Tue, 17 Aug 2021 22:06:39 GMT
+      string: '{"drinks":[{"idDrink":"13847","strDrink":"Jackhammer","strDrinkAlternate":null,"strTags":null,"strVideo":null,"strCategory":"Ordinary
+        Drink","strIBA":null,"strAlcoholic":"Alcoholic","strGlass":"Collins Glass","strInstructions":"Serve
+        over ice- Warning,Deadly!","strInstructionsES":null,"strInstructionsDE":"Servieren
+        Sie \u00fcber Eis. Warnung, t\u00f6dlich!","strInstructionsFR":null,"strInstructionsIT":"Servire
+        con ghiaccio - Attenzione, mortale!","strInstructionsZH-HANS":null,"strInstructionsZH-HANT":null,"strDrinkThumb":"https:\/\/www.thecocktaildb.com\/images\/media\/drink\/9von5j1504388896.jpg","strIngredient1":"Jack
+        Daniels","strIngredient2":"Amaretto","strIngredient3":null,"strIngredient4":null,"strIngredient5":null,"strIngredient6":null,"strIngredient7":null,"strIngredient8":null,"strIngredient9":null,"strIngredient10":null,"strIngredient11":null,"strIngredient12":null,"strIngredient13":null,"strIngredient14":null,"strIngredient15":null,"strMeasure1":"1
+        oz ","strMeasure2":"1 oz ","strMeasure3":null,"strMeasure4":null,"strMeasure5":null,"strMeasure6":null,"strMeasure7":null,"strMeasure8":null,"strMeasure9":null,"strMeasure10":null,"strMeasure11":null,"strMeasure12":null,"strMeasure13":null,"strMeasure14":null,"strMeasure15":null,"strImageSource":null,"strImageAttribution":null,"strCreativeCommonsConfirmed":"No","dateModified":"2017-09-02
+        22:48:16"}]}'
+  recorded_at: Sun, 22 Aug 2021 23:11:49 GMT
 recorded_with: VCR 6.0.0
