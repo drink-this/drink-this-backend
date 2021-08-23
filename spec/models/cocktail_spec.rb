@@ -182,5 +182,35 @@ RSpec.describe Cocktail, type: :model do
         expect(unrated_sample).to eq([])
       end
     end
+
+    describe 'unrated duplication check' do
+      it 'does not return duplicates' do
+        user1 = create(:user)
+        user2 = create(:user)
+        user3 = create(:user)
+
+        both_rated_cocktails = create_list(:cocktail, 2)
+        both_rated_cocktails.each do |cocktail|
+          Rating.create!(user: user1, cocktail: cocktail, stars: 4)
+          Rating.create!(user: user2, cocktail: cocktail, stars: 4)
+        end
+
+        one_rated_cocktails = create_list(:cocktail, 2)
+        one_rated_cocktails.each do |cocktail|
+          Rating.create!(user: user1, cocktail: cocktail, stars: 4)
+        end
+
+        two_rated_cocktails = create_list(:cocktail, 6)
+        two_rated_cocktails.each do |cocktail|
+          Rating.create!(user: user2, cocktail: cocktail, stars: 4)
+          Rating.create!(user: user3, cocktail: cocktail, stars: 4)
+        end
+
+        unrated_sample = Cocktail.sample_unrated(user1.id, 5)
+
+        expect(unrated_sample.length).to eq 5
+        expect(unrated_sample.uniq.length).to eq 5
+      end
+    end
   end
 end
