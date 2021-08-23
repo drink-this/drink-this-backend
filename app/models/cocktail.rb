@@ -26,6 +26,7 @@ class Cocktail < ApplicationRecord
     left_outer_joins(:ratings)
       .select('cocktails.*, 0 as rating')
       .where('not exists (select * from ratings where cocktail_id = cocktails.id and ratings.user_id=?)', user_id)
+      .distinct
       .sample(sample_size)
   end
 end
