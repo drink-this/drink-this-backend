@@ -14,11 +14,12 @@ class Cocktail < ApplicationRecord
       .limit(5)
   end
 
-  def self.sample_rated(user_id, sample_size)
+  def self.top_rated(user_id)
     joins(:ratings)
       .select('cocktails.*, ratings.stars as rating')
       .where('user_id = ?', user_id)
-      .sample(sample_size)
+      .order('rating desc')
+      .limit(5)
   end
 
   def self.sample_unrated(user_id, sample_size)
