@@ -19,7 +19,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 18 Aug 2021 01:38:29 GMT
+      - Sun, 22 Aug 2021 23:11:53 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -36,20 +36,20 @@ http_interactions:
       Expect-Ct:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=25K8W1MvzK%2F%2Bq7L76XNPXwVam%2FVBouUTy7AIaBorpyG5u1GG6fYJkV%2FWoK0DXUyGZxAuXwwyUR0RgN1XBgDzXOYqmpSGatSZ6vrpz%2FsAgtBY39ZxacYoAjq0i4gJX2rV%2Ft9pSl1bKJM%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=JDrzKTLEUQytcrP7NkpKX5nZxgwmaFZGX0kNDrCAlWbl%2FOmhbnYxH9eZvCm519bNDzRfZxiRbjv%2BYaBH1p%2FSiBDI1Uw0iK%2FTq7XNbkPg9YIjgV2lqLXKwzQKbZ9j5NgbXemMnpjxJWc%3D"}],"group":"cf-nel","max_age":604800}'
       Nel:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Cf-Ray:
-      - 68076c442cc8287b-DFW
+      - 682fc863f9c8ecd7-DFW
       Alt-Svc:
       - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
         ma=86400
     body:
       encoding: UTF-8
       string: '{"drinks":null}'
-  recorded_at: Wed, 18 Aug 2021 01:39:45 GMT
+  recorded_at: Sun, 22 Aug 2021 23:11:53 GMT
 - request:
     method: get
     uri: https://www.thecocktaildb.com/api/json/v1/1/filter.php?api_key=<api_key>&i=Green%20Chartreuse
@@ -69,7 +69,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 18 Aug 2021 01:38:29 GMT
+      - Sun, 22 Aug 2021 23:11:53 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -86,13 +86,13 @@ http_interactions:
       Expect-Ct:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=bEYD3HUr1r%2BsnaqPNxbZDLGQHj%2FNGDrg%2F1v94Istc666bIE759XJOfhfV2Kwee45J9YxVTRhH2aaiWu5XACAKq6uKhsIfbeXb%2Fc1eRmPpudbVB5xQ5XuOuOCAQDAvicq6YjSQLu6fBE%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=Eqp9HHSicG2uFm7F70mgE906HclORSl2kpDAqcj1CoEjjf%2FOhGVlo3qGqIMXb2q26v67whrKxNMm%2BchEtOxkuMpzwF8Ni%2B29iqNV3jihKm241jD6jmbFmC9SE1n4dx6FnpH9tPCrvM0%3D"}],"group":"cf-nel","max_age":604800}'
       Nel:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Cf-Ray:
-      - 68076c45fa602fb1-DFW
+      - 682fc8662c77c812-DFW
       Alt-Svc:
       - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
         ma=86400
@@ -101,5 +101,5 @@ http_interactions:
       string: '{"drinks":[{"strDrink":"Bijou","strDrinkThumb":"https:\/\/www.thecocktaildb.com\/images\/media\/drink\/rysb3r1513706985.jpg","idDrink":"17254"},{"strDrink":"Brigadier","strDrinkThumb":"https:\/\/www.thecocktaildb.com\/images\/media\/drink\/nl89tf1518947401.jpg","idDrink":"17825"},{"strDrink":"Jewel
         Of The Nile","strDrinkThumb":"https:\/\/www.thecocktaildb.com\/images\/media\/drink\/hx4nrb1504884947.jpg","idDrink":"11566"},{"strDrink":"The
         Last Word","strDrinkThumb":"https:\/\/www.thecocktaildb.com\/images\/media\/drink\/91oule1513702624.jpg","idDrink":"17247"},{"strDrink":"Tipperary","strDrinkThumb":"https:\/\/www.thecocktaildb.com\/images\/media\/drink\/b522ek1521761610.jpg","idDrink":"17828"}]}'
-  recorded_at: Wed, 18 Aug 2021 01:39:46 GMT
+  recorded_at: Sun, 22 Aug 2021 23:11:53 GMT
 recorded_with: VCR 6.0.0
