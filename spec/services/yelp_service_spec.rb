@@ -13,7 +13,7 @@ RSpec.describe YelpService do
       expect(union_lodge).to be_a Hash
       expect(union_lodge[:name]).to eq('Union Lodge No.1')
       expect(union_lodge[:image_url]).to eq('https://s3-media2.fl.yelpcdn.com/bphoto/oQcctWaIVGkoE1pKGlHA6Q/o.jpg')
-      expect(union_lodge[:url]).to eq('https://www.yelp.com/biz/union-lodge-no-1-denver?adjust_creative=2o4fzWWYwfCIIWDj-9PVYg&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=2o4fzWWYwfCIIWDj-9PVYg')
+      expect(union_lodge[:url]).to eq('https://www.yelp.com/biz/union-lodge-no-1-denver?adjust_creative=9gPw-kuPiDZgFQ3Tr4ox3Q&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=9gPw-kuPiDZgFQ3Tr4ox3Q')
       expect(union_lodge[:categories]).to eq([{:alias=>"cocktailbars", :title=>"Cocktail Bars"}, {:alias=>"lounges", :title=>"Lounges"}])
       expect(union_lodge[:location][:display_address]).to eq(["1543 Champa St", "Denver, CO 80202"])
 
