@@ -73,7 +73,7 @@ RSpec.describe Cocktail, type: :model do
       end
     end
 
-    describe '::sample_rated' do
+    describe '::top_rated' do
       before :each do
         @user1 = create(:user)
         @user2 = create(:user)
@@ -92,11 +92,11 @@ RSpec.describe Cocktail, type: :model do
       end
 
       it 'returns specified length sample from rated cocktails' do
-        rated_sample = Cocktail.sample_rated(@user1.id, 5)
+        top_rated = Cocktail.top_rated(@user1.id)
 
-        expect(rated_sample.length).to eq 5
-        expect(rated_sample.first).to be_a Cocktail
-        rated_sample.each do |cocktail|
+        expect(top_rated.length).to eq 5
+        expect(top_rated.first).to be_a Cocktail
+        top_rated.each do |cocktail|
           expect(@rated_cocktails).to include(cocktail)
           expect(@rated_for_alt_user).not_to include(cocktail)
           expect(@unrated_cocktails).not_to include(cocktail)
@@ -104,16 +104,16 @@ RSpec.describe Cocktail, type: :model do
       end
 
       it 'returns only as many are rated, if less than sample requested' do
-        rated_sample = Cocktail.sample_rated(@user1.id, 8)
+        top_rated = Cocktail.top_rated(@user1.id)
 
-        expect(rated_sample.length).to eq 6
+        expect(top_rated.length).to eq 5
       end
 
       it 'returns an empty array if no cocktails have been rated' do
         user3 = create(:user)
 
-        rated_sample = Cocktail.sample_rated(user3.id, 5)
-        expect(rated_sample).to eq([])
+        top_rated = Cocktail.top_rated(user3.id)
+        expect(top_rated).to eq([])
       end
 
       it 'returns no duplicates of cocktail that has been rated' do
@@ -129,9 +129,9 @@ RSpec.describe Cocktail, type: :model do
         last_rated_cocktail = create(:cocktail)
         Rating.create!(user: user4, cocktail: last_rated_cocktail, stars: 3)
 
-        sample_rated = Cocktail.sample_rated(user5.id, 5)
+        top_rated = Cocktail.top_rated(user5.id)
 
-        expect(sample_rated.length).to eq(4)
+        expect(top_rated.length).to eq(4)
       end
     end
 
