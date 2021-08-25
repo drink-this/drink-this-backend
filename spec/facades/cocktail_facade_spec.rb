@@ -15,6 +15,9 @@ RSpec.describe CocktailFacade, :vcr do
         vodka_fizz = CocktailFacade.retrieve_cocktail(user.id, '16967')
 
         expect(vodka_fizz).to have_key :name
+        expect(vodka_fizz[:id]).to eq('16967')
+
+        expect(vodka_fizz).to have_key :name
         expect(vodka_fizz[:name]).to eq('Vodka Fizz')
 
         expect(vodka_fizz).to have_key :thumbnail
@@ -59,6 +62,7 @@ RSpec.describe CocktailFacade, :vcr do
 
       cocktail = CocktailFacade.retrieve_cocktail(user.id, nil)
 
+      expect(cocktail).to have_key :id
       expect(cocktail).to have_key :name
       expect(cocktail).to have_key :thumbnail
       expect(cocktail).to have_key :glass
