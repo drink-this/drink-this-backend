@@ -73,13 +73,13 @@ class CocktailFacade
     ingredients = collect_from(details, 'Ingredient')
     measurements = collect_from(details, 'Measure')
     {
-      id: drink[:idDrink],
+      id: details[:idDrink],
       name: details[:strDrink],
       thumbnail: details[:strDrinkThumb],
       glass: details[:strGlass],
       recipe: build_recipe(ingredients, measurements),
       instructions: details[:strInstructions],
-      rating: find_rating(user_id, drink[:idDrink])
+      rating: find_rating(user_id, details[:idDrink])
     }
   end
 end
