@@ -22,7 +22,7 @@ RSpec.describe 'Cocktail Details API', :vcr do
         result = JSON.parse(response.body, symbolize_names: true)
 
         expect(result[:data]).to be_a Hash
-        expect(result[:data][:id]).to eq(@cocktail_1.id.to_s)
+        expect(result[:data][:id]).to eq(@cocktail_1.id)
         expect(result[:data][:type]).to eq('cocktail')
 
         attributes = result[:data][:attributes]

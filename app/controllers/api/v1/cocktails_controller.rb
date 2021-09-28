@@ -8,7 +8,7 @@ class Api::V1::CocktailsController < Api::V1::AuthorizationController
       if cocktail == false
         render json: { error: "Couldn't find Cocktail" }, status: :not_found
       else
-        render json: CocktailDetailsSerializer.details(params[:id], cocktail)
+        render json: CocktailDetailsSerializer.details(cocktail)
       end
     end
   end
