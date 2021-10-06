@@ -1,10 +1,10 @@
 class CocktailDetailsSerializer < ActiveModel::Serializer
   attributes :name, :thumbnail, :glass, :recipe, :instructions, :rating
 
-  def self.details(id, cocktail)
+  def self.details(cocktail)
     details = {
       data: {
-        id: id,
+        id: cocktail[:id].to_i,
         type: 'cocktail',
         attributes: cocktail
       }

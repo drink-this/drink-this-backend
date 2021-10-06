@@ -3,7 +3,7 @@ class CocktailFacade
     return false if retrieve_details(cocktail_id) == { drinks: nil }
 
     details = retrieve_details(cocktail_id)[:drinks].first
-    build_details_hash(details, user_id, cocktail_id)
+    build_details_hash(details, user_id)
   end
 
   def self.retrieve_details(cocktail_id)
@@ -69,16 +69,17 @@ class CocktailFacade
     end
   end
 
-  def self.build_details_hash(details, user_id, cocktail_id)
+  def self.build_details_hash(details, user_id)
     ingredients = collect_from(details, 'Ingredient')
     measurements = collect_from(details, 'Measure')
     {
+      id: details[:idDrink],
       name: details[:strDrink],
       thumbnail: details[:strDrinkThumb],
       glass: details[:strGlass],
       recipe: build_recipe(ingredients, measurements),
       instructions: details[:strInstructions],
-      rating: find_rating(user_id, cocktail_id)
+      rating: find_rating(user_id, details[:idDrink])
     }
   end
 end

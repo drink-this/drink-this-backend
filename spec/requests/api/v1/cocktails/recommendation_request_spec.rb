@@ -114,12 +114,13 @@ RSpec.describe '/recommendation', :vcr do
       result = JSON.parse(response.body, symbolize_names: true)
 
       expect(result[:data]).to be_a Hash
-      expect(result[:data][:id]).to be_nil
+      expect(result[:data][:id]).not_to be_nil
       expect(result[:data][:type]).to eq('cocktail')
 
       attributes = result[:data][:attributes]
 
       expect(attributes).to be_a Hash
+      expect(attributes).to have_key :id
       expect(attributes).to have_key :name
       expect(attributes).to have_key :thumbnail
       expect(attributes).to have_key :glass
